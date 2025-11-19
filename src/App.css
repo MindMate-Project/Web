@@ -8,9 +8,6 @@
 :root {
     --primary-bg: #14274E;
     --border-color: #dcdcdc;
-    --border-radius-lg: 25px;
-    --border-radius-md: 10px;
-    --border-radius-sm: 8px;
 }
 
 body {
@@ -21,9 +18,9 @@ body {
     height: 100vh;
 }
 
-.hbtn {
+/* Home page buttons just for mounting it will be removed later */
+.hbtn { 
     margin: 10px;
     color: black;
     background-color: white;
-
 }
