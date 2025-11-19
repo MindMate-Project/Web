@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Nunito", sans-serif;
+}
+
+:root {
+    --primary-bg: #14274E;
+    --border-color: #dcdcdc;
+    --border-radius-lg: 25px;
+    --border-radius-md: 10px;
+    --border-radius-sm: 8px;
+}
+
+body {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.hbtn {
+    margin: 10px;
+    color: black;
+    background-color: white;
+
+}
