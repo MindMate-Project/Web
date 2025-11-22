@@ -15,7 +15,7 @@ body {
     max-width: 1300px;
     height: 750px;
     display: flex;
-    padding: 46px;
+    padding: 45px;
     color: white;
 }
 
@@ -143,6 +143,7 @@ button:hover {
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
+        padding: 90px;
     }
 
     .card {
@@ -171,6 +172,9 @@ button:hover {
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
     .card {
         width: 100%;
         padding: 20px;
