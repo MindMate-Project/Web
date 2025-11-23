@@ -8,6 +8,7 @@ function HomePage() {
             <button className = "hbtn" onClick={() => navigate('/api/auth/signup')}>Go to Signup</button>
             <button className = "hbtn" onClick={() => navigate('/api/auth/forgot-password')}>Forget password</button>
             <button className = "hbtn" onClick={() => navigate('/api/auth/set-new-password')}>Set New Password</button>
+            <button className = "hbtn" onClick={() => navigate('/api/auth/verify-email')}>Verify Email</button>
         </div>
     )
 }

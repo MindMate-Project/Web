@@ -1,0 +1,155 @@
+.verify-email * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Nunito", sans-serif;
+}
+
+:root {
+    --primary-bg: #0b234c;
+    --border-color: #dcdcdc;
+}
+
+.verify-email body {
+    background: var(--primary-bg);
+}
+
+.verify-email .container {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+    height: 600px;
+}
+
+.verify-email .left-side {
+    width: 100%;
+    color: white;
+}
+
+.verify-email .logo {
+    width: 120px;
+    height: auto;
+}
+
+.verify-email .left-side h1 {
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+.verify-email .card {
+    width: 400px;
+    background: white;
+    margin: auto;
+    padding: 45px 25px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.verify-email .card h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #08224b;
+}
+
+.verify-email .card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--primary-bg);
+}
+
+.verify-email .resend {
+    display: block;
+    margin: 10px 0 20px;
+    font-size: 12px;
+    color: #77a5c9;
+    text-decoration: none;
+}
+
+.verify-email .code-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.verify-email .code-inputs input {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1.5px solid #cfd9e6;
+}
+
+.verify-email .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.verify-email .edit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    color: var(--primary-bg);
+    border: 1.5px solid #cfd9e6;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.verify-email .edit-btn:hover {
+    background: #f0f0f0;
+}
+.verify-email .submit-btn:hover {
+    background:#0b236c ;
+}
+
+@media (max-width: 1200px) {
+    .verify-email .container {
+        width: 1000px;
+    }
+}
+
+@media (max-width: 992px) {
+    .verify-email .container {
+        width: 750px;
+    }
+}
+
+@media (max-width: 768px) {
+    .verify-email .container {
+        width: 490px;
+    }
+}
+
+@media (max-width: 480px) {
+    .verify-email .container {
+        width: 300px;
+    }
+
+    .verify-email .left-side {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .verify-email .logo {
+        width: 120px;
+    }
+
+    .verify-email .left-side h1 {
+        font-size: 18px;
+        padding-left: 0;
+    }
+    .verify-email .card {
+        width: 100%;
+        padding: 30px 15px;
+    }
+}
