@@ -10,7 +10,7 @@ body {
     --border-color: #dcdcdc;
 }
 
-.container {
+.signup .container {
     width: 100%;
     max-width: 1300px;
     height: 750px;
@@ -20,41 +20,41 @@ body {
 }
 
 /* LEFT SIDE */
-.left {
+.signup .left {
     display: flex;
     flex-direction: column;
 }
 
-.logo {
+.signup .logo {
     width: 230px;
 }
 
-.logo img {
+.signup .logo img {
     width: 100%;
     position: relative;
     left: -65px;
 }
 
-.left h2 {
+.signup .left h2 {
     height: 60px;
     font-size: 34px;
     margin-bottom: 10px;
 }
 
-.subtitle {
+.signup .subtitle {
     color: white;
     margin-bottom: 20px;
     font-weight: 400;
 }
 
-.description {
+.signup .description {
     width: 70%;
     line-height: 1.7;
     color: #cbd6e4;
 }
 
 /* RIGHT SIDE CARD */
-.card {
+.signup .card {
     width: 938px;
     height: 679px;
     background: white;
@@ -64,7 +64,7 @@ body {
     color: #0b234c;
 }
 
-.card-title {
+.signup .card-title {
     text-align: center;
     margin-bottom: 25px;
     font-size: 40px;
@@ -72,30 +72,30 @@ body {
     font-weight: 'Poppins', 'Nuninto';
 }
 
-form {
+.signup form {
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
 
-.field {
+.signup .field {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-label {
+.signup label {
     font-size: 14px;
     color: #0b234c;
     font-weight: 500;
 }
 
-.row {
+.signup .row {
     display: flex;
     gap: 15px;
 }
 
-input {
+.signup input {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #dcdcdc;
@@ -104,7 +104,7 @@ input {
     outline: none;
 }
 
-button {
+.signup button {
     margin-top: 10px;
     padding: 14px;
     background: #0b234c;
@@ -115,43 +115,43 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.signup button:hover {
     opacity: 0.9;
 }
 
 /* Responsive */
 
 @media (max-width: 1200px) {
-    .card {
+    .signup .card {
         width: 100%;
     }
-    .left {
+    .signup .left {
         width: 100%;
     }
 }
 
 @media (max-width: 992px) {
-    .card {
+    .signup .card {
         width: 100%;
     }
 
-    .left {
+    .signup .left {
         width: 100%;
     }
 }
 
 @media (max-width: 768px) {
-    .container {
+    .signup .container {
         flex-direction: column;
         padding: 90px;
     }
 
-    .card {
+    .signup .card {
         width: 100%;
         margin: 0 auto;
     }
 
-    .left {
+    .signup .left {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -162,44 +162,44 @@ button:hover {
     }
 
 
-    .logo img {
+    .signup .logo img {
         left: 0;
     }
 
-    .left h2 {
+    .signup .left h2 {
         font-size: 28px;
     }
 }
 
 @media (max-width: 480px) {
-    .container {
+    .signup .container {
         padding: 20px;
     }
-    .card {
+    .signup .card {
         width: 100%;
         padding: 20px;
     }
 
-    .left {
+    .signup .left {
         margin: 0;
         padding: 0 20px 20px;
         text-align: center;
     }
 
-    .logo {
+    .signup .logo {
         width: 180px;
         margin: 0 auto;
     }
 
-    .logo img {
+    .signup .logo img {
         left: 0;
     }
 
-    .left h2 {
+    .signup .left h2 {
         font-size: 28px;
     }
 
-    .left .description {
+    .signup .left .description {
         margin: 10px auto;
     }
 }
