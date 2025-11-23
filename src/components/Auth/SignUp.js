@@ -20,50 +20,51 @@ function SignupPage() {
             compassionate.
           </p>
         </div>
+        <div className="right">
+          <div className="card">
+            <h2 className="card-title">Sign Up</h2>
 
-        <div className="card">
-          <h2 className="card-title">Sign Up</h2>
+            <form>
+              <div class="row">
+                <div class="field">
+                  <label>First name</label>
+                  <input type="text" placeholder="Mahmoud" />
+                </div>
 
-          <form>
-            <div class="row">
-              <div class="field">
-                <label>First name</label>
-                <input type="text" placeholder="Mahmoud" />
+                <div class="field">
+                  <label>Last name</label>
+                  <input type="text" placeholder="Abdellah" />
+                </div>
               </div>
 
               <div class="field">
-                <label>Last name</label>
-                <input type="text" placeholder="Abdellah" />
+                <label>Enter your email</label>
+                <input type="email" placeholder="@gmail.com" />
               </div>
-            </div>
 
-            <div class="field">
-              <label>Enter your email</label>
-              <input type="email" placeholder="@gmail.com" />
-            </div>
+              <div class="field">
+                <label>Phone number</label>
+                <input type="text" placeholder="***********" />
+              </div>
 
-            <div class="field">
-              <label>Phone number</label>
-              <input type="text" placeholder="***********" />
-            </div>
+              <div class="field">
+                <label>Date of birth</label>
+                <input type="text" placeholder="14/2/2004" />
+              </div>
 
-            <div class="field">
-              <label>Date of birth</label>
-              <input type="text" placeholder="14/2/2004" />
-            </div>
+              <div class="field">
+                <label>Set Password</label>
+                <input type="password" placeholder="***********" />
+              </div>
 
-            <div class="field">
-              <label>Set Password</label>
-              <input type="password" placeholder="***********" />
-            </div>
+              <div class="field">
+                <label>Confirm Password</label>
+                <input type="password" placeholder="***********" />
+              </div>
 
-            <div class="field">
-              <label>Confirm Password</label>
-              <input type="password" placeholder="***********" />
-            </div>
-
-            <button type="submit">Sign Up</button>
-          </form>
+              <button type="submit">Sign Up</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

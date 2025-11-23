@@ -5,40 +5,41 @@ body {
     font-family: 'Poppins', 'Nunito', sans-serif;
     background-color: #0b234c;
 }
+
 :root {
-    --primary-bg: #14274E;
+    --primary-bg: #0b234c;
     --border-color: #dcdcdc;
 }
 
 .signup .container {
-    width: 100%;
-    max-width: 1300px;
-    height: 750px;
     display: flex;
-    padding: 45px;
     color: white;
+    padding-top: 90px;
 }
 
 /* LEFT SIDE */
 .signup .left {
+    width: 700px;
+    /* height: 600px; */
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
-.signup .logo {
-    width: 230px;
+.signup .left .logo {
+    width: 120px;
+    height: 120px;
 }
 
-.signup .logo img {
+.signup .left .logo img {
     width: 100%;
     position: relative;
-    left: -65px;
+    left: -30px;
 }
 
 .signup .left h2 {
-    height: 60px;
-    font-size: 34px;
-    margin-bottom: 10px;
+    font-size: 30px;
+    margin: 20px 0;
 }
 
 .signup .subtitle {
@@ -48,28 +49,34 @@ body {
 }
 
 .signup .description {
-    width: 70%;
+    width: 60%;
     line-height: 1.7;
     color: #cbd6e4;
 }
 
-/* RIGHT SIDE CARD */
+/* RIGHT SIDE */
+.signup .right {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .signup .card {
-    width: 938px;
-    height: 679px;
+    width: 400px;
     background: white;
-    border-radius: 50px;
-    padding: 40px;
-    margin-right: 40px;
+    border-radius: 30px;
     color: #0b234c;
+    font-weight: bold;
+    padding: 30px 20px;
+    margin-bottom: 20px;
 }
 
 .signup .card-title {
     text-align: center;
-    margin-bottom: 25px;
-    font-size: 40px;
-    font-weight: 600;
-    font-weight: 'Poppins', 'Nuninto';
+    margin-bottom: 60px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .signup form {
@@ -105,14 +112,14 @@ body {
 }
 
 .signup button {
-    margin-top: 10px;
+    margin-top: 10px 0;
     padding: 14px;
     background: #0b234c;
     color: white;
     font-size: 16px;
-    border: none;
     border-radius: 10px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .signup button:hover {
@@ -122,84 +129,69 @@ body {
 /* Responsive */
 
 @media (max-width: 1200px) {
-    .signup .card {
-        width: 100%;
-    }
-    .signup .left {
-        width: 100%;
+    .signup .container {
+        width: 900px;
     }
 }
 
 @media (max-width: 992px) {
-    .signup .card {
-        width: 100%;
+    .signup .container {
+        width: 750px;
     }
 
     .signup .left {
+        width: 100%;
+    }
+
+    .signup .right {
         width: 100%;
     }
 }
 
+
 @media (max-width: 768px) {
     .signup .container {
-        flex-direction: column;
-        padding: 90px;
-    }
-
-    .signup .card {
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .signup .left {
-        display: flex;
+        width: 450px;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0;
-        padding: 0 20px 20px;
-        text-align: center;
+        gap: 40px;
     }
 
-
-    .signup .logo img {
-        left: 0;
+    .signup .left {
+        height: 750px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
     }
 
     .signup .left h2 {
-        font-size: 28px;
+        font-size: 24px;
     }
+
+    .signup .left .logo img {
+        width: 100%;
+        position: relative;
+        left: 0;
+    }
+
+    .signup .right {
+        width: 400px;
+    }
+
 }
 
 @media (max-width: 480px) {
     .signup .container {
-        padding: 20px;
-    }
-    .signup .card {
-        width: 100%;
-        padding: 20px;
+        max-width: 300px;
     }
 
     .signup .left {
-        margin: 0;
-        padding: 0 20px 20px;
-        text-align: center;
+        height: 900px;
     }
 
-    .signup .logo {
-        width: 180px;
-        margin: 0 auto;
-    }
-
-    .signup .logo img {
-        left: 0;
-    }
-
-    .signup .left h2 {
-        font-size: 28px;
-    }
-
-    .signup .left .description {
-        margin: 10px auto;
+    .signup .right {
+        width: 300px;
     }
 }
