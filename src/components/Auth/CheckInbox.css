@@ -1,0 +1,162 @@
+.check-inbox * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Nunito", sans-serif;
+}
+
+:root {
+    --primary-bg: #0b234c;
+    --border-color: #dcdcdc;
+}
+
+.check-inbox body {
+    background: var(--primary-bg);
+}
+
+.check-inbox .container {
+    display: flex;
+    width: 1300px;
+    height: 600px;
+}
+
+.check-inbox .left-side {
+    width: 20%;
+    color: white;
+}
+
+.check-inbox .logo {
+    width: 120px;
+    height: auto;
+}
+
+.check-inbox .left-side h1 {
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+.check-inbox .card {
+    width: 400px;
+    background: white;
+    margin: auto;
+    padding: 45px 25px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.check-inbox .card h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #08224b;
+}
+
+.check-inbox .card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--primary-bg);
+}
+
+.check-inbox .resend {
+    display: block;
+    margin: 10px 0 20px;
+    font-size: 12px;
+    color: #77a5c9;
+    text-decoration: none;
+}
+
+.check-inbox .code-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.check-inbox .code-inputs input {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1.5px solid #cfd9e6;
+}
+
+.check-inbox .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.check-inbox .edit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    color: var(--primary-bg);
+    border: 1.5px solid #cfd9e6;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.check-inbox .edit-btn:hover {
+    background: #f0f0f0;
+}
+.check-inbox .submit-btn:hover {
+    background:#0b236c ;
+}
+
+@media (max-width: 1200px) {
+    .check-inbox .container {
+        width: 1000px;
+    }
+}
+
+@media (max-width: 992px) {
+    .check-inbox .container {
+        width: 750px;
+    }
+}
+
+@media (max-width: 768px) {
+    .check-inbox .container {
+        width: 490px;
+        flex-direction: column;
+    }
+    .check-inbox .left-side {
+        width: 100%;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .check-inbox .container {
+        width: 300px;
+    }
+
+    .check-inbox .left-side {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .check-inbox .logo {
+        width: 120px;
+    }
+
+    .check-inbox .left-side h1 {
+        font-size: 18px;
+        padding-left: 0;
+    }
+    .check-inbox .card {
+        width: 100%;
+        padding: 30px 15px;
+    }
+}

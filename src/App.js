@@ -6,6 +6,7 @@ import SignupPage from "./pages/Auth/SignupPage";
 import ForgetPasswordPage from "./pages/Auth/ForgetPasswordPage";
 import SetNewPasswordPage from "./pages/Auth/SetNewPasswordPage";
 import VerifyEmailPage from "./pages/Auth/VerifyEmailPage";
+import CheckInboxPage from "./pages/Auth/CheckInboxPage";
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
           <Route path="/api/auth/forgot-password" element={<ForgetPasswordPage />} />
           <Route path="/api/auth/set-new-password" element={<SetNewPasswordPage />} />
           <Route path="/api/auth/verify-email" element={<VerifyEmailPage />} />
+          <Route path="/api/auth/check-inbox" element={<CheckInboxPage />} />
         </Routes>
       </BrowserRouter>
     </div>
