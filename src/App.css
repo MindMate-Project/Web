@@ -1,24 +1,15 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", "Nunito", sans-serif;
-}
 
-:root {
-    --primary-bg: #14274E;
-    --border-color: #dcdcdc;
-}
 
-body {
-    background-color: white;
+
+/* Home page buttons just for mounting it will be removed later */
+.home-page {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100vh;
 }
 
-/* Home page buttons just for mounting it will be removed later */
+
 .hbtn { 
     margin: 10px;
     color: black;
