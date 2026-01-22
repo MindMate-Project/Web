@@ -20,9 +20,9 @@ function CheckInbox() {
               please enter it below
             </p>
 
-            <a href="#" className="resend">
+            <button type="button" className="resend">
               Resend Code?
-            </a>
+            </button>
 
             <div className="code-inputs">
               <input maxlength="1" />
