@@ -148,7 +148,7 @@ const SignupHook = () => {
           style: { backgroundColor: "white", color: "#0b236c" },
         });
         setTimeout(() => {
-          // navigate("/api/auth/login");
+          navigate("/api/auth/login");
         }, 3000);
       }
       else {
