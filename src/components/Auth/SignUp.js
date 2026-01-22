@@ -1,7 +1,27 @@
 import logo from "../../images/logo.svg";
 import "./SignUp.css";
-
+import SignupHook from "./../../hook/auth/signup-hook";
+import { ToastContainer } from "react-toastify";
 function SignupPage() {
+  const [
+    firstName,
+    lastName,
+    email,
+    phone,
+    birthDate,
+    password,
+    confirmPassword,
+    loading,
+    onChangeFirstName,
+    onChangeLastName,
+    onChangeEmail,
+    onChangePhone,
+    onChangeBirthDate,
+    onChangePassword,
+    onChangeConfirmPassword,
+    setLoading,
+    onSubmit,
+  ] = SignupHook();
   return (
     <div className="signup">
       <div className="container">
@@ -24,49 +44,85 @@ function SignupPage() {
           <div className="card">
             <h2 className="card-title">Sign Up</h2>
 
-            <form>
-              <div class="row">
-                <div class="field">
+            <form className="card-form">
+              <div className="row">
+                <div className="field">
                   <label>First name</label>
-                  <input type="text" placeholder="Mahmoud" />
+                  <input
+                    type="text"
+                    placeholder="Mahmoud"
+                    value={firstName}
+                    onChange={onChangeFirstName}
+                  />
                 </div>
 
-                <div class="field">
+                <div className="field">
                   <label>Last name</label>
-                  <input type="text" placeholder="Abdellah" />
+                  <input
+                    type="text"
+                    placeholder="Abdellah"
+                    value={lastName}
+                    onChange={onChangeLastName}
+                  />
                 </div>
               </div>
 
-              <div class="field">
+              <div className="field">
                 <label>Enter your email</label>
-                <input type="email" placeholder="@gmail.com" />
+                <input
+                  type="email"
+                  placeholder="@gmail.com"
+                  value={email}
+                  onChange={onChangeEmail}
+                />
               </div>
 
-              <div class="field">
+              <div className="field">
                 <label>Phone number</label>
-                <input type="text" placeholder="***********" />
+                <input
+                  type="text"
+                  placeholder="***********"
+                  value={phone}
+                  onChange={onChangePhone}
+                />
               </div>
 
-              <div class="field">
+              <div className="field">
                 <label>Date of birth</label>
-                <input type="text" placeholder="14/2/2004" />
+                <input
+                  type="text"
+                  placeholder="14/2/2004"
+                  value={birthDate}
+                  onChange={onChangeBirthDate}
+                />
               </div>
 
-              <div class="field">
+              <div className="field">
                 <label>Set Password</label>
-                <input type="password" placeholder="***********" />
+                <input
+                  type="password"
+                  placeholder="***********"
+                  value={password}
+                  onChange={onChangePassword}
+                />
               </div>
 
-              <div class="field">
+              <div className="field">
                 <label>Confirm Password</label>
-                <input type="password" placeholder="***********" />
+                <input
+                  type="password"
+                  placeholder="***********"
+                  value={confirmPassword}
+                  onChange={onChangeConfirmPassword}
+                />
               </div>
 
-              <button type="submit">Sign Up</button>
+              <button type="submit" onClick={onSubmit} >Sign Up</button>
             </form>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
