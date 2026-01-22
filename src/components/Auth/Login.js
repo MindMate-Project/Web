@@ -5,7 +5,8 @@ import LoginHook from "../../hook/auth/login-hook";
 import { ToastContainer } from "react-toastify";
 
 function Login() {
-  const [email, password, loading, onChangeEmail, onChangePassword, onSubmit] = LoginHook();
+  const [email, password, , onChangeEmail, onChangePassword, onSubmit] =
+    LoginHook();
   return (
     <div className="login">
       <div className="container">
@@ -30,21 +31,39 @@ function Login() {
             <form>
               <div class="field">
                 <label>Enter your email</label>
-                <input type="email" placeholder="@gmail.com" value={email} onChange={onChangeEmail} />
+                <input
+                  type="email"
+                  placeholder="@gmail.com"
+                  value={email}
+                  onChange={onChangeEmail}
+                />
               </div>
 
               <div class="field">
                 <label>Enter your Password</label>
-                <input type="password" placeholder="***********" value={password} onChange={onChangePassword} />
+                <input
+                  type="password"
+                  placeholder="***********"
+                  value={password}
+                  onChange={onChangePassword}
+                />
               </div>
 
               <div className="option-forgot-password">
-                <p className="forgot-password"> <a href="/api/auth/forgot-password">Forgot Password?</a></p>
+                <p className="forgot-password">
+                  {" "}
+                  <a href="/api/auth/forgot-password">Forgot Password?</a>
+                </p>
               </div>
 
-              <button type="submit" onClick={onSubmit}>Log In</button>
+              <button type="submit" onClick={onSubmit}>
+                Log In
+              </button>
               <button className="google-login" type="button">
-                <span className="google-icon"><img src={google} alt="Google Icon" /></span> continue with Google
+                <span className="google-icon">
+                  <img src={google} alt="Google Icon" />
+                </span>{" "}
+                continue with Google
               </button>
               <div className="signup-redirect">
                 <p className="signup-link">
@@ -55,7 +74,7 @@ function Login() {
           </div>
         </div>
       </div>
-      <ToastContainer />  
+      <ToastContainer />
     </div>
   );
 }

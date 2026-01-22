@@ -122,7 +122,7 @@ const LoginHook = () => {
         console.log(err);
       }
     }
-  }, [loading, res]);
+  }, [loading, res, navigate]);
 
   return [email, password, loading, onChangeEmail, onChangePassword, onSubmit];
 };

@@ -17,7 +17,7 @@ const SignupHook = () => {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [patients, setPatients] = useState([]);
+  const [patients] = useState([]);
   const [loading, setLoading] = useState(false);
   const lastProcessedRes = useRef(null);
   const hasSubmitted = useRef(false);
@@ -148,7 +148,7 @@ const SignupHook = () => {
           style: { backgroundColor: "white", color: "#0b236c" },
         });
         setTimeout(() => {
-          navigate("/api/auth/login");
+          // navigate("/api/auth/login");
         }, 3000);
       }
       else {
@@ -176,7 +176,6 @@ const SignupHook = () => {
     birthDate,
     password,
     confirmPassword,
-    loading,
     onChangeFirstName,
     onChangeLastName,
     onChangeEmail,
@@ -184,7 +183,6 @@ const SignupHook = () => {
     onChangeBirthDate,
     onChangePassword,
     onChangeConfirmPassword,
-    setLoading,
     onSubmit,
   ];
 };

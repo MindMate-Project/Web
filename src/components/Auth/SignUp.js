@@ -11,7 +11,6 @@ function SignupPage() {
     birthDate,
     password,
     confirmPassword,
-    loading,
     onChangeFirstName,
     onChangeLastName,
     onChangeEmail,
@@ -19,7 +18,6 @@ function SignupPage() {
     onChangeBirthDate,
     onChangePassword,
     onChangeConfirmPassword,
-    setLoading,
     onSubmit,
   ] = SignupHook();
   return (
