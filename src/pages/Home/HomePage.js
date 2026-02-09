@@ -1,7 +1,12 @@
 import { useNavigate } from 'react-router';
 function HomePage() {
     const navigate = useNavigate();
-    
+    const logOut = () => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      navigate("/api/auth/login");
+    };
+
     return (
       <div className="home-page">
         <h1 style={{ color: "white" }} >Welcome to MindMate</h1>
@@ -10,6 +15,7 @@ function HomePage() {
             <h2 style={{ color: "white" }}>
               welcome {JSON.parse(localStorage.getItem("user")).name}!
             </h2>
+            {<button className="hbtn" onClick={logOut}>Log Out</button>}
           </div>
         ) : (
           <div>
