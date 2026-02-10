@@ -1,0 +1,20 @@
+.logo-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* margin-bottom: -26px; */
+  
+}
+
+.logo-img {
+  width: 58px;
+  display: block;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: 600;
+  color: #1b2d5c;
+  display: block;
+  /* font-family: poppins, sans-serif; */
+}

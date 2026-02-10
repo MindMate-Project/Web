@@ -1,7 +1,9 @@
-import logo from "../../images/logo.svg";
+import logo from "../../images/Logo.png";
 import "./SignUp.css";
 import SignupHook from "./../../hook/auth/signup-hook";
 import { ToastContainer } from "react-toastify";
+import ImageSlider from "../ImageSlider/ImageSlider";
+import LogoHeader from "./LogoHeader"
 function SignupPage() {
   const [
     firstName,
@@ -25,18 +27,11 @@ function SignupPage() {
       <div className="container">
         <div className="left">
           <div className="logo">
-            <img src={logo} alt="Alzheimer Assistant Logo" />
+            <LogoHeader/>
           </div>
 
-          <h2>Sign up</h2>
-          <p className="subtitle">Please sign in to continue</p>
-
-          <p className="description">
-            Access the Alzheimer Assistant dashboard to manage patient profiles,
-            monitor health updates, and stay connected with caregivers.
-            Together, we're making care simpler, smarter, and more
-            compassionate.
-          </p>
+          <ImageSlider />
+          
         </div>
         <div className="right">
           <div className="card">
