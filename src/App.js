@@ -19,6 +19,7 @@ function App() {
           <Route path="/api/auth/set-new-password" element={<SetNewPasswordPage />} />
           <Route path="/api/auth/verify-email" element={<VerifyEmailPage />} />
           <Route path="/api/auth/check-inbox" element={<CheckInboxPage />} />
+          <Route path="/api/dashboard" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </div>
