@@ -13,19 +13,7 @@ import reminder from "./../../images/reminder.svg";
 import memoryBank from "./../../images/memory bank.svg";
 import doctor from "./../../images/doctor.jpg";
 
-function Dashboard({ logOut }) {
-    const storedUser = localStorage.getItem("user");
-    let user = null;
-
-    if (storedUser) {
-        try {
-            user = JSON.parse(storedUser);
-        } catch (error) {
-            user = null;
-        }
-    }
-
-    const userName = user && user.name ? user.name : "Guest";
+function Dashboard({userName,logOut}) {
 
     return (
         <div className="dashboard">
