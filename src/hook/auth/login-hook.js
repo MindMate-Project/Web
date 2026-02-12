@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { loginUser } from "../../redux/actions/authAction";
 import { toast } from "react-toastify";
 
@@ -103,7 +103,7 @@ const LoginHook = () => {
                         style: { backgroundColor: "white", color: "#0b236c" },
                     });
                     setTimeout(() => {
-                        navigate("/");
+                        navigate("/api/dashboard");
                     }, 1600);
                     //
                 } else {
