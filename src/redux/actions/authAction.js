@@ -12,7 +12,6 @@ import { useGetDataToken } from "../../hooks/useGetData";
 export const createNewUser = (formData) => async (dispatch) => {
   try {
     const response = await useInsertData("/api/auth/register", formData);
-    console.log("API Response:", response);
     dispatch({
       type: CREATE_NEW_USER,
       payload: response,

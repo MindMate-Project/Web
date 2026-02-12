@@ -12,13 +12,14 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<div> This main route</div>} />
           <Route path="/api/auth/login" element={<LoginPage />} />
           <Route path="/api/auth/signup" element={<SignupPage />} />
           <Route path="/api/auth/forgot-password" element={<ForgetPasswordPage />} />
           <Route path="/api/auth/set-new-password" element={<SetNewPasswordPage />} />
           <Route path="/api/auth/verify-email" element={<VerifyEmailPage />} />
           <Route path="/api/auth/check-inbox" element={<CheckInboxPage />} />
+          <Route path="/api/dashboard" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </div>

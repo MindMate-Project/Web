@@ -1,40 +1,30 @@
-import { useNavigate } from 'react-router';
-function HomePage() {
-    const navigate = useNavigate();
-    const logOut = () => {
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      navigate("/api/auth/login");
-    };
+import Dashboard from "./../../components/Dashboard/Dashboard";
+import { useNavigate } from "react-router";
 
+function HomePage() {
+     const navigate = useNavigate();
+     const logOut = () => {
+         if (localStorage.getItem("user") || localStorage.getItem("token")) {
+             localStorage.removeItem("user");
+             localStorage.removeItem("token");
+         }
+         navigate("/api/auth/login");
+     };
+     const storedUser = localStorage.getItem("user");
+     let user = null;
+
+     if (storedUser) {
+         try {
+             user = JSON.parse(storedUser);
+         } catch (error) {
+             user = null;
+         }
+     }
+
+     const userName = user && user.name ? user.name : "Guest";
     return (
-      <div className="home-page">
-        <h1 style={{ color: "white" }} >Welcome to MindMate</h1>
-        {localStorage.getItem("token") ? (
-          <div>
-            <h2 style={{ color: "white" }}>
-              welcome {JSON.parse(localStorage.getItem("user")).name}!
-            </h2>
-            {<button className="hbtn" onClick={logOut}>Log Out</button>}
-          </div>
-        ) : (
-          <div>
-            <h2>Please log in or sign up to continue</h2>
-            <button
-              className="hbtn"
-              onClick={() => navigate("/api/auth/login")}
-            >
-              Go to Login
-            </button>
-            <button
-              className="hbtn"
-              onClick={() => navigate("/api/auth/signup")}
-            >
-              Go to Signup
-            </button>
-          </div>
-        )}
-      </div>
+        <Dashboard userName={userName} logOut={logOut} />
     );
 }
+
 export default HomePage;
