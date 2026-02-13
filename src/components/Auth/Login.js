@@ -5,17 +5,20 @@ import LoginHook from "../../hook/auth/login-hook";
 import { ToastContainer } from "react-toastify";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import LogoHeader from "./LogoHeader";
-
+import AuthLayout from "./AuthLayout";
 function Login() {
   const [email, password, , onChangeEmail, onChangePassword, onSubmit] =
     LoginHook();
   return (
+
+  <AuthLayout>
     <div className="login">
       <div className="container">
-        <div className="left">
-          <div className="logo">
+        {/* <div className="logo">
             <LogoHeader/>
-          </div>
+         </div> */}
+        <div className="left">
+
 
             <ImageSlider/>
        </div>
@@ -41,14 +44,14 @@ function Login() {
                   value={password}
                   onChange={onChangePassword}
                 />
-              </div>
-
-              <div className="option-forgot-password">
+                <div className="option-forgot-password">
                 <p className="forgot-password">
                   {" "}
                   <a href="/api/auth/forgot-password">Forgot Password?</a>
                 </p>
               </div>
+              </div>
+
 
               <button type="submit" onClick={onSubmit}>
                 Log In
@@ -70,6 +73,7 @@ function Login() {
       </div>
       <ToastContainer />
     </div>
+  </AuthLayout>
   );
 }
 

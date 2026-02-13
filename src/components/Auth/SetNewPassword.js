@@ -1,17 +1,14 @@
 import logo from "./../../images/logo.svg";
 import "./SetNewPassword.css";
 import { useNavigate } from "react-router";
-
+import AuthLayout from "./AuthLayout";
 function SetNewPassword() {
   const navigate = useNavigate();
   return (
+    <AuthLayout>
     <div className="set-pass">
       <div className="container">
         <div className="left">
-          <div className="logo">
-            <img src={logo} alt="Alzheimer Assistant Logo" />
-          </div>
-          <h2>Set New Password</h2>
         </div>
         <div className="right">
           <div className="card">
@@ -34,6 +31,7 @@ function SetNewPassword() {
         </div>
       </div>
     </div>
+    </AuthLayout>
   );
 }
 

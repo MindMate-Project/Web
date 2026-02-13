@@ -1,9 +1,10 @@
-import logo from "../../images/Logo.png";
+// import logo from "../../images/Logo.png";
 import "./SignUp.css";
 import SignupHook from "./../../hook/auth/signup-hook";
 import { ToastContainer } from "react-toastify";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import LogoHeader from "./LogoHeader"
+import AuthLayout from "./AuthLayout";
 function SignupPage() {
   const [
     firstName,
@@ -23,13 +24,13 @@ function SignupPage() {
     onSubmit,
   ] = SignupHook();
   return (
+    <AuthLayout>
     <div className="signup">
       <div className="container">
+        {/* <div className="logo">
+          <LogoHeader/>
+        </div> */}
         <div className="left">
-          <div className="logo">
-            <LogoHeader/>
-          </div>
-
           <ImageSlider />
           
         </div>
@@ -117,7 +118,9 @@ function SignupPage() {
       </div>
       <ToastContainer />
     </div>
+    </AuthLayout>
   );
+  
 }
 
 export default SignupPage;

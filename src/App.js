@@ -7,10 +7,12 @@ import ForgetPasswordPage from "./pages/Auth/ForgetPasswordPage";
 import SetNewPasswordPage from "./pages/Auth/SetNewPasswordPage";
 import VerifyEmailPage from "./pages/Auth/VerifyEmailPage";
 import CheckInboxPage from "./pages/Auth/CheckInboxPage";
+import LogoHeader from "./components/Auth/LogoHeader";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      {/* <LogoHeader/> */}
         <Routes>
           <Route path="/" element={<div> This main route</div>} />
           <Route path="/api/auth/login" element={<LoginPage />} />

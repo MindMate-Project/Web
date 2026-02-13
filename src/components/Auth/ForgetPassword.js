@@ -1,17 +1,18 @@
 import "./ForgetPassword.css";
 import { useNavigate } from "react-router";
 import LogoHeader from "./LogoHeader";
-
+import AuthLayout from "./AuthLayout";
 function ForgetPassword() {
   const navigate = useNavigate();
 
   return (
+    <AuthLayout>
     <div className="fo-pass">
-      <div className="header">
+      {/* <div className="logo">
         <LogoHeader />
-      </div>
-
+      </div> */}
       <div className="container">
+
         <div className="right">
           <div className="card">
             <h2 className="card-title">Forgot Password?</h2>
@@ -21,7 +22,7 @@ function ForgetPassword() {
               please enter it below
             </p>
 
-            <a className="resend">Resend Code?</a>
+            {/* <a className="resend">Resend Code?</a> */}
 
             <form>
               <div className="field">
@@ -43,6 +44,7 @@ function ForgetPassword() {
         </div>
       </div>
     </div>
+  </AuthLayout>
   );
 }
 

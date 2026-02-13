@@ -1,20 +1,19 @@
 import "./VerifyEmail.css";
-import logo from "./../../images/logo.svg";
+// import logo from "./../../images/logo.svg";
+import { useNavigate } from "react-router";
+import LogoHeader from "./LogoHeader";
+import AuthLayout from "./AuthLayout";
 function VerifyEmail() {
+  const navigate = useNavigate();
   return (
+    <AuthLayout>
     <div className="verify-email">
       <div className="container">
-        <div className="top">
-          <div className="logo">
-            <img src={logo} alt="logo" className="logo" />
-          </div>
-          <h2>Verify Your Email</h2>
-        </div>
         <div className="bottom">
           <div className="card">
             <h2>Verification Code</h2>
             <p>
-              We've sent 5 digit code to <strong>example@mail.com</strong>
+              We've sent 5 digit code to example@mail.com
               <br />
               please enter it below
             </p>
@@ -32,11 +31,13 @@ function VerifyEmail() {
             </div>
 
             <button className="submit-btn">Submit</button>
-            <button className="edit-btn">Edit Email</button>
+            <button className="edit-btn"
+            onClick={() => navigate("/api/auth/forgot-password")}>Edit Email</button>
           </div>
         </div>
       </div>
     </div>
+    </AuthLayout>
   );
 }
 export default VerifyEmail;

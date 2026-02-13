@@ -1,157 +1,146 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
+/* ================= SIGN UP PAGE ONLY ================= */
 
 .signup {
   width: 100%;
-  min-height: 100vh;  
+  min-height: 100vh;
   background-color: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: auto;    
+  overflow-y: auto;
 }
 
-
-.container {
+/* container */
+.signup .container {
   width: 95%;
-  min-height: 95vh;   
+  min-height: 95vh;
   background: #ffffff;
   display: flex;
-  border-radius: 10px;
-  overflow: hidden;
+  /* border-radius: 10px; */
+  position: relative;
 }
 
 
-
-.left {
+.signup .logo {
+  position: absolute;
+  top: 5px;
+  left: 30px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* LEFT */
+.signup .left {
   width: 50%;
   padding: 40px 50px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: center;
+  margin-top: 40px;
 }
-
-
-
-
-
-
-
-
-/* RIGHT SIDE */
-.right {
-  width: 50%;
-  background: #ffffff; 
+.signup .left .image-slider {
+  width: 580px;
+  height: 580px;
+}
+/* RIGHT */
+.signup .right {
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.card {
+/* CARD */
+.signup .card {
   width: 85%;
   max-width: 420px;
   background: #ffffff;
-  box-shadow: none; 
+  
 }
 
-.card-title {
+.signup .card-title {
   font-size: 45px;
   font-weight: 600;
   color: #6bb0c9;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
-.card-form {
+/* FORM */
+.signup .card-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-
-.row {
-  display: flex;
   gap: 15px;
 }
 
-.field {
+.signup .row {
+  display: flex;
+  /* gap: 15px; */
+}
+
+.signup .field {
   display: flex;
   flex-direction: column;
   gap: 6px;
   width: 100%;
 }
 
-.field label {
+.signup .field label {
   font-size: 16px;
-  color:#1b2d5c;
+  color: #1b2d5c;
 }
 
-.field input {
+.signup .field input {
   height: 42px;
   padding: 0 12px;
   border-radius: 9px;
-  border: 1px solid #B9C0C9;
+  border: 1px solid #b9c0c9;
   outline: none;
   font-size: 14px;
-  font-weight: 400;
 }
 
-.field input:focus {
-  border-color: #5EA5C0;
+.signup .field input:focus {
+  border-color: #5ea5c0;
 }
 
-button {
+/* BUTTON */
+.signup button {
   margin-top: 10px;
   height: 45px;
   border: none;
   border-radius: 8px;
-  background: #5EA5C0;
+  background: #5ea5c0;
   color: #fff;
   font-size: 20px;
   cursor: pointer;
-  transition: 0.3s;
   font-weight: 600;
 }
 
-button:hover {
+.signup button:hover {
   background: #5aa3bd;
 }
 
-
-/* RESPONSIVE - MOBILE */
+/* ================= MOBILE ================= */
 
 @media (max-width: 900px) {
-
   .signup {
     align-items: flex-start;
     padding: 20px 0;
   }
 
-  .container {
+  .signup .container {
     flex-direction: column;
-    width: 100%;
     min-height: auto;
     border-radius: 0;
   }
 
-  .left {
-    width: 100%;
-    padding: 30px 20px;
-    align-items: flex-start;
-    text-align: flex-start;
-  }
-
-  .right {
+  .signup .left,
+  .signup .right {
     width: 100%;
     padding: 20px;
   }
 
-  .row {
+  .signup .row {
     flex-direction: column;
   }
-
 }
