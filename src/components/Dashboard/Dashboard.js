@@ -5,7 +5,7 @@ import mother from "./../../images/mother.jpg";
 import son from "./../../images/son.jpg";
 import daughter from "./../../images/daughter.jpg";
 import grandchild from "./../../images/grandchild.jpg";
-import logo from "./../../images/Logo.png";
+import logo from "./../../images/logo.png";
 import dashboard from "./../../images/dashboard.svg";
 import patients from "./../../images/patients.svg";
 import location from "./../../images/location.svg";
