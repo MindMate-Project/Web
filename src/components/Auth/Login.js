@@ -18,9 +18,7 @@ function Login() {
             <LogoHeader/>
          </div> */}
         <div className="left">
-
-
-            <ImageSlider/>
+          <ImageSlider/>
        </div>
         <div className="right">
           <div className="card">

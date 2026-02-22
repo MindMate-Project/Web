@@ -1,5 +1,6 @@
 import React from "react";
 import LogoHeader from "./LogoHeader";
+// import "./AuthLayout.css";
 
 const AuthLayout = ({ children }) => {
   return (
