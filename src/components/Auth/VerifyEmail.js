@@ -28,6 +28,7 @@ function VerifyEmail() {
               <input maxlength="1" />
               <input maxlength="1" />
               <input maxlength="1" />
+              
             </div>
 
             <button className="submit-btn">Submit</button>

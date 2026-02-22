@@ -21,18 +21,10 @@
 }
 
 
-.signup .logo {
-  position: absolute;
-  top: 5px;
-  left: 30px;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+
 /* LEFT */
 .signup .left {
-  width: 50%;
+  width: 40%;
   padding: 40px 50px;
   display: flex;
   justify-content: center;
@@ -75,7 +67,7 @@
 
 .signup .row {
   display: flex;
-  /* gap: 15px; */
+  /* gap: 15px;/ */
 }
 
 .signup .field {
@@ -90,7 +82,7 @@
   color: #1b2d5c;
 }
 
-.signup .field input {
+.signup  input {
   height: 42px;
   padding: 0 12px;
   border-radius: 9px;
@@ -134,12 +126,16 @@
     border-radius: 0;
   }
 
-  .signup .left,
+  .signup .left {
+    width: 100%; 
+    padding: 30px 20px; 
+    align-items: flex-start; 
+    text-align: flex-staet;
+  }
   .signup .right {
-    width: 100%;
+    width: 100%; 
     padding: 20px;
   }
-
   .signup .row {
     flex-direction: column;
   }

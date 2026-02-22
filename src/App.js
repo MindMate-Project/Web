@@ -8,13 +8,19 @@ import SetNewPasswordPage from "./pages/Auth/SetNewPasswordPage";
 import VerifyEmailPage from "./pages/Auth/VerifyEmailPage";
 import CheckInboxPage from "./pages/Auth/CheckInboxPage";
 import LogoHeader from "./components/Auth/LogoHeader";
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
       {/* <LogoHeader/> */}
         <Routes>
-          <Route path="/" element={<div> This main route</div>} />
+          <Route path="/" element={<div>
+        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+            <a href="/api/auth/login" style={{ padding: "0.75rem 1.5rem", backgroundColor: "#007bff", color: "#fff", textDecoration: "none", borderRadius: "0.375rem", fontSize: "1rem", fontWeight: "500", cursor: "pointer", border: "none" }}>Login</a>
+            <a href="/api/auth/signup" style={{ padding: "0.75rem 1.5rem", backgroundColor: "#28a745", color: "#fff", textDecoration: "none", borderRadius: "0.375rem", fontSize: "1rem", fontWeight: "500", cursor: "pointer", border: "none" }}>Signup</a>
+        </div>
+          </div>} />
           <Route path="/api/auth/login" element={<LoginPage />} />
           <Route path="/api/auth/signup" element={<SignupPage />} />
           <Route path="/api/auth/forgot-password" element={<ForgetPasswordPage />} />
