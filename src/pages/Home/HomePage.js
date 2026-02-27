@@ -1,4 +1,5 @@
 import Dashboard from "./../../components/Dashboard/Dashboard";
+import DashboardLayout from "./../../components/Dashboard/DashboardLayout";
 import { useNavigate } from "react-router";
 
 function HomePage() {
@@ -22,9 +23,11 @@ function HomePage() {
      }
 
      const userName = user && user.name ? user.name : "Guest";
-    return (
-        <Dashboard userName={userName} logOut={logOut} />
-    );
+     return (
+        <DashboardLayout userName={userName} logOut={logOut}>
+            <Dashboard />
+        </DashboardLayout>
+  );
 }
 
 export default HomePage;
