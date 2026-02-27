@@ -1,45 +1,35 @@
 import "./VerificationStatus.css";
+import { useNavigate } from "react-router-dom";
+import { MdCheckCircle } from "react-icons/md";
+import AuthLayout from "../../components/Auth/AuthLayout";
 
-function VerificationStatus({
-  status = "success", // success | error
-  title,
-  message,
-  buttonText,
-  onButtonClick,
-  secondButtonText,
-  onSecondButtonClick
-}) {
+export default function VerificationSuccessPage() {
+  const navigate = useNavigate();
+
   return (
-    <div className="verification-page">
-      <div className="verification-card">
+    <AuthLayout>
+      <div className="verification-page">
+        <div className="verification-card success">
 
-        <div className={`icon ${status}`}>
-          {status === "success" ? "✓" : "✕"}
-        </div>
+          <div className="icon success-icon">
+            <MdCheckCircle />
+          </div>
 
-        <h2 className={status}>{title}</h2>
+          <h2 className="success-text">Verification Successful</h2>
 
-        <p className="message">{message}</p>
-
-        <button 
-          className="primary-btn"
-          onClick={onButtonClick}
-        >
-          {buttonText}
-        </button>
-
-        {secondButtonText && (
-          <button 
-            className="secondary-btn"
-            onClick={onSecondButtonClick}
+          <p class="verification-text">
+            <span>Your email has been successfully verified.</span>
+            <span>You can now reset your password.</span>
+          </p>
+          <button
+            className="primary-btn"
+            onClick={() => navigate("/api/auth/set-new-password")}
           >
-            {secondButtonText}
+            Continue
           </button>
-        )}
 
+        </div>
       </div>
-    </div>
+    </AuthLayout>
   );
 }
-
-export default VerificationStatus;

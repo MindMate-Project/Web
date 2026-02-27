@@ -31,8 +31,8 @@
     border: 1px solid var(--border-color);
 
     box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.12),
-        inset 0 2px 6px rgba(0, 0, 0, 0.08);
+        inset 0px 1px 4px rgba(0, 0, 0, 0.25),
+        0px 4px 4px rgba(0, 0, 0, 0.25);
     color: var(--primary-bg);
 }
 
@@ -57,6 +57,7 @@
     font-size: 14px;
     color: var(--primary-bg);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .verify-email .code-inputs {
@@ -71,7 +72,7 @@
     height: 46px;
     font-size: 20px;
     text-align: center;
-    border-radius: 20px;
+    border-radius: 16px;
     border: 1.5px solid #B9C0C9;
     outline: none;
 }
@@ -81,7 +82,8 @@
     padding: 12px;
     background: var(--primary-bg);
     color: white;
-    border: none;
+    border: 1.5px solid var(--primary-bg);
+    /* border: none; */
     border-radius: 10px;
     font-size: 20px;
     font-family: 600;
@@ -126,22 +128,86 @@
         width: auto;
     }
 
-    .verify-email .top {
+    /* .verify-email .top {
         align-items: center;
         text-align: center;
         margin-bottom: 20px;
-    }
-
+    } */
+/* 
     .verify-email .top .logo img {
         left: 0;
         top: -100%;
-    }
+    } */
 
 }
 
 @media (max-width: 480px) {
+
     .verify-email .card {
-        width: 80%;
+        width: 75%;
+        padding: 35px 20px;
+    }
+    .verify-email .card h2 {
+        font-size: 30px;
+
+    }
+    
+    .verify-email .card p {
+        font-size: 14px;
+    }  
+    
+
+    .verify-email .code-inputs {
+        gap: 6px;
     }
 
+    .verify-email .code-inputs input {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        border-radius: 14px;
+    }
+    .verify-email .submit-btn {
+        padding: 9px;
+        font-size: 18px;
+    }
+    .verify-email .edit-btn {
+        padding: 9px;
+        font-size: 16px;
+    }
+}
+   @media (max-width: 380px) {
+
+    .verify-email .card {
+        width: 75%;
+        padding: 35px 20px;
+    }
+    .verify-email .card h2 {
+        font-size: 28px;
+
+    }
+    
+    .verify-email .card p {
+        font-size: 13px;
+    }  
+    
+
+    .verify-email .code-inputs {
+        gap: 2px;
+    }
+
+    .verify-email .code-inputs input {
+        width: 32px;
+        height: 35px;
+        font-size: 16px;
+        border-radius: 10px;
+    }
+    .verify-email .submit-btn {
+        padding: 6px;
+        font-size: 16px;
+    }
+    .verify-email .edit-btn {
+        padding: 6px;
+        font-size: 14px;
+    }
 }

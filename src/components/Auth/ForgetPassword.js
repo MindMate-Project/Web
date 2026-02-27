@@ -36,7 +36,7 @@ function ForgetPassword() {
                                     />
                                 </div>
 
-                                <button type="button" onClick={onSubmit}>
+                                <button type="submit" onClick={onSubmit}>
                                     {" "}
                                     Send Code{" "}
                                 </button>

@@ -21,7 +21,8 @@ function SetNewPassword() {
                     <div className="left"></div>
                     <div className="right">
                         <div className="card">
-                            <h2 className="card-title">Set New Password</h2>
+                            <h2 className="card-title">Set New Password!</h2>
+                            <p className="card-description">Please enter and confirm your new password</p>
                             <form>
                                 <div className="field">
                                     <label>Set Password</label>
@@ -42,11 +43,6 @@ function SetNewPassword() {
                                     />
                                 </div>
                                 <button type="button" onClick={onSubmit}>Save</button>
-                                <button
-                                    onClick={() => navigate("/api/auth/login")}
-                                >
-                                    back
-                                </button>
                             </form>
                         </div>
                     </div>
