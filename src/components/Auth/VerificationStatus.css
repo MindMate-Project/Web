@@ -1,0 +1,135 @@
+:root {
+  --primary-bg: #5EA5C0;
+  --border-color: #B9C0C9;
+  --text-dark: #14274E;
+  --text-light: #6b7280;
+}
+
+.verification-page {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verification-card {
+  width: 417px;
+  margin-top: 79px;
+  padding: 40px 23px 30px;
+  border-radius: 50px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  box-shadow:
+    inset 0px 1px 4px rgba(0, 0, 0, 0.25),
+    0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.icon svg {
+  font-size: 130px;
+}
+
+.success-icon svg {
+  color: #4FCB93;
+}
+
+.success-text {
+  color: #4FCB93;
+}
+
+.error-icon svg {
+  color: #DE5753;
+}
+
+.error-text {
+  color: #DE5753;
+}
+
+.verification-card h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 23px;
+  
+  
+  /* color: var(--primary-bg); */
+}
+
+.verification-card p {
+    
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 35px;
+  color: var(--text-dark);
+}
+.verification-text span {
+  display: block;
+}
+
+.verification-text span:first-child {
+  margin-bottom: 6px;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary-bg);
+  border: 1px solid var(--primary-bg);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.primary-btn:hover {
+  background: #69afcb;
+}
+
+.secondary-btn {
+  width: 100%;
+  padding: 14px;
+  background: #ffffff;
+  color: var(--text-dark);
+  border: 1px solid #cfd9e6;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #fafafa;
+}
+
+@media (max-width: 480px) {
+  .verification-card {
+    padding: 30px 20px;
+    width: 340px;
+  }
+
+  .icon svg {
+    font-size: 90px;
+  }
+
+  .verification-card h2 {
+    font-size: 28px;
+  }
+
+  .verification-card p {
+    font-size: 14px;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    height: 42px;
+    font-size: 16px;
+  }
+}
