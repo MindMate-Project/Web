@@ -15,7 +15,8 @@ const ForgetPasswordHook = () => {
         setEmail(e.target.value);
     };
 
-    const onSubmit = async () => {
+const onSubmit = async (e) => {
+    e.preventDefault();
         if (email === "") {
              toast('Please enter your email address', {
                  position: "top-right",
