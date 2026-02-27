@@ -136,7 +136,7 @@ const SignupHook = () => {
 
             if (res.status === 201) {
                 // alert("Account created successfully!");
-                toast("Account created successfully! redirecting...", {
+                toast("Account created successfully! Please verify your email. check your inbox", {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,

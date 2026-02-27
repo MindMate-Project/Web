@@ -1,8 +1,8 @@
 :root {
-  --primary-bg: #5EA5C0;
-  --border-color: #B9C0C9;
-  --text-dark: #14274E;
-  --text-light: #6b7280;
+    --primary-bg: #5EA5C0;
+    --border-color: #B9C0C9;
+    --text-dark: #14274E;
+    --text-light: #6b7280;
 }
 
 
@@ -33,7 +33,7 @@
     box-shadow:
         0 12px 30px rgba(0, 0, 0, 0.12),
         inset 0 2px 6px rgba(0, 0, 0, 0.08);
-        color: var(--primary-bg);
+    color: var(--primary-bg);
 }
 
 .verify-email .card h2 {
@@ -52,7 +52,7 @@
 
 .verify-email .resend {
     /* display: flex; */
-    all: unset; 
+    all: unset;
     margin: 0px 0 39px;
     font-size: 14px;
     color: var(--primary-bg);
@@ -62,13 +62,13 @@
 .verify-email .code-inputs {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
     margin-bottom: 25px;
 }
 
 .verify-email .code-inputs input {
-    width: 55px;
-    height: 55px;
+    width: 46px;
+    height: 46px;
     font-size: 20px;
     text-align: center;
     border-radius: 20px;
@@ -106,7 +106,7 @@
 }
 
 .verify-email .submit-btn:hover {
-    background:  #69afcb;
+    background: #69afcb;
 }
 
 @media (max-width: 1200px) {
