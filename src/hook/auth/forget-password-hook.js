@@ -83,7 +83,7 @@ const onSubmit = async (e) => {
                 }
             }
         }
-    }, [loading]);
+    }, [loading, res, navigate]);
 
     return [OnChangeEmail, email, onSubmit];
 };
