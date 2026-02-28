@@ -1,192 +1,379 @@
 :root {
-  --primary-bg: #5EA5C0;
+    --primary-bg: #5EA5C0;
+    --secondary-bg: #14274E;
 }
 
 .login {
-  width: 100%;
-  min-height: 100vh;
-  background-color: #FFFFFF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.login .logo-header {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+}
+
+.login .logo-header img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.login .brand-title {
+    font-size: 24px;
+    font-weight: 450;
+    color: var(--secondary-bg);
+    margin: 0;
 }
 
 .login .container {
-  width: 95%;
-  min-height: 95vh;
-  background: #ffffff;
-  display: flex;
-  /* border-radius: 10px; */
-  /* position: relative; */
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 
 /* LEFT SIDE (Slider) */
 .login .left {
-  width: 50%;
-  padding: 40px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top:40px
+    width: 50%;
+    padding: 40px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px
 }
 
 /* Slider size control (Login only) */
 .login .left .image-slider {
-  width: 580px;
-  height: 580px;
+    width: 460px;
+    height: 460px;
 }
 
 /* RIGHT SIDE (Form) */
 .login .right {
-  width: 60%;
-  background: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 60%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login .card {
-  width: 85%;
-  max-width: 420px;
-  background: #ffffff;
-  box-shadow: none;
+    width: 85%;
+    max-width: 420px;
+    background: #ffffff;
+    box-shadow: none;
 }
 
 .login .card-title {
-  font-size: 45px;
-  font-weight: 600;
-  color: var(--primary-bg);
-  margin-bottom: 25px;
+    font-size: 45px;
+    font-weight: 600;
+    color: var(--primary-bg);
+    margin-bottom: 25px;
 }
 
 .login form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .row {
-  display: flex;
-  gap: 15px;
+    display: flex;
+    gap: 15px;
 }
 
 .login .field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
 }
 
 .login label {
-  font-size: 16px;
-  color: #1b2d5c;
+    font-size: 16px;
+    color: #1b2d5c;
 }
 
 .login input {
-  height: 42px;
-  padding: 0 12px;
-  border-radius: 9px;
-  border: 1px solid #ddd;
-  outline: none;
-  font-size: 14px;
+    height: 42px;
+    padding: 0 12px;
+    border-radius: 9px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 14px;
 }
 
 .login input:focus {
-  border-color: var(--primary-bg);
+    border-color: var(--primary-bg);
 }
+
 .login .password-field {
-  gap: 4px;
+    gap: 4px;
 }
 
 .login .forgot-password {
-  margin-top: 2px;
+    margin-top: 2px;
 }
 
 .login button {
-  margin-top: 10px;
-  height: 45px;
-  border: none;
-  border-radius: 8px;
-  background: var(--primary-bg);
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 600;
+    margin-top: 10px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-bg);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
 }
 
 .login button:hover {
-  background: #5aa3bd;
+    background: #5aa3bd;
 }
 
 .login .google-login {
-  background: white !important;
-  color: black !important;
-  border: 1px solid #eeee !important;
-  font-weight: 600;
-  font-size: 16px;
+    background: white !important;
+    color: black !important;
+    border: 1px solid #eeee !important;
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .login .google-login img {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 .login .forgot-password {
-  text-align: right;
+    text-align: right;
 }
 
 .login .forgot-password a {
-  font-size: 14px;
-  color: var(--primary-bg);
-  text-decoration: none;
-  font-weight: 500;
+    font-size: 14px;
+    color: var(--primary-bg);
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .login .signup-link {
-  font-size: 13px;
-  text-align: center;
-  margin-top: 20px;
-  color: #555555;
-  font-weight: 500;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 20px;
+    color: #555555;
+    font-weight: 500;
 }
 
 .login .signup-link a {
-  color: var(--primary-bg);
-  text-decoration: none;
-  font-weight: 500;
+    color: var(--primary-bg);
+    text-decoration: none;
+    font-weight: 500;
 }
 
 /* RESPONSIVE */
-@media (max-width: 900px) { 
-  
-    .login { 
-        align-items: flex-start; 
-        padding: 20px 0; 
-    } 
-    .login .container { 
-        flex-direction: column; 
-        width: 100%; 
-        min-height: auto; 
-        border-radius: 0; 
-    } 
-    .login .left { 
-        width: 100%; 
-        padding: 30px 20px; 
-        align-items: flex-start; 
-        text-align: flex-staet; 
-    } 
-    .login .right { 
-        width: 100%; 
-        padding: 20px; 
-    } 
-    .row { 
-        flex-direction: column; 
-    } 
+
+/* Large tablets and small desktops */
+@media (max-width: 1200px) {
+    .login .left .image-slider {
+        width: 390px;
+        height: 390px;
+    }
+
+    .login .right {
+        width: 50%;
+    }
+
+    .login .left {
+        width: 50%;
+        padding: 30px 40px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+    .login .container {
+        flex-direction: column;
+        width: 100%;
+        min-height: auto;
+        padding-top: 80px;
+    }
+
+    .login .logo-header {
+        top: 15px;
+        left: 20px;
+    }
+
+    .login .logo-header img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .login .brand-title {
+        font-size: 24px;
+    }
+
+    .login .left {
+        width: 100%;
+        padding: 40px 20px 20px 20px;
+        margin-top: 0;
+    }
+
+    .login .left .image-slider {
+        width: 320px;
+        height: 320px;
+    }
+
+    .login .right {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .login .card {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+}
+
+/* Mobile landscape and small tablets */
+@media (max-width: 768px) {
+    .login .logo-header {
+        top: 12px;
+        left: 15px;
+        gap: 10px;
+    }
+
+    .login .logo-header img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .login .brand-title {
+        font-size: 22px;
+    }
+
+    .login .container {
+        padding-top: 70px;
+    }
+
+    .login .left {
+        padding: 30px 15px 15px 15px;
+    }
+
+    .login .left .image-slider {
+        width: 280px;
+        height: 280px;
+    }
+
+    .login .card-title {
+        font-size: 38px;
+    }
+
+    .login .card {
+        width: 95%;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+    .login .logo-header {
+        top: 10px;
+        left: 12px;
+        gap: 8px;
+    }
+
+    .login .logo-header img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .login .brand-title {
+        font-size: 20px;
+    }
+
+    .login .container {
+        padding-top: 60px;
+    }
+
+    .login .left {
+        padding: 20px 10px 10px 10px;
+    }
+
+    .login .left .image-slider {
+        width: 230px;
+        height: 230px;
+    }
+
+    .login .card {
+        width: 100%;
+        padding: 0 5px;
+    }
+
+    .login .card-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .login label {
+        font-size: 14px;
+    }
+
+    .login input {
+        height: 40px;
+        font-size: 13px;
+    }
+
+    .login button {
+        height: 42px;
+        font-size: 18px;
+    }
+
+    .login .google-login {
+        font-size: 14px;
+    }
+
+    .login .signup-link {
+        font-size: 12px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .login .logo-header img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .login .brand-title {
+        font-size: 18px;
+    }
+
+    .login .left .image-slider {
+        width: 200px;
+        height: 200px;
+    }
+
+    .login .card-title {
+        font-size: 28px;
+    }
 }
