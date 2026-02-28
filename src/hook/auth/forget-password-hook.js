@@ -56,7 +56,7 @@ const onSubmit = async (e) => {
                         theme: "light",
                     });
                     setTimeout(() => {
-                        navigate("/api/auth/verify-reset-password");
+                        navigate("/api/auth/verify-reset-code");
                     }, 2000);
                 }
                 else if (res.status === 404) {
