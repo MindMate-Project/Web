@@ -25,7 +25,7 @@ function App() {
           <Route path="/api/auth/login" element={<LoginPage />} />
           <Route path="/api/auth/signup" element={<SignupPage />} />
           <Route path="/api/auth/forgot-password" element={<ForgetPasswordPage />} />
-          <Route path="/api/auth/verify-reset-password" element={<VerifyResetCodePage />} />
+          <Route path="/api/auth/verify-reset-code" element={<VerifyResetCodePage />} />
           <Route path="/api/auth/set-new-password" element={<SetNewPasswordPage />} />
           <Route path="/api/auth/verification-success" element={<VerificationSuccessPage />} />
           <Route path="/api/auth/verification-error" element={<VerificationErrorPage />} />
