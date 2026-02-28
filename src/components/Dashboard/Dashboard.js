@@ -13,12 +13,76 @@ import reminder from "./../../images/reminder.svg";
 import memoryBank from "./../../images/memory bank.svg";
 import doctor from "./../../images/doctor.jpg";
 
-function Dashboard({userName,logOut}) {
+function Dashboard({ logOut }) {
+    const storedUser = localStorage.getItem("user");
+    let user = null;
+
+    if (storedUser) {
+        try {
+            user = JSON.parse(storedUser);
+        } catch (error) {
+            user = null;
+        }
+    }
+
+    const userName = user && user.name ? user.name : "Guest";
 
     return (
         <div className="dashboard">
-            <div className="dashboard__main">
+            <aside className="dashboard__sidebar">
+                <div className="dashboard__logo">
+                    <img src={logo} alt="MindMate" />
+                    <span>MindMate</span>
+                </div>
 
+                <nav className="dashboard__nav">
+                    <ul>
+                        <li className="active">
+                            <img src={dashboard} alt="" />
+                            <span>Dashboard</span>
+                        </li>
+                        <li>
+                            <img src={patients} alt="" />
+                            <span>Patients</span>
+                        </li>
+                        <li>
+                            <img src={location} alt="" />
+                            <span>Live Location</span>
+                        </li>
+                        <li>
+                            <img src={reminder} alt="" />
+                            <span>Reminders</span>
+                        </li>
+                        <li>
+                            <img src={memoryBank} alt="" />
+                            <span>Memory Bank</span>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div className="dashboard__main">
+                <header className="dashboard__header">
+                    <div className="dashboard__greeting">
+                        <h2>Hello, {userName} !</h2>
+                        <p>Ready to take care of your patients today</p>
+                    </div>
+
+                    <div className="dashboard__user">
+                        <img src={DashboardPerson} alt="user" />
+                        <div>
+                            <strong>{userName}</strong>
+                            <span>Caregiver</span>
+                        </div>
+                        <button
+                            className="dashboard__logout"
+                            type="button"
+                            onClick={logOut}
+                        >
+                            Logout
+                        </button>
+                    </div>
+                </header>
 
                 <div className="dashboard__title-row">
                     <h3 className="dashboard__title">Dashboard</h3>
