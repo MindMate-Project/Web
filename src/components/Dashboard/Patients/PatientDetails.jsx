@@ -31,6 +31,7 @@ export default function PatientDetails() {
     const handleEdit = () => {
         // TODO: Implement edit functionality
         console.log("Edit patient");
+        navigate(`/api/dashboard/patients/${patient.id}/edit`);
     };
 
     const handleDelete = () => {
