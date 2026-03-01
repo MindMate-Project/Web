@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
-import HomePage from "./pages/Home/HomePage";
 import LoginPage from "./pages/Auth/LoginPage";
 import SignupPage from "./pages/Auth/SignupPage";
 import ForgetPasswordPage from "./pages/Auth/ForgetPasswordPage";
@@ -8,7 +7,12 @@ import SetNewPasswordPage from "./pages/Auth/SetNewPasswordPage";
 import VerifyResetCodePage from "./pages/Auth/VerifyResetCodePage";
 import VerificationSuccessPage from "./pages/Auth/VerificationSuccessPage";
 import VerificationErrorPage from "./pages/Auth/VerificationErrorPage";
-
+import DashboardLayout from "./pages/Dashboard/DashboardLayout";
+import MainDashboard from "./components/Dashboard/DashboardMain";
+import Patients from "./components/Dashboard/Patients";
+import Location from "./components/Dashboard/Location";
+import Reminders from "./components/Dashboard/Reminders";
+import MemoryBank from "./components/Dashboard/MemoryBank";
 function App() {
   return (
     <div className="App">
@@ -21,7 +25,13 @@ function App() {
         </div>
           </div>} />
 
-          <Route path="/api/dashboard" element={<HomePage />} />
+        <Route path="/api/dashboard/" element={<DashboardLayout />}>
+          <Route index element={<MainDashboard />} />
+            <Route path="patients" element={<Patients />} />
+            <Route path="location" element={<Location />} />
+            <Route path="reminders" element={<Reminders />} />
+            <Route path="memory-bank" element={<MemoryBank />} />
+        </Route>
           <Route path="/api/auth/login" element={<LoginPage />} />
           <Route path="/api/auth/signup" element={<SignupPage />} />
           <Route path="/api/auth/forgot-password" element={<ForgetPasswordPage />} />
