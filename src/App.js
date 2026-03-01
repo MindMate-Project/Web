@@ -13,9 +13,9 @@ import Patients from "./components/Dashboard/Patients/Patients";
 import PatientDetails from "./components/Dashboard/Patients/PatientDetails";
 import EditPatient from "./components/Dashboard/Patients/EditPatient";
 import AddPatient from "./components/Dashboard/Patients/AddPatient";
-import Location from "./components/Dashboard/Location";
-import Reminders from "./components/Dashboard/Reminders";
-import MemoryBank from "./components/Dashboard/MemoryBank";
+import Location from "./components/Dashboard/Location/Location";
+import Reminders from "./components/Dashboard/Reminders/Reminders";
+import MemoryBank from "./components/Dashboard/MemoryBank/MemoryBank";
 function App() {
   return (
     <div className="App">
