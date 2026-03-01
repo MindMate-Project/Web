@@ -1,0 +1,35 @@
+.dashboard {
+    min-height: 100vh;
+}
+
+/* Header */
+.dashboard-header {
+    margin-bottom: 25px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+}
+
+.dashboard-header p {
+    margin-top: 6px;
+    color: #777;
+    font-size: 14px;
+}
+
+/* Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Card */
+.dashboard .card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    min-height: 150px;
+    font-weight: 600;
+}
