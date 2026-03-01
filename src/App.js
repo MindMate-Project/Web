@@ -9,7 +9,10 @@ import VerificationSuccessPage from "./pages/Auth/VerificationSuccessPage";
 import VerificationErrorPage from "./pages/Auth/VerificationErrorPage";
 import DashboardLayout from "./pages/Dashboard/DashboardLayout";
 import MainDashboard from "./components/Dashboard/DashboardMain";
-import Patients from "./components/Dashboard/Patients";
+import Patients from "./components/Dashboard/Patients/Patients";
+import PatientDetails from "./components/Dashboard/Patients/PatientDetails";
+import EditPatient from "./components/Dashboard/Patients/EditPatient";
+import AddPatient from "./components/Dashboard/Patients/AddPatient";
 import Location from "./components/Dashboard/Location";
 import Reminders from "./components/Dashboard/Reminders";
 import MemoryBank from "./components/Dashboard/MemoryBank";
@@ -27,7 +30,12 @@ function App() {
 
         <Route path="/api/dashboard/" element={<DashboardLayout />}>
           <Route index element={<MainDashboard />} />
-            <Route path="patients" element={<Patients />} />
+            <Route path="patients">
+            <Route index element={<Patients />} />
+            <Route path="add" element={<AddPatient />} />
+            <Route path=":id" element={<PatientDetails />}/>
+            <Route path=":id/edit" element={<EditPatient />} />
+          </Route>
             <Route path="location" element={<Location />} />
             <Route path="reminders" element={<Reminders />} />
             <Route path="memory-bank" element={<MemoryBank />} />

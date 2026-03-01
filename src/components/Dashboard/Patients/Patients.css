@@ -1,0 +1,319 @@
+.patients-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.patients-container .patients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+}
+
+.patients-container .patients-title h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 0.25rem 0;
+}
+
+.patients-container .patients-count {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+}
+
+.patients-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.patients-container .search-box {
+    position: relative;
+    min-width: 200px;
+}
+
+.patients-container .search-box input {
+    width: 80%;
+    padding: 0.65rem 1rem;
+    padding-right: 2.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+}
+
+.patients-container .search-box input::placeholder {
+    color: #999;
+}
+
+.patients-container .search-box input:focus {
+    border-color: #7dd3fc;
+}
+
+.patients-container .search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+}
+
+.patients-container .add-patient-btn {
+    padding: 0.65rem 1.5rem;
+    background-color: #7dd3fc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.patients-container .add-patient-btn:hover {
+    background-color: #38bdf8;
+    transform: translateY(-1px);
+}
+
+.patients-container .add-patient-btn:active {
+    transform: translateY(0);
+}
+
+.patients-container .patients-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.patients-container .patient-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.patients-container .patient-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.patients-container .patient-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.patients-container .patient-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f0f0f0;
+}
+
+.patients-container .patient-details h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 0.25rem 0;
+}
+
+.patients-container .patient-details p {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+}
+
+.patients-container .patient-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.patients-container .view-btn,
+.patients-container .delete-btn {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.patients-container .view-btn {
+    background-color: #7dd3fc;
+    color: #fff;
+}
+
+.patients-container .view-btn:hover {
+    background-color: #38bdf8;
+    transform: translateY(-1px);
+}
+
+.patients-container .delete-btn {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #e0e0e0;
+}
+
+.patients-container .delete-btn:hover {
+    background-color: #fee;
+    color: #dc2626;
+    border-color: #fca5a5;
+}
+
+.patients-container .no-patients {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #999;
+}
+
+.patients-container .no-patients p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .patients-container {
+        padding: 1.5rem;
+    }
+
+    .patients-container .patients-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .patients-container .patients-actions {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .patients-container .search-box {
+        flex: 1;
+        min-width: auto;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .patients-container .patients-container {
+        padding: 1rem;
+    }
+
+    .patients-container .patients-title h1 {
+        font-size: 1.5rem;
+    }
+
+    .patients-container .patients-count {
+        font-size: 0.8rem;
+    }
+
+    .patients-container .patients-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .patients-container .search-box {
+        width: 100%;
+    }
+
+     .patients-container .add-patient-btn {
+        width: 100%;
+        padding: 0.75rem 1.5rem;
+    }
+
+     .patients-container .patient-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .patients-container .patient-info {
+        width: 100%;
+    }
+
+    .patients-container .patient-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .patients-container {
+        padding: 0.75rem;
+    }
+
+    .patients-container .patients-header {
+        margin-bottom: 1.5rem;
+        gap: 1rem;
+    }
+
+    .patients-container .patients-title h1 {
+        font-size: 1.25rem;
+    }
+
+    .patients-container .patient-card {
+        padding: 0.875rem;
+    }
+
+    .patients-container .patient-avatar {
+        width: 45px;
+        height: 45px;
+    }
+
+    .patients-container .patient-details h3 {
+        font-size: 0.95rem;
+    }
+
+    .patients-container .patient-details p {
+        font-size: 0.8rem;
+    }
+
+    .patients-container .patient-actions {
+        gap: 0.5rem;
+    }
+
+     .patients-container .view-btn,
+    .patients-container .delete-btn {
+        padding: 0.45rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra Small Mobile (max-width: 360px) */
+@media (max-width: 360px) {
+    .patients-container {
+        padding: 0.5rem;
+    }
+
+    .patients-container .patient-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .patients-container .view-btn,
+    .patients-container .delete-btn {
+        width: 100%;
+    }
+}
