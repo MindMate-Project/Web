@@ -1,0 +1,173 @@
+.reminders {
+  padding: 30px;
+}
+
+.reminders-title {
+  color:#14274E;
+  font-size: 26px;
+  font-weight: 600;
+  /* color: #1f2a37; */
+  margin-bottom: 25px;
+}
+
+.reminder-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.reminder-card:hover {
+  transform: translateY(-3px);
+}
+
+.reminder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  
+  gap: 10px;
+}
+
+.reminder-header h3 {
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #676D75
+
+}
+
+.btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-edit {
+  background: #a7d3e5;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.btn-edit:hover {
+  background: #82c1da;
+}
+
+.btn-add {
+  /* background: #e7f2f7; */
+  border: 1px solid #cdd6df;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.btn-add:hover {
+  background: #d6e9f2;
+}
+
+.reminder-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.reminder-table th {
+  text-align: left;
+  padding: 12px;
+  font-size: 14px;
+  color: #9aa4b2;
+  
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.reminder-table td {
+  padding: 14px 12px;
+  border-top: 1px solid #eef2f6;
+  font-size: 14px;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.status {
+  font-weight: 500;
+}
+
+/* .upcoming {
+  color: #4b9cd3;
+}
+
+.scheduled {
+  color: #10b981;
+} */
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .reminder-table {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .reminder-card {
+    padding: 18px;
+  }
+
+  .reminder-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btns {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .btn-edit, .btn-add {
+    width: auto;
+    flex: 1 1 auto;
+  }
+
+  .reminder-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .reminders {
+    padding: 20px 15px;
+  }
+  .reminder-header h3 {
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #676D75
+  }
+
+  .reminders-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .reminder-card {
+    padding: 15px;
+  }
+
+  .reminder-table th, .reminder-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}
