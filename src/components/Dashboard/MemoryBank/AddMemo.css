@@ -1,0 +1,302 @@
+.addMemoryContainer{
+padding:40px;
+min-height:100vh;
+}
+
+.title{
+color:#5EA5C0;
+font-weight:400;
+font-size:20px;
+line-height:17.67px;
+letter-spacing:0.48px;
+margin-bottom:40px;
+}
+
+.memoryCard{
+background:#FFFFFF;
+border-radius:10px;
+padding:40px;
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+gap:40px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* form section */
+
+.formSection{
+display:flex;
+flex-direction:column;
+gap:22px;
+}
+
+/* upload */
+
+.uploadBox label{
+display:flex;
+align-items:center;
+justify-content:center;
+width:170px;
+height:150px;
+background:#E0E0E0;
+border-radius:10px;
+cursor:pointer;
+}
+
+.uploadContent{
+display:flex;
+flex-direction:column;
+/* align-items:center; */
+justify-content:center;
+text-align:center;
+color:#757575;
+font-size:16px;
+font-weight:400;
+}
+
+.uploadIcon svg{
+width:45px;
+height:45px;
+margin-top: 30px;
+fill:#757575;
+}
+
+/* 
+.uploadIcon{
+font-size:28px;
+display:block;
+margin-bottom:8px;
+} */
+
+/* form */
+
+.memoryForm{
+width:430px;
+max-width:100%;
+display:flex;
+flex-direction:column;
+}
+
+/* select */
+
+.memorySelect{
+width:100%;
+padding:14px 40px 14px 14px;
+border:1.3px solid #979797;
+border-radius:10px;
+margin-bottom: 19px;
+font-size:14px;
+justify-content: space-between;
+outline:none;
+background-color:white;
+color:#979797;
+box-sizing:border-box;
+
+/* remove default arrow */
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance:none;
+
+/* custom arrow */
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23979797' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
+
+background-repeat:no-repeat;
+background-position:right 14px center;
+background-size:18px;
+}
+
+.inputGroup{
+position:relative;
+width:100%;
+}
+
+.inputGroup label{
+position:absolute;
+top:-9px;
+left:14px;
+background:white;
+padding:0 6px;
+font-size:16px;
+font-family: 400;
+color:#14274E;
+}
+
+/* inputs */
+
+.inputGroup input{
+width:100%;
+padding:14px;
+margin-bottom:19px;
+border:1px solid #CFCFCF;
+border-radius:10px;
+font-size:14px;
+outline:none;
+box-sizing:border-box;
+}
+
+/* textarea */
+
+.inputGroup textarea{
+width:100%;
+height:180px;
+padding:14px;
+margin-bottom:19px;
+border:1px solid #CFCFCF;
+border-radius:10px;
+resize:none;
+font-size:14px;
+outline:none;
+box-sizing:border-box;
+}
+
+/* focus */
+
+.inputGroup input:focus,
+.inputGroup textarea:focus,
+.memorySelect:focus{
+border-color:#8bb9c7;
+}
+
+/* buttons */
+
+.buttons{
+display:flex;
+gap:15px;
+justify-content: flex-end;
+
+/* align-items:center; */
+}
+
+.saveBtn{
+background:#9ec4cf;
+color:white;
+border:none;
+padding:10px 25px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.cancelBtn{
+background:white;
+border:1px solid #ddd;
+padding:10px 25px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.cancelBtn:hover{
+background:#f3f3f3;
+}
+/* ============ 1024px ============ */
+
+@media (max-width:1024px){
+
+.memoryCard{
+flex-direction:column;
+align-items:flex-start;
+gap:30px;
+}
+
+.memoryForm{
+width:100%;
+}
+
+.buttons{
+align-self:flex-end;
+}
+
+}
+
+/* ============ 768px ============ */
+
+@media (max-width:768px){
+
+.addMemoryContainer{
+padding:30px 20px;
+}
+
+.memoryCard{
+padding:30px;
+}
+
+.formSection{
+width:100%;
+}
+
+.memoryForm{
+width:100%;
+}
+
+.uploadBox label{
+width:140px;
+height:120px;
+}
+
+.inputGroup input,
+.inputGroup textarea,
+.memorySelect{
+width:100%;
+}
+
+.buttons{
+width:100%;
+justify-content:flex-end;
+}
+
+}
+
+/* ============ 480px ============ */
+
+@media (max-width:480px){
+
+.addMemoryContainer{
+padding:20px 15px;
+}
+
+.memoryCard{
+padding:20px;
+gap:20px;
+}
+
+.uploadBox label{
+width:120px;
+height:110px;
+}
+
+.uploadIcon svg{
+width:35px;
+height:35px;
+}
+.uploadContent{
+    font-size: 14px;
+}
+
+.memorySelect{
+    font-size: 12px;
+}
+
+.inputGroup label{
+font-size:11px;
+}
+
+.inputGroup input,
+.memorySelect{
+padding:12px;
+}
+
+.inputGroup textarea{
+height:140px;
+}
+
+.buttons{
+width:100%;
+/* justify-content:space-between; */
+}
+
+.saveBtn,
+.cancelBtn{
+padding:10px 18px;
+}
+
+}
