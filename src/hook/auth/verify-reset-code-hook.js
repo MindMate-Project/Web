@@ -88,6 +88,7 @@ const VerifyResetCodeHook = () => {
         if (loading === false) {
             if (res) {
                 if (res.status === 200) {
+                    localStorage.setItem("reset-code-verified", "true");
                     toast("Reset code verified successfully", {
                         position: "top-right",
                         autoClose: 3000,
@@ -102,16 +103,6 @@ const VerifyResetCodeHook = () => {
                         navigate("/api/auth/verification-success");
                     }, 1500);
                 } else {
-                    toast("Invalid or expired reset code", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                        style: { backgroundColor: "white", color: "#0b236c" },
-                    });
                     setTimeout(() => {
                         navigate("/api/auth/verification-error");
                     }, 1500)
