@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { forgetPassword } from "../../redux/actions/authAction";
+import { forgetPassword } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
