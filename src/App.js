@@ -20,6 +20,11 @@ import AddAppointment from "./components/Dashboard/Reminders/AddAppointment";
 import AddMedicine from "./components/Dashboard/Reminders/AddMedicine";
 import AddMemo from "./components/Dashboard/MemoryBank/AddMemo";
 
+import ProtectedRoute from "./components/utils/ProtectedRoute";
+import ResetCodeRoute from "./components/utils/ResetCodeRoute";
+import NewPasswordRoute from "./components/utils/NewPasswordRoute";
+import NotFound from "./pages/NotFound/NotFound";
+
 function App() {
   return (
     <div className="App">
@@ -32,33 +37,44 @@ function App() {
         </div>
           </div>} />
 
-        <Route path="/api/dashboard/" element={<DashboardLayout />}>
-          <Route index element={<MainDashboard />} />
-            <Route path="patients">
-            <Route index element={<Patients />} />
-            <Route path="add" element={<AddPatient />} />
-            <Route path=":id" element={<PatientDetails />}/>
-            <Route path=":id/edit" element={<EditPatient />} />
-          </Route>
-            <Route path="location" element={<Location />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/api/dashboard/" element={<DashboardLayout />}>
+            <Route index element={<MainDashboard />} />
+              <Route path="patients">
+              <Route index element={<Patients />} />
+              <Route path="add" element={<AddPatient />} />
+              <Route path=":id" element={<PatientDetails />}/>
+              <Route path=":id/edit" element={<EditPatient />} />
+            </Route>
+              <Route path="location" element={<Location />} />
 
-            <Route path="reminders">
-              <Route index element={<Reminders />} />
-              <Route path="add-appointment" element={<AddAppointment />} />
-              <Route path="add-medicine" element={<AddMedicine />} />
-            </Route>
-            <Route path="memory-bank">
-              <Route index element={<MemoryBank/>}/>
-              <Route path="add-new-memo" element={<AddMemo />} />
-            </Route>
+              <Route path="reminders">
+                <Route index element={<Reminders />} />
+                <Route path="add-appointment" element={<AddAppointment />} />
+                <Route path="add-medicine" element={<AddMedicine />} />
+              </Route>
+              <Route path="memory-bank">
+                <Route index element={<MemoryBank/>}/>
+                <Route path="add-new-memo" element={<AddMemo />} />
+              </Route>
+          </Route>
         </Route>
           <Route path="/api/auth/login" element={<LoginPage />} />
           <Route path="/api/auth/signup" element={<SignupPage />} />
           <Route path="/api/auth/forgot-password" element={<ForgetPasswordPage />} />
-          <Route path="/api/auth/verify-reset-code" element={<VerifyResetCodePage />} />
-          <Route path="/api/auth/set-new-password" element={<SetNewPasswordPage />} />
-          <Route path="/api/auth/verification-success" element={<VerificationSuccessPage />} />
+          
+          <Route element={<ResetCodeRoute />}>
+            <Route path="/api/auth/verify-reset-code" element={<VerifyResetCodePage />} />
+          </Route>
+          
+          <Route element={<NewPasswordRoute />}>
+            <Route path="/api/auth/set-new-password" element={<SetNewPasswordPage />} />
+            <Route path="/api/auth/verification-success" element={<VerificationSuccessPage />} />
+          </Route>
+
           <Route path="/api/auth/verification-error" element={<VerificationErrorPage />} />
+          
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
