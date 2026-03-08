@@ -1,0 +1,100 @@
+.add-medicine-container {
+  padding: 30px;
+}
+
+.add-medicine-container .page-title {
+  font-size: 20px;
+  font-weight: 400;
+  color: #5EA5C0;
+  margin-bottom: 20px;
+  letter-spacing: 0.48px;
+}
+
+.add-medicine-container .medicine-card {
+  background: #FFFFFF;
+  padding: 50px;
+  border-radius: 16px;
+  max-width: 950px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-medicine-container .form-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 30px;
+}
+
+.add-medicine-container .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-medicine-container .form-group label {
+  font-size: 14px;
+  color: #14274E;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.add-medicine-container .form-group input {
+  border-radius: 9px;
+  border: 1px solid #B9C0C9;
+  padding: 15px 14px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+  transition: 0.2s;
+}
+
+.add-medicine-container .form-group input:focus {
+  border-color: #4b9cd3;
+}
+
+.add-medicine-container .form-actions{
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 35px;
+}
+
+.add-medicine-container .save-btn {
+  background: #ACD4E3;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.add-medicine-container .save-btn:hover {
+  background: #79b3c0;
+}
+
+.add-medicine-container .cancel-btn {
+  background: transparent;
+  border: 1px solid #cfd8e3;
+  padding: 10px 21px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.add-medicine-container .cancel-btn:hover {
+  background: #eef4f8;
+}
+
+@media (max-width: 992px) {
+  .add-medicine-container .form-section {
+    grid-template-columns: 1fr;
+  }
+
+  .add-medicine-container .medicine-card {
+    padding: 25px;
+  }
+}

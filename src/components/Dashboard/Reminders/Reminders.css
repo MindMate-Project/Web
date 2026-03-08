@@ -1,0 +1,167 @@
+.reminders-page {
+  padding: 30px;
+}
+
+.reminders-page .page-title {
+  color: #14274E;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.reminders-page .reminder-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.reminders-page .reminder-card:hover {
+  transform: translateY(-3px);
+}
+
+.reminders-page .reminder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reminders-page .reminder-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #676D75;
+}
+
+.reminders-page .btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.reminders-page .btn-edit {
+  background: #a7d3e5;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.reminders-page .btn-edit:hover {
+  background: #82c1da;
+}
+
+.reminders-page .btn-add {
+  border: 1px solid #cdd6df;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.reminders-page .btn-add:hover {
+  background: #d6e9f2;
+}
+
+.reminders-page .reminder-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.reminders-page .reminder-table th {
+  text-align: left;
+  padding: 12px;
+  font-size: 14px;
+  color: #9aa4b2;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.reminders-page .reminder-table td {
+  padding: 14px 12px;
+  border-top: 1px solid #eef2f6;
+  font-size: 14px;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.reminders-page .status {
+  font-weight: 500;
+}
+
+.reminders-page .upcoming {
+  color: #4b9cd3;
+}
+
+.reminders-page .scheduled {
+  color: #10b981;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .reminders-page .reminder-table {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .reminders-page .reminder-card {
+    padding: 18px;
+  }
+
+  .reminders-page .reminder-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reminders-page .btns {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .reminders-page .btn-edit,
+  .reminders-page .btn-add {
+    width: auto;
+    flex: 1 1 auto;
+  }
+
+  .reminders-page .reminder-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .reminders-page {
+    padding: 20px 15px;
+  }
+
+  .reminders-page .page-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .reminders-page .reminder-header h3 {
+    font-size: 14px;
+  }
+
+  .reminders-page .reminder-card {
+    padding: 15px;
+  }
+
+  .reminders-page .reminder-table th,
+  .reminders-page .reminder-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}

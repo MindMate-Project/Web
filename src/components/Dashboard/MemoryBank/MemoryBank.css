@@ -1,0 +1,157 @@
+.memorybank {
+  padding: 30px;
+}
+
+.memorybank .memorybank-filter-grid-container {
+  background: #fff; 
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.memorybank .memorybank-filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 10px 20px; 
+  margin-bottom: 40px;
+  border-radius: 30px; 
+  width: fit-content;
+  background-color: #F1F6F9;
+  margin: 10px auto 30px;
+}
+
+.memorybank .memorybank-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(219px, 1fr));
+  gap: 20px;
+}
+
+.memorybank .memorybank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.memorybank .memorybank-header h1 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #151D48;
+  line-height: 140%;
+}
+
+.memorybank .memorybank-search-box {
+  position: relative;
+  min-width: 200px;
+}
+
+.memorybank .memorybank-search-add{
+  display: flex;
+  gap: 1rem;
+}
+
+.memorybank .memorybank-search-box input {
+  width: 220px;
+  padding: 10px 15px;
+  padding-right: 45px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  outline: none;
+}
+
+.memorybank .memorybank-search-box input::placeholder {
+  color: #999;
+}
+
+.memorybank .memorybank-search-box input:focus {
+  border-color: #82c1da;
+}
+
+.memorybank .memorybank-search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-51%);
+  color: #999;
+  pointer-events: none;
+}
+
+.memorybank .memorybank-add-btn {
+  background-color: #ACD4E3;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.memorybank .memorybank-add-btn:hover{
+  background: #82c1da;
+}
+
+.memorybank .memorybank-filter-buttons button {
+  padding: 12px 40px;
+  border-radius: 20px;
+  background-color: #F1F6F9;
+  cursor: pointer;
+  font-weight: 550;
+  font-size: 17px;
+  border: none;
+}
+
+.memorybank .memorybank-filter-buttons button.active {
+  background-color: #5EA5C0;
+  color: white;
+}
+
+.memorybank .memorybank-card {
+  border: 1px solid #5EA5C0;
+  border-radius: 15px;
+  padding: 8px;
+  text-align: center;
+  background: white;
+}
+
+.memorybank .memorybank-card img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.memorybank .memorybank-video-placeholder {
+  width: 100%;
+  height: 150px;
+  background: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.memorybank .memorybank-text-card {
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 15px;
+  min-height: 120px;
+  margin-bottom: 10px;
+}
+
+.memorybank .memorybank-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.memorybank .memorybank-info p {
+  font-size: 14px;
+  color: #555;
+}
+
+.memorybank .memorybank-date {
+  font-size: 12px;
+  color: #888;
+}

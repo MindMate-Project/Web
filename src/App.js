@@ -16,6 +16,10 @@ import AddPatient from "./components/Dashboard/Patients/AddPatient";
 import Location from "./components/Dashboard/Location/Location";
 import Reminders from "./components/Dashboard/Reminders/Reminders";
 import MemoryBank from "./components/Dashboard/MemoryBank/MemoryBank";
+import AddAppointment from "./components/Dashboard/Reminders/AddAppointment";
+import AddMedicine from "./components/Dashboard/Reminders/AddMedicine";
+import AddMemo from "./components/Dashboard/MemoryBank/AddMemo";
+
 function App() {
   return (
     <div className="App">
@@ -37,8 +41,16 @@ function App() {
             <Route path=":id/edit" element={<EditPatient />} />
           </Route>
             <Route path="location" element={<Location />} />
-            <Route path="reminders" element={<Reminders />} />
-            <Route path="memory-bank" element={<MemoryBank />} />
+
+            <Route path="reminders">
+              <Route index element={<Reminders />} />
+              <Route path="add-appointment" element={<AddAppointment />} />
+              <Route path="add-medicine" element={<AddMedicine />} />
+            </Route>
+            <Route path="memory-bank">
+              <Route index element={<MemoryBank/>}/>
+              <Route path="add-new-memo" element={<AddMemo />} />
+            </Route>
         </Route>
           <Route path="/api/auth/login" element={<LoginPage />} />
           <Route path="/api/auth/signup" element={<SignupPage />} />
