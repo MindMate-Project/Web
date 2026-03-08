@@ -1,14 +1,14 @@
-.memory-bank {
+.memorybank {
   padding: 30px;
-  /* background-color: #fff; */
 }
-.filter-grid-container {
+
+.memorybank .memorybank-filter-grid-container {
   background: #fff; 
   padding: 20px;
   border-radius: 15px;
 }
 
-.filter-buttons {
+.memorybank .memorybank-filter-buttons {
   display: flex;
   justify-content: center;
   gap: 30px;
@@ -17,40 +17,40 @@
   border-radius: 30px; 
   width: fit-content;
   background-color: #F1F6F9;
-  /* width: 100%;  */
-  /* max-width: 400px;  */
   margin: 10px auto 30px;
 }
 
-.memory-grid {
+.memorybank .memorybank-memory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(219px, 1fr));
   gap: 20px;
 }
 
-.memory-header {
+.memorybank .memorybank-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.memory-header h1 {
+.memorybank .memorybank-header h1 {
   font-size: 30px;
   font-weight: 600;
   color: #151D48;
   line-height: 140%;
 }
 
-.search-box {
+.memorybank .memorybank-search-box {
   position: relative;
   min-width: 200px;
 }
-.search-add{
+
+.memorybank .memorybank-search-add{
   display: flex;
   gap: 1rem;
 }
-.search-box input {
+
+.memorybank .memorybank-search-box input {
   width: 220px;
   padding: 10px 15px;
   padding-right: 45px;
@@ -59,15 +59,15 @@
   outline: none;
 }
 
-.search-box input::placeholder {
+.memorybank .memorybank-search-box input::placeholder {
   color: #999;
 }
 
-.search-box input:focus {
+.memorybank .memorybank-search-box input:focus {
   border-color: #82c1da;
 }
 
-.search-icon {
+.memorybank .memorybank-search-icon {
   position: absolute;
   right: 15px;
   top: 50%;
@@ -76,7 +76,7 @@
   pointer-events: none;
 }
 
-.add-btn {
+.memorybank .memorybank-add-btn {
   background-color: #ACD4E3;
   color: #FFFFFF;
   font-size: 14px;
@@ -86,38 +86,27 @@
   border-radius: 8px;
   cursor: pointer;
 }
-.add-btn:hover{
-    background: #82c1da;
+
+.memorybank .memorybank-add-btn:hover{
+  background: #82c1da;
 }
 
-
-
-.filter-buttons button {
+.memorybank .memorybank-filter-buttons button {
   padding: 12px 40px;
   border-radius: 20px;
-  /* border: 1px solid #86bcd6; */
   background-color: #F1F6F9;
   cursor: pointer;
-  /* color: #1f2a37; */
   font-weight: 550;
   font-size: 17px;
   border: none;
-  
 }
 
-.filter-buttons button.active {
+.memorybank .memorybank-filter-buttons button.active {
   background-color: #5EA5C0;
   color: white;
-  border: none;
 }
 
-.memory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(219px, 1fr));
-  gap: 20px;
-}
-
-.memory-card {
+.memorybank .memorybank-card {
   border: 1px solid #5EA5C0;
   border-radius: 15px;
   padding: 8px;
@@ -125,13 +114,13 @@
   background: white;
 }
 
-.memory-card img {
+.memorybank .memorybank-card img {
   width: 100%;
   border-radius: 15px;
   margin-bottom: 10px;
 }
 
-.video-placeholder {
+.memorybank .memorybank-video-placeholder {
   width: 100%;
   height: 150px;
   background: #e0e0e0;
@@ -143,7 +132,7 @@
   margin-bottom: 10px;
 }
 
-.text-card {
+.memorybank .memorybank-text-card {
   background: #f5f5f5;
   padding: 10px;
   border-radius: 15px;
@@ -151,147 +140,18 @@
   margin-bottom: 10px;
 }
 
-.memory-info h4 {
+.memorybank .memorybank-info h4 {
   font-size: 16px;
   font-weight: 600;
   margin: 5px 0;
 }
 
-.memory-info p {
+.memorybank .memorybank-info p {
   font-size: 14px;
   color: #555;
 }
 
-.date {
+.memorybank .memorybank-date {
   font-size: 12px;
   color: #888;
-}
-/* ===== Tablet ===== */
-@media (max-width: 1024px) {
-
-  .memory-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-
-}
-
-
-/* ===== Small Tablet / Large Mobile ===== */
-@media (max-width: 768px) {
-
-  .memory-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .search-add {
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .search-box input {
-    /* width: 100%; */
-    padding: 12px 15px;
-  }
-
-  .add-btn {
-    padding: 7px 12px;
-    font-size: 13px;
-  }
-
-  .filter-buttons {
-    gap: 10px;
-    padding: 8px 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .filter-buttons button {
-    padding: 10px 20px;
-    font-size: 15px;
-  }
-
-  .memory-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-
-
-/* ===== Mobile ===== */
-@media (max-width: 480px) {
-  .memory-header h1 {
-    font-size: 30px;
-  }
-
-  .search-add {
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .search-box {
-    width: 100%;
-  }
-
-  .search-box input {
-    /* width: 100%; */
-    padding: 9px;
-  }
-
-  .add-btn {
-    /* width: 100%; */
-    padding: 8px;
-    font-size: 13px;
-  }
-
-  .filter-buttons {
-    width: 100%;
-    gap: 6px;
-    padding: 8px;
-  }
-  .search-icon {
-    position: absolute;
-    right: 150px;
-    
-  }
-
-
-  .filter-buttons button {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .memory-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-}
-
-
-/* ===== Very Small Mobile ===== */
-@media (max-width: 360px) {
-
-  .filter-buttons {
-    padding: 6px;
-  }
-
-  .filter-buttons button {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-
-  .search-box input {
-    font-size: 13px;
-    padding: 10px;
-  }
-
-  .add-btn {
-    font-size: 12px;
-    padding: 7px;
-  }
-
 }
