@@ -67,7 +67,6 @@ const memoryData = [
     image: "https://i.pravatar.cc/150?img=4",
     date: null,
   },
-  
 ];
 
 export default function MemoryBank() {
@@ -86,13 +85,12 @@ export default function MemoryBank() {
   });
 
   return (
-    <div className="memory-bank">
-      <div className="memory-header">
+    <div className="memorybank">
+      <div className="memorybank-header">
         <h1>Memory Bank</h1>
 
-        <div className="search-add">
-
-          <div className="search-box">
+        <div className="memorybank-search-add">
+          <div className="memorybank-search-box">
             <input
               type="text"
               placeholder="Search"
@@ -101,7 +99,7 @@ export default function MemoryBank() {
             />
 
             <svg
-              className="search-icon"
+              className="memorybank-search-icon"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -117,16 +115,19 @@ export default function MemoryBank() {
             </svg>
           </div>
 
-          <button className="add-btn" 
-          onClick={() => navigate("/api/dashboard/memory-bank/add-new-memo")}
-          >Add New Memo</button>
-
+          <button
+            className="memorybank-add-btn"
+            onClick={() =>
+              navigate("/api/dashboard/memory-bank/add-new-memo")
+            }
+          >
+            Add New Memo
+          </button>
         </div>
       </div>
 
-      <div className="filter-grid-container">
-
-        <div className="filter-buttons">
+      <div className="memorybank-filter-grid-container">
+        <div className="memorybank-filter-buttons">
           {["all", "photo", "video", "text"].map((type) => (
             <button
               key={type}
@@ -138,36 +139,38 @@ export default function MemoryBank() {
           ))}
         </div>
 
-        <div className="memory-grid">
+        <div className="memorybank-memory-grid">
           {filteredMemory.length > 0 ? (
             filteredMemory.map((mem) => (
-              <div key={mem.id} className="memory-card">
+              <div key={mem.id} className="memorybank-card">
 
                 {mem.type === "photo" && (
                   <img src={mem.image} alt={mem.title} />
                 )}
 
                 {mem.type === "video" && (
-                  <div className="video-placeholder">
+                  <div className="memorybank-video-placeholder">
                     <span>▶</span>
                   </div>
                 )}
 
                 {mem.type === "text" && (
-                  <div className="text-card">
+                  <div className="memorybank-text-card">
                     <h3>{mem.title}</h3>
                     <p>{mem.description}</p>
                   </div>
                 )}
 
-                <div className="memory-info">
+                <div className="memorybank-info">
                   <h4>{mem.title}</h4>
 
                   {mem.description && mem.type !== "text" && (
                     <p>{mem.description}</p>
                   )}
 
-                  {mem.date && <p className="date">{mem.date}</p>}
+                  {mem.date && (
+                    <p className="memorybank-date">{mem.date}</p>
+                  )}
                 </div>
 
               </div>
@@ -178,7 +181,6 @@ export default function MemoryBank() {
             </p>
           )}
         </div>
-
       </div>
     </div>
   );
