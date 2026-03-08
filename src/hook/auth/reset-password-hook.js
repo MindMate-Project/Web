@@ -63,6 +63,8 @@ const ResetPasswordHook = () => {
         if (loading === false) {
             if (res) {
                 if (res.status === 200) {
+                    localStorage.removeItem("user-email");
+                    localStorage.removeItem("reset-code-verified");
                     toast("Password changed successfully", {
                         position: "top-right",
                         autoClose: 3000,
