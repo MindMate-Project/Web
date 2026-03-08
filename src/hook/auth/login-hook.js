@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginUser } from "../../redux/actions/authAction";
+import { loginUser } from "../../redux/slices/authSlice";
 import { toast } from "react-toastify";
 
 const LoginHook = () => {

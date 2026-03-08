@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { verifyResetCode } from "../../redux/actions/authAction";
+import { verifyResetCode } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 

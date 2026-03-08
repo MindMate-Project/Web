@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { forgetPassword } from "../../redux/actions/authAction";
+import { forgetPassword } from "../../redux/slices/authSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 const ResendCodeHook = () => {
