@@ -6,6 +6,8 @@
     background-color: #f9fafb;
     padding: 1.5rem;
     overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .location-container .location-header {
@@ -125,19 +127,21 @@
     border-bottom: 1px solid #f3f4f6;
 }
 
-.location-container .patient-avatar {
+.location-container .patient-avatar-wrapper {
     width: 3rem;
     height: 3rem;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.25rem;
     flex-shrink: 0;
     margin-right: 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.location-container .patient-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .location-container .patient-info {
@@ -187,6 +191,11 @@
     background-color: #ef4444;
 }
 
+.location-container .status-indicator.offline {
+    background-color: #9ca3af;
+    animation: none; /* No pulse when offline */
+}
+
 @keyframes pulse {
 
     0%,
@@ -231,10 +240,75 @@
     color: #842029;
 }
 
+.location-container .status-badge.offline {
+    background-color: #e5e7eb;
+    color: #4b5563;
+}
+
 .location-container .popup-time {
     font-size: 0.75rem;
     color: #9ca3af;
     margin-top: 0.5rem !important;
+}
+
+.location-container .patient-battery {
+    font-size: 0.75rem;
+    color: #4b5563;
+    margin: 0.25rem 0 0 0;
+    font-weight: 500;
+}
+
+.location-container .popup-battery {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-top: 0.25rem !important;
+}
+
+/* Empty State Styles */
+.location-container.empty-state {
+    align-items: center;
+    justify-content: center;
+}
+
+.location-container .empty-state-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-width: 28rem;
+    width: 100%;
+}
+
+.location-container .empty-state-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: #eff6ff;
+    color: #3b82f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-container .empty-state-icon svg {
+    margin-right: -2px; /* Visual center adjustment */
+}
+
+.location-container .empty-state-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 1rem 0;
+}
+
+.location-container .empty-state-content p {
+    font-size: 1rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
 }
 
 /* Tablet Screens (768px to 1024px) */
@@ -273,6 +347,10 @@
 
     .location-container .patient-info h3 {
         font-size: 0.9rem;
+    }
+
+    .location-container .patient-battery {
+        font-size: 0.75rem;
     }
 
     .location-container .patient-list-header h2 {
@@ -340,6 +418,10 @@
     }
 
     .location-container .patient-time {
+        font-size: 0.7rem;
+    }
+
+    .location-container .patient-battery {
         font-size: 0.7rem;
     }
 
@@ -434,6 +516,10 @@
         margin-top: 0.15rem;
     }
 
+    .location-container .patient-battery {
+        font-size: 0.65rem;
+    }
+
     .location-container .status-indicator {
         width: 10px;
         height: 10px;
@@ -496,7 +582,8 @@
     }
 
     .location-container .patient-location,
-    .location-container .patient-time {
+    .location-container .patient-time,
+    .location-container .patient-battery {
         font-size: 0.65rem;
     }
 
