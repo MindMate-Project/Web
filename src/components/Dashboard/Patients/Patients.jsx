@@ -1,55 +1,63 @@
 import { useState } from "react";
+import Modal from "react-modal";
 import "./Patients.css";
+import "./DeleteModal.css";
 import { useNavigate } from "react-router-dom";
-
+import useGetAllPatients from "../../../hook/patient/get-all-patients-hook";
+import useDeletePatient from "../../../hook/patient/delete-patient-hook";
+import dateToAge from "../../utils/dateToAge";
+import father from "./../../../images/father.jpg";
 
 export default function Patients() {
+    const allPatients = useGetAllPatients();
+    const CurrentPatients = allPatients.patients.data;
+
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
-    const [patients, setPatients] = useState([
-        {
-            id: 1,
-            name: "salim Ali",
-            age: 75,
-            gender: "Male",
-            image: "https://i.pravatar.cc/150?img=12",
-        },
-        {
-            id: 2,
-            name: "Ahmed Ali",
-            age: 75,
-            gender: "Male",
-            image: "https://i.pravatar.cc/150?img=13",
-        },
-    ]);
+    const [handleDelete, isDeleting] = useDeletePatient();
+    
+    // Modal state
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [patientToDelete, setPatientToDelete] = useState(null);
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
     };
 
     const handleAddPatient = () => {
-        // TODO: Implement add patient functionality
         navigate("/api/dashboard/patients/add");
-        console.log("Add new patient");
     };
 
     const handleViewPatient = (patientId) => {
-        // TODO: Implement view patient functionality
-        console.log("View patient:", patientId);
-
-        // usenavigate(`/api/dashboard/patients/${patientId}`);
-            navigate(`/api/dashboard/patients/${patientId}`);
-    
+        navigate(`/api/dashboard/patients/${patientId}`);
     };
 
-    const handleDeletePatient = (patientId) => {
-        // TODO: Implement delete patient functionality
-        setPatients(patients.filter((p) => p.id !== patientId));
+    const handleDeletePatient = (patient) => {
+        setPatientToDelete(patient);
+        setIsModalOpen(true);
     };
 
-    const filteredPatients = patients.filter((patient) =>
-        patient.name.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
+    const confirmDelete = async () => {
+        if (patientToDelete) {
+            await handleDelete(patientToDelete._id);
+            closeModal();
+        }
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setPatientToDelete(null);
+    };
+
+    // We filter `CurrentPatients` which we get from the custom hook
+    const filteredPatients =
+        CurrentPatients?.length > 0
+            ? CurrentPatients.filter((patient) =>
+                  patient.name
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()),
+              )
+            : [];
 
     return (
         <div className="patients-container">
@@ -57,7 +65,7 @@ export default function Patients() {
                 <div className="patients-title">
                     <h1>Patients</h1>
                     <p className="patients-count">
-                        Total: {patients.length} Patients
+                        Total: <span className="patients-count-number">{CurrentPatients?.length || 0}</span> Patients
                     </p>
                 </div>
 
@@ -98,18 +106,23 @@ export default function Patients() {
             <div className="patients-list">
                 {filteredPatients.length > 0 ? (
                     filteredPatients.map((patient) => (
-                        <div key={patient.id} className="patient-card">
+                        <div key={patient._id} className="patient-card">
                             <div className="patient-info">
                                 <img
-                                    src={patient.image}
+                                    src={patient.imageCover || father}
                                     alt={patient.name}
                                     className="patient-avatar"
                                 />
                                 <div className="patient-details">
                                     <h3>{patient.name}</h3>
                                     <p>
-                                        {patient.age} years old •{" "}
-                                        {patient.gender}
+                                        {patient.dateOfBirth
+                                            ? dateToAge(patient.dateOfBirth)
+                                            : "N/A"}{" "}
+                                        years old •{" "}
+                                        {patient.gender
+                                            ? patient.gender
+                                            : "N/A"}
                                     </p>
                                 </div>
                             </div>
@@ -118,7 +131,7 @@ export default function Patients() {
                                 <button
                                     className="view-btn"
                                     onClick={() =>
-                                        handleViewPatient(patient.id)
+                                        handleViewPatient(patient._id)
                                     }
                                 >
                                     View
@@ -126,7 +139,7 @@ export default function Patients() {
                                 <button
                                     className="delete-btn"
                                     onClick={() =>
-                                        handleDeletePatient(patient.id)
+                                        handleDeletePatient(patient)
                                     }
                                 >
                                     Delete
@@ -140,6 +153,38 @@ export default function Patients() {
                     </div>
                 )}
             </div>
+
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Delete Patient Confirm"
+                className="delete-modal-content"
+                overlayClassName="delete-modal-overlay"
+                portalClassName="patients-container"
+                ariaHideApp={false}
+            >
+                <h2>Delete Patient</h2>
+                <p>
+                    Are you sure you want to delete{" "}
+                    <strong>{patientToDelete?.name}</strong>? This will permanently remove the patient from your list.
+                </p>
+                <div className="delete-modal-actions">
+                    <button
+                        className="delete-cancel-btn"
+                        onClick={closeModal}
+                        disabled={isDeleting}
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        className="delete-confirm-btn"
+                        onClick={confirmDelete}
+                        disabled={isDeleting}
+                    >
+                        {isDeleting ? "Deleting..." : "Yes, Delete"}
+                    </button>
+                </div>
+            </Modal>
         </div>
     );
 }

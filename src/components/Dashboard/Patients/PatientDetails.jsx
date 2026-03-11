@@ -1,50 +1,65 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Modal from "react-modal";
 import "./PatientDetails.css";
+import useGetPatientData from "../../../hook/patient/get-patient-data-hook";
+import useDeletePatient from "../../../hook/patient/delete-patient-hook";
+import { useParams } from "react-router-dom";
+import dateToAge, { formatDate } from "./../../../components/utils/dateToAge";
+import father from "./../../../images/father.jpg";
+import "./DeleteModal.css";
 
 export default function PatientDetails() {
     const navigate = useNavigate();
-
-    // Sample patient data - replace with actual data from props/API
-    const patient = {
-        name: "Ahmed Ali",
-        age: 75,
-        image: "https://i.pravatar.cc/150?img=12",
-        phone: "+20 102 358 9603",
-        gender: "Male",
-        location: "24 St. Nasr Street, Nasr City, Cairo, Egypt",
-        email: "ahmad.k.ali@gmail.com",
-        relationship: "Father",
-        birthdate: "13 March 1951",
-        medicalNotes: {
-            diagnosis: "Alzheimer's Disease",
-            stage: "Stage 2 (Mild Cognitive Decline)",
-            chronicDiseases: ["Diabetes", "Hypertension"],
-            allergies: "Penicillin",
-            currentMedications: "Donepezil 10mg, Metformin 500mg",
-        },
-    };
+    const params = useParams();
+    const [patientData] = useGetPatientData(params.id);
+    const patient = patientData?.data;
+    
+    // Delete Hook and Modal State
+    const [executeDelete, isDeleting] = useDeletePatient();
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const handleBack = () => {
         navigate("/api/dashboard/patients");
     };
 
     const handleEdit = () => {
-        // TODO: Implement edit functionality
-        console.log("Edit patient");
-        navigate(`/api/dashboard/patients/${patient.id}/edit`);
+        if (patient?._id) {
+            navigate(`/api/dashboard/patients/${patient._id}/edit`);
+        }
     };
 
-    const handleDelete = () => {
-        // TODO: Implement delete functionality
-        console.log("Delete patient");
+    const handleDeleteClick = () => {
+        setIsDeleteModalOpen(true);
     };
+
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+
+    const confirmDelete = async () => {
+        if (patient?._id) {
+            await executeDelete(patient._id);
+            setIsDeleteModalOpen(false);
+            navigate("/api/dashboard/patients");
+        }
+    };
+
+    // Prevent rendering if data hasn't loaded
+    if (!patient) {
+        return (
+            <div className="patient-details-container">
+                <p>Loading patient...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="patient-details-container">
             <button className="back-button" onClick={handleBack}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path
-                        d="M10 12L6 8L10 4"
+                        d="M19 12H5M5 12L12 19M5 12L12 5"
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
@@ -62,13 +77,18 @@ export default function PatientDetails() {
                     <div className="basic-info-layout">
                         <div className="profile-section">
                             <img
-                                src={patient.image}
+                                src={patient.imageCover || father}
                                 alt={patient.name}
                                 className="profile-image"
                             />
                             <div className="profile-name-age">
                                 <h3>{patient.name}</h3>
-                                <p>Age: {patient.age}</p>
+                                <p>
+                                    Age:{" "}
+                                    {patient.dateOfBirth
+                                        ? dateToAge(patient.dateOfBirth)
+                                        : "N/A"}
+                                </p>
                             </div>
                         </div>
 
@@ -91,33 +111,11 @@ export default function PatientDetails() {
                                     </svg>
                                 </div>
                                 <span className="info-value">
-                                    {patient.phone}
+                                    {patient.contactNumber || "N/A"}
                                 </span>
                             </div>
 
                             <div className="info-item">
-                                <div className="info-icon gender-icon">
-                                    <svg
-                                        width="18"
-                                        height="18"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M20 9V5h-4M15 9l5-5M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 0v8m-3-3h6"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </div>
-                                <span className="info-value">
-                                    {patient.gender}
-                                </span>
-                            </div>
-
-                            <div className="info-item full-width">
                                 <div className="info-icon location-icon">
                                     <svg
                                         width="18"
@@ -140,32 +138,7 @@ export default function PatientDetails() {
                                     </svg>
                                 </div>
                                 <span className="info-value">
-                                    {patient.location}
-                                </span>
-                            </div>
-
-                            <div className="info-item full-width">
-                                <div className="info-icon email-icon">
-                                    <svg
-                                        width="18"
-                                        height="18"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                        />
-                                        <path
-                                            d="M22 6l-10 7L2 6"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                        />
-                                    </svg>
-                                </div>
-                                <span className="info-value">
-                                    {patient.email}
+                                    {patient.location || "N/A"}
                                 </span>
                             </div>
 
@@ -187,7 +160,54 @@ export default function PatientDetails() {
                                     </svg>
                                 </div>
                                 <span className="info-value">
-                                    {patient.relationship}
+                                    {patient.relationship || "N/A"}
+                                </span>
+                            </div>
+
+                            <div className="info-item">
+                                <div className="info-icon gender-icon">
+                                    <svg
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M20 9V5h-4M15 9l5-5M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 0v8m-3-3h6"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </div>
+                                <span className="info-value">
+                                    {patient.gender || "N/A"}
+                                </span>
+                            </div>
+
+                            <div className="info-item">
+                                <div className="info-icon email-icon">
+                                    <svg
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                        />
+                                        <path
+                                            d="M22 6l-10 7L2 6"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                        />
+                                    </svg>
+                                </div>
+                                <span className="info-value">
+                                    {patient.email || "N/A"}
                                 </span>
                             </div>
 
@@ -217,7 +237,9 @@ export default function PatientDetails() {
                                     </svg>
                                 </div>
                                 <span className="info-value">
-                                    {patient.birthdate}
+                                    {patient.dateOfBirth
+                                        ? formatDate(patient.dateOfBirth)
+                                        : "N/A"}
                                 </span>
                             </div>
                         </div>
@@ -236,25 +258,37 @@ export default function PatientDetails() {
                             <ul className="medical-list">
                                 <li>
                                     <strong>Diagnosis:</strong>{" "}
-                                    {patient.medicalNotes.diagnosis}
+                                    {patient.medicalHistory?.diagnosis || "N/A"}
                                 </li>
                                 <li>
                                     <strong>Stage:</strong>{" "}
-                                    {patient.medicalNotes.stage}
+                                    {patient.medicalHistory?.stage || "N/A"}
                                 </li>
                                 <li>
                                     <strong>Chronic Diseases:</strong>{" "}
-                                    {patient.medicalNotes.chronicDiseases.join(
-                                        ", ",
-                                    )}
+                                    {patient.medicalHistory?.chronicDiseases
+                                        ?.length
+                                        ? patient.medicalHistory.chronicDiseases.join(
+                                              ", ",
+                                          )
+                                        : "N/A"}
                                 </li>
                                 <li>
                                     <strong>Allergies:</strong>{" "}
-                                    {patient.medicalNotes.allergies}
+                                    {patient.medicalHistory?.allergies?.length
+                                        ? patient.medicalHistory.allergies.join(
+                                              ", ",
+                                          )
+                                        : "N/A"}
                                 </li>
                                 <li>
                                     <strong>Current Medications:</strong>{" "}
-                                    {patient.medicalNotes.currentMedications}
+                                    {patient.medicalHistory?.currentMedications
+                                        ?.length
+                                        ? patient.medicalHistory.currentMedications.join(
+                                              ", ",
+                                          )
+                                        : "N/A"}
                                 </li>
                             </ul>
                         </div>
@@ -265,7 +299,7 @@ export default function PatientDetails() {
                             </button>
                             <button
                                 className="delete-btn"
-                                onClick={handleDelete}
+                                onClick={handleDeleteClick}
                             >
                                 Delete
                             </button>
@@ -273,6 +307,39 @@ export default function PatientDetails() {
                     </div>
                 </section>
             </div>
+
+            {/* Reusing the Delete Modal from Patients.jsx */}
+            <Modal
+                isOpen={isDeleteModalOpen}
+                onRequestClose={closeDeleteModal}
+                contentLabel="Delete Patient Confirm"
+                className="delete-modal-content"
+                overlayClassName="delete-modal-overlay"
+                portalClassName="patients-container"
+                ariaHideApp={false}
+            >
+                <h2>Delete Patient</h2>
+                <p>
+                    Are you sure you want to delete{" "}
+                    <strong>{patient.name}</strong>? This will permanently remove the patient from your list.
+                </p>
+                <div className="delete-modal-actions">
+                    <button
+                        className="delete-cancel-btn"
+                        onClick={closeDeleteModal}
+                        disabled={isDeleting}
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        className="delete-confirm-btn"
+                        onClick={confirmDelete}
+                        disabled={isDeleting}
+                    >
+                        {isDeleting ? "Deleting..." : "Yes, Delete"}
+                    </button>
+                </div>
+            </Modal>
         </div>
     );
 }

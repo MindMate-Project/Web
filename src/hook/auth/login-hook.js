@@ -89,7 +89,7 @@ const LoginHook = () => {
                 if (res.status === 200) {
                     localStorage.setItem(
                         "token",
-                        JSON.stringify(res.data.token),
+                        res.data.token,
                     );
                     localStorage.setItem("user", JSON.stringify(res.data.data));
                     toast("Login successful! Redirecting...", {

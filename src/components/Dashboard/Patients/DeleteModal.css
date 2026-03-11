@@ -1,0 +1,167 @@
+.patients-container .delete-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(21, 29, 72, 0.4) !important;
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.patients-container .delete-modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e5e5;
+    position: relative;
+    outline: none;
+}
+
+.patients-container .delete-modal-content h2 {
+    color: var(--patients-title-color, #151D48);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.patients-container .delete-modal-content p {
+    color: var(--patients-count-color, #6C7278);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.patients-container .delete-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.patients-container .delete-modal-actions button {
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.patients-container .delete-cancel-btn {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.patients-container .delete-cancel-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.patients-container .delete-confirm-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.patients-container .delete-confirm-btn:hover {
+    background-color: #dc2626;
+}
+
+.patients-container .delete-confirm-btn:disabled {
+    background-color: #fca5a5;
+    cursor: not-allowed;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .patients-container .delete-modal-content {
+        padding: 1.75rem;
+        width: 85%;
+        max-width: 380px;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .patients-container .delete-modal-content {
+        padding: 1.5rem;
+        width: 90%;
+        max-width: 340px;
+    }
+
+    .patients-container .delete-modal-content h2 {
+        font-size: 1.35rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .patients-container .delete-modal-content p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .patients-container .delete-modal-actions {
+        gap: 0.75rem;
+    }
+
+    .patients-container .delete-modal-actions button {
+        padding: 0.55rem 1.1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .patients-container .delete-modal-content {
+        padding: 1.25rem;
+        width: calc(100% - 2.5rem); /* Leaves 1.25rem on each side */
+        max-width: 300px;
+        border-radius: 12px;
+    }
+
+    .patients-container .delete-modal-content h2 {
+        font-size: 1.15rem;
+    }
+
+    .patients-container .delete-modal-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .patients-container .delete-modal-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .patients-container .delete-modal-actions button {
+        width: 100%;
+        padding: 0.65rem 1rem;
+    }
+}
+
+/* Extra Small Mobile (max-width: 360px) */
+@media (max-width: 360px) {
+    .patients-container .delete-modal-content {
+        padding: 1rem;
+        width: calc(100% - 1.5rem); /* Leaves 0.75rem on each side */
+    }
+
+    .patients-container .delete-modal-content h2 {
+        font-size: 1.05rem;
+    }
+
+    .patients-container .delete-modal-content p {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .patients-container .delete-modal-actions button {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+}
