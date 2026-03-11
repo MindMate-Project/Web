@@ -1,4 +1,9 @@
 .patients-container {
+    --patients-title-color: #151D48;
+    --patients-count-color: #6C7278;
+    --patients-count-number-size: 1rem;
+    --patients-count-number-weight: bold;
+
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -15,14 +20,19 @@
 .patients-container .patients-title h1 {
     font-size: 1.75rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--patients-title-color);
     margin: 0 0 0.25rem 0;
 }
 
 .patients-container .patients-count {
     font-size: 0.875rem;
-    color: #666;
+    color: var(--patients-count-color);
     margin: 0;
+}
+
+.patients-container .patients-count-number {
+    font-size: var(--patients-count-number-size);
+    font-weight: var(--patients-count-number-weight);
 }
 
 .patients-actions {
