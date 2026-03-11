@@ -27,4 +27,12 @@ const useUpdatePassword = async (url, parmas) => {
     return res;
 };
 
-export { useUpdateDataWithImage, useUpdateData, useUpdatePassword };
+const usePatchData = async (url, params) => {
+    const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    };
+    const res = await baseUrl.patch(url, params, config);
+    return res;
+};
+
+export { useUpdateDataWithImage, useUpdateData, useUpdatePassword, usePatchData };
