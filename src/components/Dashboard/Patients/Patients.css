@@ -3,10 +3,6 @@
     --patients-count-color: #6C7278;
     --patients-count-number-size: 1rem;
     --patients-count-number-weight: bold;
-
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
 }
 
 .patients-container .patients-header {
