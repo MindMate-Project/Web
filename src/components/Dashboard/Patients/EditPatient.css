@@ -4,9 +4,10 @@
     --label-color: #425166;
     --input-text-color: #151D48;
     --input-border-color: #e2e8f0;
-    --input-focus-border: #3380C5;
-    --primary-btn-bg: #3380C5;
-    --primary-btn-hover: #21609e;
+    --input-focus-border: #5EA5C0;
+    --primary-btn-bg: #5EA5C0;
+    --primary-btn-hover: #4a8ca6;
+    --primary-btn-color: #fff;
     
     padding: 2rem;
     max-width: 1400px;
@@ -187,7 +188,7 @@
 .edit-patient-container .form-textarea:focus {
     outline: none;
     border-color: var(--input-focus-border);
-    box-shadow: 0 0 0 3px rgba(51, 128, 197, 0.1);
+    box-shadow: 0 0 0 3px rgba(94, 165, 192, 0.15);
 }
 
 .edit-patient-container .form-input::placeholder,
@@ -227,7 +228,7 @@
 .edit-patient-container .btn-save {
     background: var(--primary-btn-bg);
     border: 1px solid var(--primary-btn-bg);
-    color: #fff;
+    color: var(--primary-btn-color);
 }
 
 .edit-patient-container .btn-save:hover {
