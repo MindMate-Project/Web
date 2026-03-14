@@ -14,10 +14,10 @@ const SignupHook = () => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [birthDate, setBirthDate] = useState("");
+    const [gender, setGender] = useState("male");
 
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [patients] = useState([]);
     const [loading, setLoading] = useState(false);
     const lastProcessedRes = useRef(null);
     const hasSubmitted = useRef(false);
@@ -38,7 +38,17 @@ const SignupHook = () => {
     };
 
     const onChangeBirthDate = (e) => {
-        setBirthDate(e.target.value);
+        const raw = e.target.value;
+        if (raw) {
+            const [year, month, day] = raw.split("-");
+            setBirthDate(`${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`);
+        } else {
+            setBirthDate("");
+        }
+    };
+
+    const onChangeGender = (e) => {
+        setGender(e.target.value);
     };
 
     const onChangePassword = (e) => {
@@ -62,9 +72,7 @@ const SignupHook = () => {
             .match(/^01[0-9]{9}$/);
     };
     const validateBirthDate = (birthDate) => {
-        return String(birthDate)
-            .toLowerCase()
-            .match(/^\d{1,2}\/\d{1,2}\/\d{4}$/);
+        return birthDate && birthDate.trim() !== "";
     };
 
     const validationValues = () => {
@@ -85,6 +93,9 @@ const SignupHook = () => {
         } else if (!validateBirthDate(birthDate)) {
             isValid = false;
             message = "Birth date is not valid";
+        } else if (!gender) {
+            isValid = false;
+            message = "Gender is required";
         } else if (password.length < 6) {
             isValid = false;
             message = "Password must be more than 5 characters";
@@ -114,11 +125,11 @@ const SignupHook = () => {
                 email: email,
                 password: password,
                 passwordConfirm: confirmPassword,
-                phone: phone,
-                birthDate: birthDate,
-                role: "caregiver",
-                relation: "sibling",
-                patients: patients,
+                phoneNumber: phone,
+                dateOfBirth: birthDate,
+                gender: gender,
+                address: "No Address",
+                role: "caregiver"
             }),
         );
     };
@@ -150,10 +161,8 @@ const SignupHook = () => {
                     navigate("/api/auth/login");
                 }, 3000);
             } else {
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 2000);
-                toast.error("Error creating account. Please try again.", {
+                // console.log('this is res',res);
+                toast.error(`Error Creating Account ,${res.data.message}`, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -172,6 +181,7 @@ const SignupHook = () => {
         email,
         phone,
         birthDate,
+        gender,
         password,
         confirmPassword,
         onChangeFirstName,
@@ -179,6 +189,7 @@ const SignupHook = () => {
         onChangeEmail,
         onChangePhone,
         onChangeBirthDate,
+        onChangeGender,
         onChangePassword,
         onChangeConfirmPassword,
         onSubmit,
