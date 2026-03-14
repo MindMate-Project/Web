@@ -26,7 +26,7 @@ export default function PatientDetails() {
     const handleEdit = () => {
         if (patient?._id) {
             navigate(`/api/dashboard/patients/${patient._id}/edit`);
-        }
+        }   
     };
 
     const handleDeleteClick = () => {
@@ -111,7 +111,7 @@ export default function PatientDetails() {
                                     </svg>
                                 </div>
                                 <span className="info-value">
-                                    {patient.contactNumber || "N/A"}
+                                    {patient.phoneNumber || "N/A"}
                                 </span>
                             </div>
 
@@ -138,7 +138,7 @@ export default function PatientDetails() {
                                     </svg>
                                 </div>
                                 <span className="info-value">
-                                    {patient.location || "N/A"}
+                                    {patient.address || "N/A"}
                                 </span>
                             </div>
 
@@ -258,36 +258,28 @@ export default function PatientDetails() {
                             <ul className="medical-list">
                                 <li>
                                     <strong>Diagnosis:</strong>{" "}
-                                    {patient.medicalHistory?.diagnosis || "N/A"}
+                                    {patient.medicalNotes?.diagnosis || "N/A"}
                                 </li>
                                 <li>
                                     <strong>Stage:</strong>{" "}
-                                    {patient.medicalHistory?.stage || "N/A"}
+                                    {patient.medicalNotes?.stage || "N/A"}
                                 </li>
                                 <li>
                                     <strong>Chronic Diseases:</strong>{" "}
-                                    {patient.medicalHistory?.chronicDiseases
-                                        ?.length
-                                        ? patient.medicalHistory.chronicDiseases.join(
-                                              ", ",
-                                          )
+                                    {patient.medicalNotes?.chronicDiseases?.length
+                                        ? patient.medicalNotes.chronicDiseases.join(", ")
                                         : "N/A"}
                                 </li>
                                 <li>
                                     <strong>Allergies:</strong>{" "}
-                                    {patient.medicalHistory?.allergies?.length
-                                        ? patient.medicalHistory.allergies.join(
-                                              ", ",
-                                          )
+                                    {patient.medicalNotes?.allergies?.length
+                                        ? patient.medicalNotes.allergies.join(", ")
                                         : "N/A"}
                                 </li>
                                 <li>
                                     <strong>Current Medications:</strong>{" "}
-                                    {patient.medicalHistory?.currentMedications
-                                        ?.length
-                                        ? patient.medicalHistory.currentMedications.join(
-                                              ", ",
-                                          )
+                                    {patient.medicalNotes?.currentMedication?.length
+                                        ? patient.medicalNotes.currentMedication.join(", ")
                                         : "N/A"}
                                 </li>
                             </ul>

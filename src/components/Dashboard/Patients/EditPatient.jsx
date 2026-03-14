@@ -19,17 +19,16 @@ export default function EditPatient() {
     // Form State
     const [formData, setFormData] = useState({
         name: "",
-        contactNumber: "",
-        gender: "Male",
+        phoneNumber: "",
+        gender: "male",
         email: "",
         dateOfBirth: "",
-        relationship: "",
-        location: "",
+        address: "",
         diagnosis: "",
         stage: "",
         allergies: "",
         chronicDiseases: "",
-        currentMedications: ""
+        currentMedication: ""
     });
 
     const [modalConfig, setModalConfig] = useState({
@@ -63,17 +62,16 @@ export default function EditPatient() {
 
             setFormData({
                 name: patient.name || "",
-                contactNumber: patient.contactNumber || "",
-                gender: patient.gender || "Male",
+                phoneNumber: patient.phoneNumber || "",
+                gender: patient.gender || "male",
                 email: patient.email || "",
                 dateOfBirth: parsedDate,
-                relationship: patient.relationship || "",
-                location: patient.location || "",
-                diagnosis: patient.medicalHistory?.diagnosis || "",
-                stage: patient.medicalHistory?.stage || "",
-                allergies: patient.medicalHistory?.allergies?.join(", ") || "",
-                chronicDiseases: patient.medicalHistory?.chronicDiseases?.join(", ") || "",
-                currentMedications: patient.medicalHistory?.currentMedications?.join(", ") || ""
+                address: patient.address || "",
+                diagnosis: patient.medicalNotes?.diagnosis || "",
+                stage: patient.medicalNotes?.stage || "",
+                allergies: patient.medicalNotes?.allergies?.join(", ") || "",
+                chronicDiseases: patient.medicalNotes?.chronicDiseases?.join(", ") || "",
+                currentMedication: patient.medicalNotes?.currentMedication?.join(", ") || ""
             });
         }
     }, [patient]);
@@ -106,11 +104,11 @@ export default function EditPatient() {
         e.preventDefault();
         
         // Basic Validation
-        if (!formData.name || !formData.contactNumber || !formData.relationship) {
+        if (!formData.name || !formData.phoneNumber) {
             setModalConfig({
                 isOpen: true,
                 type: "error",
-                message: "Please fill in all required fields (Name, Phone, Relationship)."
+                message: "Please fill in all required fields (Name, Phone)."
             });
             return;
         }
@@ -118,17 +116,16 @@ export default function EditPatient() {
         // Prepare payload, converting comma-separated strings back to arrays
         const payload = {
             name: formData.name,
-            contactNumber: formData.contactNumber,
+            phoneNumber: formData.phoneNumber,
             gender: formData.gender,
             dateOfBirth: formData.dateOfBirth,
-            relationship: formData.relationship,
-            location: formData.location,
-            medicalHistory: {
+            address: formData.address,
+            medicalNotes: {
                 diagnosis: formData.diagnosis,
                 stage: formData.stage,
                 allergies: formData.allergies.split(",").map(i => i.trim()).filter(Boolean),
                 chronicDiseases: formData.chronicDiseases.split(",").map(i => i.trim()).filter(Boolean),
-                currentMedications: formData.currentMedications.split(",").map(i => i.trim()).filter(Boolean),
+                currentMedication: formData.currentMedication.split(",").map(i => i.trim()).filter(Boolean),
             }
         };
 
@@ -248,12 +245,12 @@ export default function EditPatient() {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="contactNumber">Phone Number *</label>
+                                <label htmlFor="phoneNumber">Phone Number *</label>
                                 <input
                                     type="tel"
-                                    id="contactNumber"
+                                    id="phoneNumber"
                                     className="form-input"
-                                    value={formData.contactNumber}
+                                    value={formData.phoneNumber}
                                     onChange={handleChange}
                                     placeholder="+1 234 567 8900"
                                 />
@@ -267,8 +264,8 @@ export default function EditPatient() {
                                     value={formData.gender}
                                     onChange={handleChange}
                                 >
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
                                 </select>
                             </div>
 
@@ -308,12 +305,12 @@ export default function EditPatient() {
                             </div>
 
                             <div className="form-group full-width">
-                                <label htmlFor="location">Address / Location</label>
+                                <label htmlFor="address">Address / Location</label>
                                 <input
                                     type="text"
-                                    id="location"
+                                    id="address"
                                     className="form-input"
-                                    value={formData.location}
+                                    value={formData.address}
                                     onChange={handleChange}
                                     placeholder="Full address"
                                 />
@@ -374,11 +371,11 @@ export default function EditPatient() {
                             </div>
 
                             <div className="form-group full-width">
-                                <label htmlFor="medications">Current Medications (comma-separated)</label>
+                                <label htmlFor="currentMedication">Current Medications (comma-separated)</label>
                                 <textarea
-                                    id="currentMedications"
+                                    id="currentMedication"
                                     className="form-textarea"
-                                    value={formData.currentMedications}
+                                    value={formData.currentMedication}
                                     onChange={handleChange}
                                     placeholder="List current medications..."
                                 />
