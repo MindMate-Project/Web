@@ -10,7 +10,7 @@ import father from "./../../../images/father.jpg";
 
 export default function Patients() {
     const allPatients = useGetAllPatients();
-    const CurrentPatients = allPatients.patients.data;
+    const CurrentPatients = allPatients?.data;
 
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
@@ -39,7 +39,7 @@ export default function Patients() {
 
     const confirmDelete = async () => {
         if (patientToDelete) {
-            await handleDelete(patientToDelete._id);
+            await handleDelete(patientToDelete.patientId);
             closeModal();
         }
     };
@@ -65,7 +65,11 @@ export default function Patients() {
                 <div className="patients-title">
                     <h1>Patients</h1>
                     <p className="patients-count">
-                        Total: <span className="patients-count-number">{CurrentPatients?.length || 0}</span> Patients
+                        Total:{" "}
+                        <span className="patients-count-number">
+                            {CurrentPatients?.length || 0}
+                        </span>{" "}
+                        Patients
                     </p>
                 </div>
 
@@ -106,7 +110,7 @@ export default function Patients() {
             <div className="patients-list">
                 {filteredPatients.length > 0 ? (
                     filteredPatients.map((patient) => (
-                        <div key={patient._id} className="patient-card">
+                        <div key={patient.patientId} className="patient-card">
                             <div className="patient-info">
                                 <img
                                     src={patient.imageCover || father}
@@ -131,16 +135,14 @@ export default function Patients() {
                                 <button
                                     className="view-btn"
                                     onClick={() =>
-                                        handleViewPatient(patient._id)
+                                        handleViewPatient(patient.patientId)
                                     }
                                 >
                                     View
                                 </button>
                                 <button
                                     className="delete-btn"
-                                    onClick={() =>
-                                        handleDeletePatient(patient)
-                                    }
+                                    onClick={() => handleDeletePatient(patient)}
                                 >
                                     Delete
                                 </button>
@@ -166,7 +168,8 @@ export default function Patients() {
                 <h2>Delete Patient</h2>
                 <p>
                     Are you sure you want to delete{" "}
-                    <strong>{patientToDelete?.name}</strong>? This will permanently remove the patient from your list.
+                    <strong>{patientToDelete?.name}</strong>? This will
+                    permanently remove the patient from your list.
                 </p>
                 <div className="delete-modal-actions">
                     <button
