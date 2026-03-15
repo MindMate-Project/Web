@@ -3,6 +3,9 @@
     --patients-count-color: #6C7278;
     --patients-count-number-size: 1rem;
     --patients-count-number-weight: bold;
+    --primary-btn-bg: #5EA5C0;
+    --primary-btn-hover: #4a8ca6;
+    --primary-btn-color: #fff;
 }
 
 .patients-container .patients-header {
@@ -73,8 +76,8 @@
 
 .patients-container .add-patient-btn {
     padding: 0.65rem 1.5rem;
-    background-color: #7dd3fc;
-    color: #fff;
+    background-color: var(--primary-btn-bg);
+    color: var(--primary-btn-color);
     border: none;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -85,7 +88,7 @@
 }
 
 .patients-container .add-patient-btn:hover {
-    background-color: #38bdf8;
+    background-color: var(--primary-btn-hover);
     transform: translateY(-1px);
 }
 
@@ -162,12 +165,12 @@
 }
 
 .patients-container .view-btn {
-    background-color: #7dd3fc;
-    color: #fff;
+    background-color: var(--primary-btn-bg);
+    color: var(--primary-btn-color);
 }
 
 .patients-container .view-btn:hover {
-    background-color: #38bdf8;
+    background-color: var(--primary-btn-hover);
     transform: translateY(-1px);
 }
 
