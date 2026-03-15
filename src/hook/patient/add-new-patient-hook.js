@@ -11,7 +11,7 @@ const useAddPatient = () => {
         try {
             // Using the payload expected by the assignPatientRequest thunk
             const response = await dispatch(
-                assignPatientRequest({ patientEmail: email, relationship: relation }),
+                assignPatientRequest({ patientEmail: email, relation })
             ).unwrap();
             
             // Optionally refresh the list of patients to include the new one

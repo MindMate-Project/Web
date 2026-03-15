@@ -4,9 +4,6 @@
     --patient-name-color: #151D48;
     --patient-age-color: #425166;
     --patient-info-color: #3380C5;
-    --primary-btn-bg: #5EA5C0;
-    --primary-btn-hover: #4a8ca6;
-    --primary-btn-color: #fff;
     
     padding: 2rem;
     max-width: 1400px;
@@ -228,12 +225,12 @@
 }
 
 .patient-details-container .edit-btn {
-    background-color: var(--primary-btn-bg);
-    color: var(--primary-btn-color);
+    background-color: #7dd3fc;
+    color: #fff;
 }
 
 .patient-details-container .edit-btn:hover {
-    background-color: var(--primary-btn-hover);
+    background-color: #38bdf8;
     transform: translateY(-1px);
 }
 

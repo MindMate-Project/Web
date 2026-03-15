@@ -2,9 +2,6 @@
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
-    --primary-btn-bg: #5EA5C0;
-    --primary-btn-hover: #4a8ca6;
-    --primary-btn-color: #fff;
 }
 
 .add-patient-container .back-button {
@@ -77,7 +74,7 @@
 }
 
 .add-patient-container .form-group input:focus {
-    border-color: var(--primary-btn-bg);
+    border-color: #7dd3fc;
 }
 
 .add-patient-container .info-text {
@@ -107,12 +104,12 @@
 }
 
 .add-patient-container .add-btn {
-    background-color: var(--primary-btn-bg);
-    color: var(--primary-btn-color);
+    background-color: #7dd3fc;
+    color: #fff;
 }
 
 .add-patient-container .add-btn:hover {
-    background-color: var(--primary-btn-hover);
+    background-color: #38bdf8;
     transform: translateY(-1px);
 }
 

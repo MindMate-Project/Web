@@ -12,7 +12,7 @@ export default function AddPatient() {
     // Form and Modal State
     const [formData, setFormData] = useState({
         email: "",
-        relationship: "",
+        relation: "",
     });
     const [modalConfig, setModalConfig] = useState({
         isOpen: false,
