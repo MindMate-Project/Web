@@ -52,7 +52,7 @@ const AddReminder = () => {
 
           {/* Appointment Date */}
           <div className="form-group">
-            <label>Appointment Date</label>
+            <label>Date*</label>
             <input
               type="date"
               className="input"
@@ -61,7 +61,7 @@ const AddReminder = () => {
 
           {/* Appointment Time */}
           <div className="form-group">
-            <label>Appointment Time</label>
+            <label>Time*</label>
             <input
               type="time"
               className="input"
@@ -70,7 +70,7 @@ const AddReminder = () => {
 
           {/* Location */}
           <div className="form-group">
-            <label>Location</label>
+            <label>Locatio*</label>
             <input
               type="text"
               className="input"
@@ -107,7 +107,7 @@ const AddReminder = () => {
 
           {/* Notes */}
           <div className="form-group notes-group">
-            <label>Notes (optional)</label>
+            <label>Notes <span>(optional)</span></label>
             <textarea
               className="input textarea"
               
