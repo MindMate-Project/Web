@@ -17,12 +17,17 @@ import Location from "./components/Dashboard/Location/Location";
 import Reminders from "./components/Dashboard/Reminders/Reminders";
 import MemoryBank from "./components/Dashboard/MemoryBank/MemoryBank";
 import AddAppointment from "./components/Dashboard/Reminders/AddAppointment";
+import AppointmentDetails from "./components/Dashboard/Reminders/appointmentDetails"
+// import ReminderDetails from "./components/Dashboard/Reminders/ReminderDetails"
+import AppointmentEdit from "./components/Dashboard/Reminders/AppointmentEdit";
+import MedicineEdit from "./components/Dashboard/Reminders/MedicineEdit";
 import AddMedicine from "./components/Dashboard/Reminders/AddMedicine";
 import AddMemo from "./components/Dashboard/MemoryBank/AddMemo";
-
+import MedicineDetails from "./components/Dashboard/Reminders/MedicineDetails";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import ResetCodeRoute from "./components/utils/ResetCodeRoute";
 import NewPasswordRoute from "./components/utils/NewPasswordRoute";
+
 import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
@@ -52,6 +57,18 @@ function App() {
                 <Route index element={<Reminders />} />
                 <Route path="add-appointment" element={<AddAppointment />} />
                 <Route path="add-medicine" element={<AddMedicine />} />
+                {/* appointment details */}
+                <Route path="appointment/:id" element={<AppointmentDetails />} />
+
+                {/* medicine details */}
+                <Route path="medicine/:id" element={<MedicineDetails />} />
+
+                {/* appointment edit */}
+                <Route path="apointment/:id/edit" element={<AppointmentEdit/>} />
+
+                {/* medicine edit */}
+                <Route path="medicine/:id/edit" element={<MedicineEdit/>} />
+
               </Route>
               <Route path="memory-bank">
                 <Route index element={<MemoryBank/>}/>
