@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const AddMedicine = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/api/dashboard/reminders");
+    navigate("/api/dashboard/reminders/medicine/${id}");
   };
 
   return (
@@ -20,10 +20,10 @@ const AddMedicine = () => {
             strokeLinejoin="round"
           />
         </svg>
-        Back To Reminders
+        Back To Details
       </button>
 
-      <p className="page-title">Add New Medicine</p>
+      <p className="page-title">Edit Medicine Information</p>
 
       <div className="medicine-card">
         <div className="form-section">

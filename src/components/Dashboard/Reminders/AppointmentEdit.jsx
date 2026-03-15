@@ -6,7 +6,7 @@ const AddReminder = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate("/api/dashboard/reminders");
+    navigate("/api/dashboard/reminders/appointment/${id}");
   };
 
   return (
@@ -22,10 +22,10 @@ const AddReminder = () => {
             strokeLinejoin="round"
           />
         </svg>
-        Back To Reminders
+        Back To Details
       </button>
 
-      <p className="page-title">Add New Appointment</p>
+      <p className="page-title">Edit Appointment Information</p>
 
       <div className="form-card">
         <div className="form-grid">
@@ -70,7 +70,7 @@ const AddReminder = () => {
 
           {/* Location */}
           <div className="form-group">
-            <label>Location*</label>
+            <label>Locatio*</label>
             <input
               type="text"
               className="input"
