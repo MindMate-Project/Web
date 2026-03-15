@@ -105,6 +105,11 @@
   font-size: 14px;
   color: #14274E;
 }
+.add-medicine-container .time-optional{
+  font-size: 12px;
+  font-weight: 400;
+  color: grey;
+}
 
 .add-medicine-container .treatment-period {
   display: flex;
