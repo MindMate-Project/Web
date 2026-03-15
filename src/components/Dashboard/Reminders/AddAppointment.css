@@ -119,6 +119,13 @@
   grid-column: 1 / 2;
 }
 
+.notes-group span {
+  font-size: 12px;
+  font-weight: 400;
+  color: grey;
+
+}
+
 
 
 .add-reminder .btn-save {
