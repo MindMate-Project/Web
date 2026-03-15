@@ -132,50 +132,6 @@
     border-color: var(--primary-bg);
 }
 
-.signup input[type="date"] {
-    cursor: pointer;
-    color: #333;
-}
-
-.signup input[type="date"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 0.6;
-    filter: invert(40%) sepia(60%) saturate(400%) hue-rotate(170deg);
-}
-
-/* GENDER RADIO */
-.signup .gender-options {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    height: 40px;
-    padding: 0 8px;
-    border: 1px solid #ddd;
-    border-radius: 9px;
-    background: #fff;
-}
-
-.signup .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14px;
-    color: #1b2d5c;
-    cursor: pointer;
-    user-select: none;
-}
-
-.signup .radio-option input[type="radio"] {
-    height: auto;
-    width: 15px;
-    height: 15px;
-    accent-color: var(--primary-bg);
-    cursor: pointer;
-    border: none;
-    padding: 0;
-    margin: 0;
-}
-
 /* BUTTON */
 .signup button {
     margin-top: 10px;
