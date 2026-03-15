@@ -43,7 +43,7 @@ const AddMedicine = () => {
             <input type="time" defaultValue="10:00" />
           </div>
           <div className="form-group">
-            <label>Time Per Day (optional)</label>
+            <label>Time Per Day <span className="time-optional">(optional)</span></label>
             <input type="number" min="1" defaultValue="1" />
           </div>
 
