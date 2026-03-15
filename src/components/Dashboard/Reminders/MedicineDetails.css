@@ -1,0 +1,243 @@
+/* page */
+
+.medicine-details-page{
+  padding:10px;
+}
+
+.medicine-details-page .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    background: transparent;
+    border: none;
+    color: #151D48;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.medicine-details-page .back-button:hover {
+    color: #4a8ca6;
+}
+
+.medicine-details-page .back-button svg {
+    transition: transform 0.3s ease;
+}
+
+.medicine-details-page .back-button:hover svg {
+    transform: translateX(-3px);
+}
+
+
+/* title */
+
+.medicine-details-title{
+  font-size:22px;
+  font-weight:500;
+  color:#151D48;
+  margin-bottom:40px;
+}
+
+
+/* card */
+
+.medicine-details-card{
+  padding:20px;
+  max-width:900px;
+  margin:auto;
+}
+
+
+/* rows */
+
+.medicine-details-row{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+
+/* labels */
+
+.medicine-details-label{
+  font-weight:500;
+  color:#14274E;
+}
+
+
+/* content */
+
+.medicine-details-content{
+  display:flex;
+  gap:12px;
+}
+
+.medicine-details-two{
+  display:flex;
+  gap:12px;
+}
+
+
+/* boxes */
+
+.medicine-details-box{
+  background:#fff;
+  border-radius:16px;
+  padding:28px 26px;
+  flex:1;
+  box-sizing:border-box;
+  min-height:80px;
+}
+
+
+/* full width */
+
+.medicine-details-full{
+  width:100%;
+}
+
+
+/* vertical layout inside box */
+
+.medicine-details-vertical{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+
+/* icon + value row */
+
+.medicine-details-value{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+
+/* icons */
+
+.medicine-details-icon{
+  width:20px;
+  height:20px;
+}
+
+
+/* text */
+
+.medicine-details-text{
+  font-size:16px;
+  color:#333;
+}
+
+
+/* subtitle */
+
+.medicine-details-subtitle{
+  display:block;
+  font-size:13px;
+  color:#5EA5C0;
+  font-weight:500;
+}
+
+
+/* buttons */
+
+.medicine-details-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top:20px;
+}
+
+
+.medicine-details-btn{
+  padding:12px 26px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:500;
+}
+
+
+.medicine-details-edit{
+  background:#5EA5C0;
+  color:white;
+}
+
+.medicine-details-edit:hover {
+  background: #427A90;;
+}
+
+
+
+.medicine-details-delete{
+  background:#EB4335;
+  color:white;
+}
+.medicine-details-delete:hover {
+  background: #DC2626;
+}
+
+
+/* responsive */
+
+@media (max-width: 768px) {
+
+  .add-medicine-container {
+    padding: 15px;
+  }
+
+  .add-medicine-container .medicine-card {
+    padding: 25px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .add-medicine-container .form-section {
+    grid-template-columns: 1fr; 
+    gap: 25px;
+  }
+
+  /* Treatment period */
+  .add-medicine-container .treatment-period {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .add-medicine-container .date-inputs-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .add-medicine-container .date-inputs {
+    gap: 8px;
+  }
+
+  .add-medicine-container .date-inputs input {
+    width: 60px;
+  }
+
+  /* radio buttons */
+  .add-medicine-container .radio-group {
+    gap: 15px;
+  }
+
+  /* buttons */
+  .add-medicine-container .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .add-medicine-container .save-btn,
+  .add-medicine-container .cancel-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+}
