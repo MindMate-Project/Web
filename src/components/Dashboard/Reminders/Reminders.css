@@ -2,7 +2,7 @@
   padding: 30px;
 }
 
-.page-title {
+.reminders-page .page-title {
   color: #14274E;
   font-size: 26px;
   font-weight: 600;
@@ -11,140 +11,139 @@
 
 /* SECTION */
 
-.reminder-section{
+.reminders-page .reminder-section {
   margin-bottom: 35px;
 }
 
 /* HEADER ABOVE CARD */
 
-.section-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:5px;
+.reminders-page .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
-.section-header h3{
-  font-size:18px;
-  font-weight:400;
-  color:#676D75;
+.reminders-page .section-header h3 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #676D75;
 }
 
 /* CARD */
 
-.reminder-card{
-  background:#FFFFFF;
-  border-radius:10px;
+.reminders-page .reminder-card {
+  background: #FFFFFF;
+  border-radius: 10px;
   /* padding:20px; */
-  border:1px solid #eef2f6;
+  border: 1px solid #eef2f6;
 }
 
 /* BUTTON */
 
-.btn-add{
-  border:1px solid #C3D3E2;
-  padding:15px 16px;
-  border-radius:8px;
+.reminders-page .btn-add {
+  border: 1px solid #C3D3E2;
+  padding: 15px 16px;
+  border-radius: 8px;
   /* background:white; */
   color: #14274E;
-  cursor:pointer;
-  font-weight:500;
+  cursor: pointer;
+  font-weight: 500;
 }
 
-.btn-add:hover{
-  background:#f2f7fb;
+.reminders-page .btn-add:hover {
+  background: #f2f7fb;
 }
 
 /* TABLE CONTAINER */
 
-.table-container{
-  width:100%;
-  overflow-x:auto;
+.reminders-page .table-container {
+  width: 100%;
+  overflow-x: auto;
 }
 
 /* TABLE */
 
-.reminder-table{
-  width:100%;
-  border-collapse:collapse;
+.reminders-page .reminder-table {
+  width: 100%;
+  border-collapse: collapse;
   min-width: 968px;
 }
 
 /* HEADER */
 
-.reminder-table thead tr{
-  border-bottom:2px solid #a7d3e5;
+.reminders-page .reminder-table thead tr {
+  border-bottom: 2px solid #a7d3e5;
 }
 
-.reminder-table th{
-  text-align:left;
-  padding:18px;
-  font-size:14px;
-  font-weight: 700px;
+.reminders-page .reminder-table th {
+  text-align: left;
+  padding: 18px;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.1px;
-  color:#5EA5C0;
-  font-weight:500;
+  color: #5EA5C0;
 }
 
 /* ROWS */
 
-.reminder-table td{
-  padding:16px 12px;
-  font-size:14px;
-  color:#333333;
+.reminders-page .reminder-table td {
+  padding: 16px 12px;
+  font-size: 14px;
+  color: #333333;
 }
 
 /* ROW SEPARATORS */
 
-.reminder-table tbody tr{
-  border-bottom:1px solid #e3e5e6;
+.reminders-page .reminder-table tbody tr {
+  border-bottom: 1px solid #e3e5e6;
 }
 
 /* HOVER */
 
-.reminder-table tbody tr:hover{
-  background:#fafbfd;
-  cursor:pointer;
+.reminders-page .reminder-table tbody tr:hover {
+  background: #fafbfd;
+  cursor: pointer;
 }
 
 /* TIME BADGES */
 
-.time-badge{
-  padding:4px 10px;
-  border-radius:14px;
-  font-size:12px;
-  font-weight:500;
+.reminders-page .time-badge {
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* GREEN BADGE */
 
-.time-badge.appointment{
-  background:#d9f7e8;
-  color:#2e7d32;
+.reminders-page .time-badge.appointment {
+  background: #d9f7e8;
+  color: #2e7d32;
 }
 
 /* ORANGE BADGE */
 
-.time-badge.medication{
-  background:#ffe5d1;
-  color:#d97706;
+.reminders-page .time-badge.medication {
+  background: #ffe5d1;
+  color: #d97706;
 }
 
 /* RESPONSIVE */
 
-@media (max-width:768px){
+@media (max-width: 768px) {
 
-  .reminders-page{
-    padding:20px;
+  .reminders-page {
+    padding: 20px;
   }
 
-  .page-title{
-    font-size:22px;
+  .reminders-page .page-title {
+    font-size: 22px;
   }
 
-  .reminder-card{
-    padding:16px;
+  .reminders-page .reminder-card {
+    padding: 16px;
   }
 
 }
