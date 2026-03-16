@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const AddMedicine = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/api/dashboard/reminders/medicine/${id}");
+    navigate(`/api/dashboard/reminders/medicine/${1}`);
   };
 
   return (
