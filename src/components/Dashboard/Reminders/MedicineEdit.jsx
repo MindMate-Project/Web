@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 const AddMedicine = () => {
   const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleBack = () => {
     navigate(`/api/dashboard/reminders/medicine/${1}`);
   };
 
+  
   return (
     <div className="add-medicine-container">
       <button className="back-button" onClick={handleBack}>
