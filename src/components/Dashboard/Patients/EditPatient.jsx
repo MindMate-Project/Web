@@ -27,6 +27,7 @@ export default function EditPatient() {
         diagnosis: "",
         stage: "",
         allergies: "",
+        relationship: "",
         chronicDiseases: "",
         currentMedication: ""
     });
@@ -65,6 +66,7 @@ export default function EditPatient() {
                 phoneNumber: patient.phoneNumber || "",
                 gender: patient.gender || "male",
                 email: patient.email || "",
+                relationship: patient.relationship || "",
                 dateOfBirth: parsedDate,
                 address: patient.address || "",
                 diagnosis: patient.medicalNotes?.diagnosis || "",
@@ -120,6 +122,7 @@ export default function EditPatient() {
             gender: formData.gender,
             dateOfBirth: formData.dateOfBirth,
             address: formData.address,
+            relationship: formData.relationship,
             medicalNotes: {
                 diagnosis: formData.diagnosis,
                 stage: formData.stage,
