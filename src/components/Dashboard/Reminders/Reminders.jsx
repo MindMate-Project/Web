@@ -1,9 +1,10 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Reminders.css";
-
 export default function Reminders() {
   const navigate = useNavigate();
+
+  const patientId = localStorage.getItem("selectedPatientId");
+  console.log("patientId", patientId);
 
   const appointments = [
     {
