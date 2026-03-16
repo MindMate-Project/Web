@@ -13,8 +13,12 @@ import Patients from "./components/Dashboard/Patients/Patients";
 import PatientDetails from "./components/Dashboard/Patients/PatientDetails";
 import EditPatient from "./components/Dashboard/Patients/EditPatient";
 import AddPatient from "./components/Dashboard/Patients/AddPatient";
+
 import Location from "./components/Dashboard/Location/Location";
 import Reminders from "./components/Dashboard/Reminders/Reminders";
+import Settings from "./components/Dashboard/Settings/Settings";
+import Notification from "./components/Dashboard/Notification/Notification";
+import Profile from "./components/Dashboard/Profile/Profile";
 import MemoryBank from "./components/Dashboard/MemoryBank/MemoryBank";
 import AddAppointment from "./components/Dashboard/Reminders/AddAppointment";
 import AppointmentDetails from "./components/Dashboard/Reminders/appointmentDetails"
@@ -70,6 +74,12 @@ function App() {
                 <Route path="medicine/:id/edit" element={<MedicineEdit/>} />
 
               </Route>
+
+              {/* Header Icon Routes */}
+              <Route path="settings" element={<Settings />} />
+              <Route path="notification" element={<Notification />} />
+              <Route path="profile" element={<Profile />} />
+
               <Route path="memory-bank">
                 <Route index element={<MemoryBank/>}/>
                 <Route path="add-new-memo" element={<AddMemo />} />
