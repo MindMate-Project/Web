@@ -6,7 +6,7 @@ const AddReminder = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate("/api/dashboard/reminders/appointment/${id}");
+    navigate(`/api/dashboard/reminders/appointment/${1}`);
   };
 
   return (
