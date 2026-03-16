@@ -25,24 +25,26 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadowUrl,
 });
 
-function MapUpdater({ center, zoom }) {
+function MapUpdater({ center, zoom, mapId }) {
     const map = useMap();
     useEffect(() => {
-        // Only fly if coordinates actually changed
+        // Fly to coordinates whenever center, zoom, or explicit mapId changes
         map.flyTo(center, zoom, { duration: 1.5 });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [center[0], center[1], zoom, map]);
+    }, [center[0], center[1], zoom, map, mapId]);
     return null;
 }
 
 export default function Location() {
     const {
         patients,
-        selectedPatient,
         centerPosition,
         mapZoom,
-        handlePatientClick,
+        mapId, // Use this to force map updater when clicked
+        handlePatientClick
     } = useLocationState();
+
+    const currentPatient = patients.length > 0 ? patients[0] : null;
 
     if (patients && patients.length === 0) {
         return (
@@ -66,11 +68,9 @@ export default function Location() {
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
                     </div>
-                    <h2>No Patients to Track</h2>
+                    <h2>No Location Data Available</h2>
                     <p>
-                        You currently don't have any patients assigned to your
-                        care or their tracking devices are not currently
-                        broadcasting locations.
+                        You haven't selected a patient from the dashboard or their tracking device is not currently broadcasting locations.
                     </p>
                 </div>
             </div>
@@ -80,8 +80,10 @@ export default function Location() {
     return (
         <div className="location-container">
             <div className="location-header">
-                <h1>Live Location Tracking</h1>
-                <p>Real-time patient location monitoring</p>
+                <div className="location-header-info">
+                    <h1>Live Location Tracking</h1>
+                    <p>Real-time location for {currentPatient?.name || "Patient"}</p>
+                </div>
             </div>
 
             <div className="location-content">
@@ -92,7 +94,7 @@ export default function Location() {
                         zoom={mapZoom}
                         className="map-container"
                     >
-                        <MapUpdater center={centerPosition} zoom={mapZoom} />
+                        <MapUpdater center={centerPosition} zoom={mapZoom} mapId={mapId} />
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -104,8 +106,7 @@ export default function Location() {
                                 <Marker
                                     position={patient.position}
                                     eventHandlers={{
-                                        click: () =>
-                                            handlePatientClick(patient),
+                                        click: () => handlePatientClick(patient),
                                     }}
                                 >
                                     <Popup>
@@ -123,12 +124,12 @@ export default function Location() {
                                                 {patient.isOffline ? (
                                                     <span>
                                                         Last active at{" "}
-                                                        {patient.lastUpdated.toLocaleTimeString()}
+                                                        {patient.lastUpdated.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                                     </span>
                                                 ) : (
                                                     <span>
                                                         Active now (
-                                                        {patient.lastUpdated.toLocaleTimeString()}
+                                                        {patient.lastUpdated.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                                         )
                                                     </span>
                                                 )}
@@ -163,62 +164,52 @@ export default function Location() {
                     </MapContainer>
                 </div>
 
-                {/* Patient List Section */}
-                <div className="patient-list-wrapper">
-                    <div className="patient-list-header">
-                        <h2>Patients List</h2>
-                        <span className="patient-count">{patients.length}</span>
-                    </div>
-
-                    <div className="patient-list">
-                        {patients.map((patient) => (
-                            <div
-                                key={patient.id}
-                                className={`patient-card ${
-                                    selectedPatient?.id === patient.id
-                                        ? "active"
-                                        : ""
-                                }`}
-                                onClick={() => handlePatientClick(patient)}
+                {/* Patient Tracked Info Card */}
+                {currentPatient && (
+                    <div className="patient-list-wrapper">
+                        <div className="patient-list-header">
+                            <h2>Tracked Patient</h2>
+                        </div>
+    
+                        <div className="patient-list">
+                            <div 
+                                className="patient-card active" 
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handlePatientClick(currentPatient)}
                             >
                                 <div className="patient-avatar-wrapper">
                                     <img
-                                        src={patient.imageCover || father}
-                                        alt={patient.name}
+                                        src={currentPatient.imageCover || father}
+                                        alt={currentPatient.name}
                                         className="patient-avatar-img"
                                     />
                                 </div>
                                 <div className="patient-info">
-                                    <h3>{patient.name}</h3>
+                                    <h3>{currentPatient.name}</h3>
                                     <p className="patient-location">
-                                        📍 {patient.position[0].toFixed(4)},{" "}
-                                        {patient.position[1].toFixed(4)}
+                                        📍 {currentPatient.position[0].toFixed(4)},{" "}
+                                        {currentPatient.position[1].toFixed(4)}
                                     </p>
                                     <p className="patient-time">
                                         🕐{" "}
-                                        {patient.isOffline ? (
+                                        {currentPatient.isOffline ? (
                                             <span>
                                                 Last active{" "}
-                                                {patient.lastUpdated.toLocaleTimeString()}
+                                                {currentPatient.lastUpdated.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                             </span>
                                         ) : (
                                             <span>Active now</span>
                                         )}
                                     </p>
-                                    {patient.battery !== null &&
-                                        patient.battery !== undefined && (
-                                            <p className="patient-battery">
-                                                🔋 {patient.battery}%
-                                            </p>
-                                        )}
                                 </div>
                                 <div
-                                    className={`status-indicator ${patient.status.toLowerCase()}`}
+                                    className={`status-indicator ${currentPatient.status.toLowerCase()}`}
                                 ></div>
                             </div>
-                        ))}
+                        </div>
                     </div>
-                </div>
+                )}
+
             </div>
         </div>
     );

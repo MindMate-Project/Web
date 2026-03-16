@@ -193,7 +193,8 @@
 
 .location-container .status-indicator.offline {
     background-color: #9ca3af;
-    animation: none; /* No pulse when offline */
+    animation: none;
+    /* No pulse when offline */
 }
 
 @keyframes pulse {
@@ -294,7 +295,8 @@
 }
 
 .location-container .empty-state-icon svg {
-    margin-right: -2px; /* Visual center adjustment */
+    margin-right: -2px;
+    /* Visual center adjustment */
 }
 
 .location-container .empty-state-content h2 {

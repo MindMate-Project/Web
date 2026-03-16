@@ -17,8 +17,9 @@ export default function useMapSocket(patients) {
 
         // Subscribe to all patient rooms
         patients.forEach((patient) => {
-            if (patient._id) {
-                socket.emit('subscribe:patient', patient._id);
+            const id = patient.patientId || patient._id;
+            if (id) {
+                socket.emit('subscribe:patient', id);
             }
         });
 
@@ -38,8 +39,9 @@ export default function useMapSocket(patients) {
         // Cleanup on unmount
         return () => {
             patients.forEach((patient) => {
-                if (patient._id) {
-                    socket.emit('leave:patient', patient._id);
+                const id = patient.patientId || patient._id;
+                if (id) {
+                    socket.emit('leave:patient', id);
                 }
             });
             socket.disconnect();
