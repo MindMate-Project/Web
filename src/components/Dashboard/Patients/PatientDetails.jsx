@@ -24,8 +24,8 @@ export default function PatientDetails() {
     };
 
     const handleEdit = () => {
-        if (patient?._id) {
-            navigate(`/api/dashboard/patients/${patient._id}/edit`);
+        if (patient?.patientId) {
+            navigate(`/api/dashboard/patients/${patient.patientId}/edit`);
         }   
     };
 
@@ -38,8 +38,8 @@ export default function PatientDetails() {
     };
 
     const confirmDelete = async () => {
-        if (patient?._id) {
-            await executeDelete(patient._id);
+        if (patient?.patientId) {
+            await executeDelete(patient.patientId);
             setIsDeleteModalOpen(false);
             navigate("/api/dashboard/patients");
         }
