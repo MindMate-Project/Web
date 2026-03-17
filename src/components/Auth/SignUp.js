@@ -10,6 +10,7 @@ function SignupPage() {
         email,
         phone,
         birthDate,
+        gender,
         password,
         confirmPassword,
         onChangeFirstName,
@@ -17,6 +18,7 @@ function SignupPage() {
         onChangeEmail,
         onChangePhone,
         onChangeBirthDate,
+        onChangeGender,
         onChangePassword,
         onChangeConfirmPassword,
         onSubmit,
@@ -78,14 +80,42 @@ function SignupPage() {
                                 />
                             </div>
 
-                            <div className="field">
-                                <label>Date of birth</label>
-                                <input
-                                    type="text"
-                                    placeholder="14/2/2004"
-                                    value={birthDate}
-                                    onChange={onChangeBirthDate}
-                                />
+                            <div className="row dob-gender-row">
+                                <div className="field">
+                                    <label>Date of birth</label>
+                                    <input
+                                        type="date"
+                                        value={birthDate}
+                                        onChange={onChangeBirthDate}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="field">
+                                    <label>Gender</label>
+                                    <div className="gender-options">
+                                        <label className="radio-option">
+                                            <input
+                                                type="radio"
+                                                name="gender"
+                                                value="male"
+                                                checked={gender === "male"}
+                                                onChange={onChangeGender}
+                                            />
+                                            Male
+                                        </label>
+                                        <label className="radio-option">
+                                            <input
+                                                type="radio"
+                                                name="gender"
+                                                value="female"
+                                                checked={gender === "female"}
+                                                onChange={onChangeGender}
+                                            />
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="field">
@@ -111,6 +141,12 @@ function SignupPage() {
                             <button type="submit" onClick={onSubmit}>
                                 Sign Up
                             </button>
+                            <div className="login-redirect">
+                                <p className="login-link">
+                                    Already have an account?{" "}
+                                    <a href="/api/auth/login">Log In</a>
+                                </p>
+                            </div>
                         </form>
                     </div>
                 </div>
