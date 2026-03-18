@@ -1,64 +1,150 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AddMemo.css";
 
 function AddMemory() {
-  return (
-    <div className="addmemory-container">
+    const [selectedType, setSelectedType] = useState("");
+    const navigate = useNavigate();
 
-      <p className="addmemory-title">Add New Memory</p>
+    const handleTypeChange = (e) => {
+        setSelectedType(e.target.value);
+    };
 
-      <div className="addmemory-card">
-
-        <div className="addmemory-form-section">
-
-          {/* Upload */}
-          <div className="addmemory-upload-box">
-            <input type="file" id="fileUpload" hidden />
-            <label htmlFor="fileUpload">
-              <div className="addmemory-upload-content">
-                <div className="addmemory-upload-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M352 173.3L352 384C352 401.7 337.7 416 320 416C302.3 416 288 401.7 288 384L288 173.3L246.6 214.7C234.1 227.2 213.8 227.2 201.3 214.7C188.8 202.2 188.8 181.9 201.3 169.4L297.3 73.4C309.8 60.9 330.1 60.9 342.6 73.4L438.6 169.4C451.1 181.9 451.1 202.2 438.6 214.7C426.1 227.2 405.8 227.2 393.3 214.7L352 173.3zM320 464C364.2 464 400 428.2 400 384L480 384C515.3 384 544 412.7 544 448L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 448C96 412.7 124.7 384 160 384L240 384C240 428.2 275.8 464 320 464zM464 488C477.3 488 488 477.3 488 464C488 450.7 477.3 440 464 440C450.7 440 440 450.7 440 464C440 477.3 450.7 488 464 488z"/></svg>
+    return (
+        <div className="memorybank">
+            <div className="addmemory-container">
+                <div
+                    className="addmemory-back-link"
+                    onClick={() => navigate("/api/dashboard/memory-bank")}
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M19 12H5M5 12L12 19M5 12L12 5"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                    <span>back to memory bank</span>
                 </div>
-                <p>Upload Media</p>
-              </div>
-            </label>
-          </div>
 
-          {/* Select */}
-          <div className="addmemory-form">
-            <select className="addmemory-memory-select">
-              <option>Choose Memory Type</option>
-              <option>Photo</option>
-              <option>Video</option>
-              <option>Text</option>
-            </select>
+                <h2 className="addmemory-page-title">Add New Memory</h2>
 
-            <div className="addmemory-input-group">
-                <label>Title</label>
-                <input type="text" />
+                <div className="addmemory-card">
+                    {/* Upload Block */}
+                    <div className="addmemory-upload-container">
+                        <input type="file" id="fileUpload" hidden />
+                        <label
+                            htmlFor="fileUpload"
+                            className="addmemory-upload-box"
+                        >
+                            <div className="addmemory-upload-content">
+                                <svg
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M12 4L12 16M12 4L8 8M12 4L16 8M4 16L4 17C4 18.6569 5.34315 20 7 20L17 20C18.6569 20 20 18.6569 20 17L20 16"
+                                        stroke="#757575"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                                <span>Upload Media</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    {/* Form Block */}
+                    <div className="addmemory-form-container">
+                        <div className="addmemory-form-group">
+                            <label className="addmemory-label">Type</label>
+                            <div className="addmemory-radio-group">
+                                <label className="addmemory-radio-label">
+                                    <input
+                                        type="radio"
+                                        name="memoryType"
+                                        value="Photo"
+                                        checked={selectedType === "Photo"}
+                                        onChange={handleTypeChange}
+                                    />
+                                    <span className="addmemory-radio-custom"></span>
+                                    Photo
+                                </label>
+                                <label className="addmemory-radio-label">
+                                    <input
+                                        type="radio"
+                                        name="memoryType"
+                                        value="Video"
+                                        checked={selectedType === "Video"}
+                                        onChange={handleTypeChange}
+                                    />
+                                    <span className="addmemory-radio-custom"></span>
+                                    Video
+                                </label>
+                                <label className="addmemory-radio-label">
+                                    <input
+                                        type="radio"
+                                        name="memoryType"
+                                        value="Text"
+                                        checked={selectedType === "Text"}
+                                        onChange={handleTypeChange}
+                                    />
+                                    <span className="addmemory-radio-custom"></span>
+                                    Text
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="addmemory-form-group">
+                            <label className="addmemory-label">Title</label>
+                            <input type="text" className="addmemory-input" />
+                        </div>
+
+                        <div className="addmemory-form-group">
+                            <label className="addmemory-label">Caption</label>
+                            <textarea className="addmemory-textarea"></textarea>
+                        </div>
+
+                        <div className="addmemory-tags-actions-row">
+                            <div className="addmemory-form-group addmemory-tags-group">
+                                <label className="addmemory-label">Tags</label>
+                                <input
+                                    type="text"
+                                    className="addmemory-input"
+                                />
+                            </div>
+
+                            <div className="addmemory-actions">
+                                <button className="addmemory-btn-add">
+                                    Add
+                                </button>
+                                <button
+                                    className="addmemory-btn-cancel"
+                                    onClick={() =>
+                                        navigate("/api/dashboard/memory-bank")
+                                    }
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div className="addmemory-input-group">
-              <label>Caption</label>
-              <textarea></textarea>
-            </div>
-
-            <div className="addmemory-input-group">
-              <label>Date (Optional)</label>
-              <input type="date" />
-            </div>
-
-            <div className="addmemory-buttons">
-              <button className="addmemory-save-btn">Save</button>
-              <button className="addmemory-cancel-btn">Cancel</button>
-            </div>
-
-          </div>
-
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default AddMemory;
