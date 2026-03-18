@@ -1,157 +1,369 @@
+:root {
+    --primary-color: #5EA5C0;
+}
+
 .memorybank {
-  padding: 30px;
+    padding: 10px 0 30px 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .memorybank .memorybank-filter-grid-container {
-  background: #fff; 
-  padding: 20px;
-  border-radius: 15px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
 }
 
 .memorybank .memorybank-filter-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 10px 20px; 
-  margin-bottom: 40px;
-  border-radius: 30px; 
-  width: fit-content;
-  background-color: #F1F6F9;
-  margin: 10px auto 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 8px 15px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    width: fit-content;
+    background-color: #F1F6F9;
+    margin: 10px auto 30px;
 }
 
 .memorybank .memorybank-memory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(219px, 1fr));
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
 }
 
 .memorybank .memorybank-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .memorybank .memorybank-header h1 {
-  font-size: 30px;
-  font-weight: 600;
-  color: #151D48;
-  line-height: 140%;
+    margin-top: 0;
+    font-size: 30px;
+    font-weight: 600;
+    color: #151D48;
+    line-height: 140%;
 }
 
 .memorybank .memorybank-search-box {
-  position: relative;
-  min-width: 200px;
+    position: relative;
+    min-width: 200px;
 }
 
-.memorybank .memorybank-search-add{
-  display: flex;
-  gap: 1rem;
+.memorybank .memorybank-search-add {
+    display: flex;
+    gap: 1rem;
 }
 
 .memorybank .memorybank-search-box input {
-  width: 220px;
-  padding: 10px 15px;
-  padding-right: 45px;
-  border: 1px solid #d0d7de;
-  border-radius: 8px;
-  outline: none;
+    width: 220px;
+    padding: 10px 15px;
+    padding-right: 45px;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    outline: none;
 }
 
 .memorybank .memorybank-search-box input::placeholder {
-  color: #999;
+    color: #999;
 }
 
 .memorybank .memorybank-search-box input:focus {
-  border-color: #82c1da;
+    border-color: #82c1da;
 }
 
 .memorybank .memorybank-search-icon {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-51%);
-  color: #999;
-  pointer-events: none;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-51%);
+    color: #999;
+    pointer-events: none;
 }
 
 .memorybank .memorybank-add-btn {
-  background-color: #ACD4E3;
-  color: #FFFFFF;
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
-  cursor: pointer;
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.memorybank .memorybank-add-btn:hover{
-  background: #82c1da;
+.memorybank .memorybank-add-btn:hover {
+    background: #4a869e;
 }
 
 .memorybank .memorybank-filter-buttons button {
-  padding: 12px 40px;
-  border-radius: 20px;
-  background-color: #F1F6F9;
-  cursor: pointer;
-  font-weight: 550;
-  font-size: 17px;
-  border: none;
+    padding: 8px 25px;
+    border-radius: 20px;
+    background-color: #F1F6F9;
+    cursor: pointer;
+    font-weight: 550;
+    font-size: 15px;
+    border: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.memorybank .memorybank-filter-buttons button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.memorybank .memorybank-filter-buttons button:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transition: 0s;
 }
 
 .memorybank .memorybank-filter-buttons button.active {
-  background-color: #5EA5C0;
-  color: white;
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(94, 165, 192, 0.3);
+}
+
+/* Grid animation for when items mount/unmount */
+.memorybank .memorybank-memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .memorybank .memorybank-card {
-  border: 1px solid #5EA5C0;
-  border-radius: 15px;
-  padding: 8px;
-  text-align: center;
-  background: white;
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 0;
+    text-align: center;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 263px;
+    animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.memorybank .memorybank-card.media-card-layout {
+    padding: 0;
 }
 
 .memorybank .memorybank-card img {
-  width: 100%;
-  border-radius: 15px;
-  margin-bottom: 10px;
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background-color: #f8f9fa;
 }
 
 .memorybank .memorybank-video-placeholder {
-  width: 100%;
-  height: 150px;
-  background: #e0e0e0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;
-  border-radius: 15px;
-  margin-bottom: 10px;
+    width: 100%;
+    height: 160px;
+    background: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    margin-bottom: 0;
 }
 
-.memorybank .memorybank-text-card {
-  background: #f5f5f5;
-  padding: 10px;
-  border-radius: 15px;
-  min-height: 120px;
-  margin-bottom: 10px;
+.memorybank .memorybank-card.text-card-layout {
+    padding: 0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.memorybank .memorybank-text-full {
+    background: white;
+    padding: 20px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.memorybank .memorybank-text-full .memorybank-date-top {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    color: #a0a0a0;
+    text-align: right;
+}
+
+.memorybank .memorybank-text-full h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.memorybank .memorybank-text-full .memorybank-desc {
+    color: #999;
+    line-height: 1.8;
+    font-size: 14px;
+    margin: 0;
+}
+
+.memorybank .memorybank-info {
+    padding: 10px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
 }
 
 .memorybank .memorybank-info h4 {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 5px 0;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 5px 0;
+    color: #000;
 }
 
 .memorybank .memorybank-info p {
-  font-size: 14px;
-  color: #555;
+    font-size: 14px;
+    color: #999;
+    margin: 0;
 }
 
 .memorybank .memorybank-date {
-  font-size: 12px;
-  color: #888;
+    font-size: 13px;
+    color: #a0a0a0;
+    margin-top: 5px;
+}
+
+/* --- Responsive Media Queries --- */
+
+@media (max-width: 900px) {
+    .memorybank {
+        padding: 10px 20px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .memorybank .memorybank-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .memorybank .memorybank-search-add {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .memorybank .memorybank-search-box {
+        flex-grow: 1;
+    }
+
+    .memorybank .memorybank-search-box input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .memorybank .memorybank-filter-buttons {
+        flex-wrap: wrap;
+        gap: 10px;
+        border-radius: 15px;
+    }
+
+    .memorybank .memorybank-filter-grid-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .memorybank {
+        padding: 10px 15px 15px;
+    }
+
+    .memorybank .memorybank-header h1 {
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .memorybank .memorybank-search-add {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .memorybank .memorybank-add-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .memorybank .memorybank-filter-buttons {
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .memorybank .memorybank-filter-buttons button {
+        flex: 1 1 40%;
+        padding: 8px 5px;
+        font-size: 13px;
+    }
+
+    .memorybank .memorybank-memory-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .memorybank .memorybank-card {
+        height: 240px;
+    }
+
+    .memorybank .memorybank-card img,
+    .memorybank .memorybank-video-placeholder {
+        height: 130px;
+    }
+
+    .memorybank .memorybank-text-full {
+        padding: 15px;
+    }
+
+    .memorybank .memorybank-text-full h3 {
+        font-size: 16px;
+    }
+
+    .memorybank .memorybank-text-full .memorybank-desc {
+        font-size: 13px;
+    }
+
+    .memorybank .memorybank-info h4 {
+        font-size: 15px;
+    }
+
+    .memorybank .memorybank-info p {
+        font-size: 12px;
+    }
 }
