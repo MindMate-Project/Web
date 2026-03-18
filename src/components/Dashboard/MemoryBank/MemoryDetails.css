@@ -1,0 +1,444 @@
+.memorybank .memory-details-container {
+    padding: 10px 0 30px 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    color: #151D48;
+}
+
+.memorybank .memory-details-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #5EA5C0;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+    text-transform: capitalize;
+}
+
+.memorybank .memory-details-back-link:hover {
+    color: #4a8ca6;
+}
+
+.memorybank .memory-details-back-link svg {
+    transition: transform 0.3s ease;
+}
+
+.memorybank .memory-details-back-link:hover svg {
+    transform: translateX(-3px);
+}
+
+.memorybank .memory-details-page-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2F3B59;
+    margin: 0 0 30px 0;
+}
+
+.memorybank .memory-details-content-wrapper {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Base row layout */
+.memorybank .memory-details-row,
+.memorybank .memory-details-media-row,
+.memorybank .memory-details-actions-row {
+    display: flex;
+    align-items: stretch;
+    /* So label can center if we want, or align flex-start */
+    gap: 20px;
+}
+
+.memorybank .memory-details-row {
+    align-items: flex-start;
+}
+
+.memorybank .memory-details-actions-row {
+    margin-top: 10px;
+}
+
+/* Left label alignment */
+.memorybank .memory-details-label,
+.memorybank .memory-details-label-space {
+    width: 80px;
+    flex-shrink: 0;
+    font-weight: 600;
+    color: #2F3B59;
+    font-size: 15px;
+    padding-top: 15px;
+    /* Aligns with padding of right box text */
+}
+
+/* Right value box */
+.memorybank .memory-details-value-box,
+.memorybank .memory-details-media-box {
+    flex-grow: 1;
+    position: relative;
+    border-radius: 12px;
+}
+
+.memorybank .memory-details-value-box {
+    background-color: #FFFFFF;
+    padding: 15px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.memorybank .memory-details-value-box p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555555;
+    word-break: break-word;
+}
+
+.memorybank .memory-details-tags {
+    color: #5EA5C0 !important;
+}
+
+/* Media (Image/Video) */
+.memorybank .memory-details-media-box {
+    overflow: hidden;
+    background-color: #e6e6e6;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* Optional shadow */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.memorybank .memory-details-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #f0f0f0;
+}
+
+.memorybank .memory-details-video-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Date Badges */
+.memorybank .memory-details-date-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #5EA5C0;
+    color: #FFFFFF;
+    padding: 8px 20px;
+    border-bottom-left-radius: 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Inline badge shown inside Title box when there's no media */
+.memorybank .memory-details-date-badge-inline {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #5EA5C0;
+    color: #FFFFFF;
+    padding: 6px 15px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Action Buttons */
+.memorybank .memory-details-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.memorybank .memory-details-buttons button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #FFFFFF;
+    transition: background-color 0.2s;
+}
+
+.memorybank .memory-details-btn-edit {
+    background-color: #5EA5C0;
+}
+
+.memorybank .memory-details-btn-edit:hover {
+    background-color: #4A869E;
+}
+
+.memorybank .memory-details-btn-delete {
+    background-color: #E74C3C;
+}
+
+.memorybank .memory-details-btn-delete:hover {
+    background-color: #C0392B;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+
+    .memorybank .memory-details-row,
+    .memorybank .memory-details-media-row,
+    .memorybank .memory-details-actions-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .memorybank .memory-details-label,
+    .memorybank .memory-details-label-space {
+        padding-top: 0;
+        width: 100%;
+        margin-left: 5px;
+    }
+
+    .memorybank .memory-details-label-space {
+        display: none;
+    }
+
+    .memorybank .memory-details-media-box {
+        height: 250px;
+        width: 100%;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .memorybank .memory-details-container {
+        padding: 5px 15px 15px 15px;
+    }
+
+    .memorybank .memory-details-page-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .memorybank .memory-details-media-box {
+        height: 200px;
+    }
+
+    .memorybank .memory-details-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .memorybank .memory-details-btn-edit,
+    .memorybank .memory-details-btn-delete {
+        width: 100%;
+        padding: 12px;
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+/* Modals */
+.memorybank-delete-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(21, 29, 72, 0.4) !important;
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.memorybank-delete-modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e5e5;
+    position: relative;
+    outline: none;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.memorybank-delete-modal-content h2 {
+    color: #151D48;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.memorybank-delete-modal-content p {
+    color: #6C7278;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.memorybank-delete-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.memorybank-delete-modal-actions button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    flex: unset;
+    min-width: 100px;
+}
+
+.memorybank-delete-cancel-btn {
+    background-color: white;
+    color: #151D48;
+    border: 1px solid #151D48 !important;
+}
+
+.memorybank-delete-cancel-btn:hover {
+    background-color: #f8f9fa;
+}
+
+.memorybank-delete-confirm-btn {
+    background-color: #EA4335;
+    color: white;
+}
+
+.memorybank-delete-confirm-btn:hover {
+    background-color: #d93a2c;
+}
+
+/* Success Modal Details */
+.memorybank-success-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.memorybank-success-icon svg {
+    width: 60px;
+    height: 60px;
+}
+
+.memorybank-delete-modal-content.success-modal h2 {
+    color: #4CAF50;
+}
+
+.memorybank-success-btn {
+    background-color: #5EA5C0 !important;
+    color: white !important;
+}
+
+.memorybank-success-btn:hover {
+    background-color: #4a8ca6 !important;
+}
+
+/* Modal Media Queries */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .memorybank-delete-modal-content {
+        padding: 28px;
+        width: 85%;
+        max-width: 380px;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .memorybank-delete-modal-content {
+        padding: 24px;
+        width: 90%;
+        max-width: 340px;
+    }
+
+    .memorybank-delete-modal-content h2 {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .memorybank-delete-modal-content p {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+
+    .memorybank-delete-modal-actions {
+        gap: 12px;
+    }
+
+    .memorybank-delete-modal-actions button {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .memorybank-delete-modal-content {
+        padding: 20px;
+        width: calc(100% - 40px);
+        /* 20px margin on each side */
+        max-width: 300px;
+    }
+
+    .memorybank-delete-modal-content h2 {
+        font-size: 20px;
+    }
+
+    .memorybank-delete-modal-content p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .memorybank-delete-modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .memorybank-delete-modal-actions button {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+/* Extra Small Mobile (max-width: 360px) */
+@media (max-width: 360px) {
+    .memorybank-delete-modal-content {
+        padding: 16px;
+        width: calc(100% - 24px);
+        /* 12px margin on each side */
+    }
+
+    .memorybank-delete-modal-content h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .memorybank-delete-modal-content p {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+
+    .memorybank-delete-modal-actions button {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
