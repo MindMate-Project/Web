@@ -22,7 +22,7 @@ export default function MemoryDetails() {
     }
 
     const isMedia = mem.type === "photo" || mem.type === "video";
-    const dateText = mem.date || "No Date";
+    // const dateText = mem.date || "No Date";
 
     const handleDeleteClick = () => {
         setIsDeleteModalOpen(true);
