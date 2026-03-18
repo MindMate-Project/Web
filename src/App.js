@@ -27,6 +27,8 @@ import AppointmentEdit from "./components/Dashboard/Reminders/AppointmentEdit";
 import MedicineEdit from "./components/Dashboard/Reminders/MedicineEdit";
 import AddMedicine from "./components/Dashboard/Reminders/AddMedicine";
 import AddMemo from "./components/Dashboard/MemoryBank/AddMemo";
+import MemoryDetails from "./components/Dashboard/MemoryBank/MemoryDetails";
+import EditMemo from "./components/Dashboard/MemoryBank/EditMemo";
 import MedicineDetails from "./components/Dashboard/Reminders/MedicineDetails";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import ResetCodeRoute from "./components/utils/ResetCodeRoute";
@@ -83,6 +85,8 @@ function App() {
               <Route path="memory-bank">
                 <Route index element={<MemoryBank/>}/>
                 <Route path="add-new-memo" element={<AddMemo />} />
+                <Route path=":id" element={<MemoryDetails />} />
+                <Route path=":id/edit" element={<EditMemo />} />
               </Route>
           </Route>
         </Route>
