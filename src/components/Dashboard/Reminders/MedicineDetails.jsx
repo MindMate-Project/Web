@@ -1,165 +1,151 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MedicineDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getRemindersByPatient,
+  deleteReminder,
+} from "../../../redux/slices/reminderSlice";
+import DeleteReminderModal from "./deleteModal";
 
 export default function MedicineDetails() {
-
   const navigate = useNavigate();
   const { id } = useParams();
-  const handleBack = () => {
-        navigate(`/api/dashboard/reminders`);
-  };
-  const medicineEdit = () => {
+  const dispatch = useDispatch();
+  const patientId = localStorage.getItem("selectedPatientId");
+
+  const reminders = useSelector(
+    (state) => state.reminderReducer?.reminders || []
+  );
+
+  const [medicine, setMedicine] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    if (patientId) dispatch(getRemindersByPatient(patientId));
+  }, [dispatch, patientId]);
+
+  useEffect(() => {
+    const med = reminders.find(
+      (r) => r._id === id && r.type === "medication"
+    );
+    setMedicine(med);
+  }, [reminders, id]);
+
+  const handleBack = () => navigate("/api/dashboard/reminders");
+
+  const medicineEdit = () =>
     navigate(`/api/dashboard/reminders/medicine/${id}/edit`);
+
+  const handleDeleteClick = () => setIsDeleteModalOpen(true);
+
+  const confirmDelete = async () => {
+    if (!medicine) return;
+
+    setIsDeleting(true);
+    try {
+      await dispatch(deleteReminder(medicine._id)).unwrap();
+      setIsDeleteModalOpen(false);
+      navigate("/api/dashboard/reminders");
+    } catch (err) {
+      console.error(err);
+    }
+    setIsDeleting(false);
   };
 
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
+
+  if (!medicine) return <p>Loading...</p>;
 
   return (
-    
     <div className="medicine-details-page">
 
       <button className="back-button" onClick={handleBack} type="button">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M19 12H5M5 12L12 19M5 12L12 5"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-                Back To Reminders
-        </button>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M19 12H5M5 12L12 19M5 12L12 5"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+        </svg>
+        Back To Reminders
+      </button>
 
-      <h2 className="medicine-details-title">
-        Medicine Information
-      </h2>
+      <h2 className="medicine-details-title">Medicine Information</h2>
 
       <div className="medicine-details-card">
 
-
         {/* Drug Name */}
         <div className="medicine-details-row">
-
-          <div className="medicine-details-label">
-            Drug Name
-          </div>
-
+          <div className="medicine-details-label">Drug Name</div>
           <div className="medicine-details-content">
-
             <div className="medicine-details-box medicine-details-full">
-
               <span className="medicine-details-text">
-                Metformin
+                {medicine.medicineName}
               </span>
-
             </div>
-
           </div>
-
         </div>
-
 
         {/* Dosage */}
         <div className="medicine-details-row">
-
-          <div className="medicine-details-label">
-            Dosage
-          </div>
-
+          <div className="medicine-details-label">Dosage</div>
           <div className="medicine-details-content medicine-details-two">
 
-
-            {/* Amount */}
             <div className="medicine-details-box medicine-details-vertical">
-
-              <span className="medicine-details-subtitle">
-                Amount
-              </span>
-
+              <span className="medicine-details-subtitle">Amount</span>
               <div className="medicine-details-value">
-
-                <svg
-                viewBox="-0.72 -0.72 25.44 25.44"
-                className="medicine-details-icon"
-                >
-                <path
-                d="M19.54,4.46a5,5,0,0,0-7.08,0l-8,8a5,5,0,0,0,7.08,7.08l8-8a5,5,0,0,0,0-7.08Z"
-                fill="#ffffff"
-                stroke="#2ca9bc"
-                strokeWidth="1.5"
-                />
-                <path
-                d="M15.54,15.54l-4,4a5,5,0,0,1-7.08-7.08l4-4Z"
-                fill="#2ca9bc"
-                />
+                <svg viewBox="-0.72 -0.72 25.44 25.44" className="medicine-details-icon">
+                  <path
+                    d="M19.54,4.46a5,5,0,0,0-7.08,0l-8,8a5,5,0,0,0,7.08,7.08l8-8a5,5,0,0,0,0-7.08Z"
+                    fill="#ffffff"
+                    stroke="#2ca9bc"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M15.54,15.54l-4,4a5,5,0,0,1-7.08-7.08l4-4Z"
+                    fill="#2ca9bc"
+                  />
                 </svg>
                 <span className="medicine-details-text">
-                  2 Capsule
+                  {medicine.dosage}
                 </span>
-
               </div>
-
             </div>
 
-
-            {/* Type */}
             <div className="medicine-details-box medicine-details-vertical">
-
-              <span className="medicine-details-subtitle">
-                Type
-              </span>
-
+              <span className="medicine-details-subtitle">Type</span>
               <div className="medicine-details-value">
-
-                <svg
-                viewBox="-0.72 -0.72 25.44 25.44"
-                className="medicine-details-icon"
-                >
-                <path
-                d="M19.54,4.46a5,5,0,0,0-7.08,0l-8,8a5,5,0,0,0,7.08,7.08l8-8a5,5,0,0,0,0-7.08Z"
-                fill="#ffffff"
-                stroke="#2ca9bc"
-                strokeWidth="1.5"
-                />
-                <path
-                d="M15.54,15.54l-4,4a5,5,0,0,1-7.08-7.08l4-4Z"
-                fill="#2ca9bc"
-                />
+                <svg viewBox="-0.72 -0.72 25.44 25.44" className="medicine-details-icon">
+                  <path
+                    d="M19.54,4.46a5,5,0,0,0-7.08,0l-8,8a5,5,0,0,0,7.08,7.08l8-8a5,5,0,0,0,0-7.08Z"
+                    fill="#ffffff"
+                    stroke="#2ca9bc"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M15.54,15.54l-4,4a5,5,0,0,1-7.08-7.08l4-4Z"
+                    fill="#2ca9bc"
+                  />
                 </svg>
-
                 <span className="medicine-details-text">
-                  Capsule
+                  {medicine.form}
                 </span>
-
               </div>
-
             </div>
 
           </div>
-
         </div>
-
 
         {/* Treatment Period */}
         <div className="medicine-details-row">
-
-          <div className="medicine-details-label">
-            Treatment Period
-          </div>
-
+          <div className="medicine-details-label">Treatment Period</div>
           <div className="medicine-details-content medicine-details-two">
 
-
-            {/* Start Date */}
             <div className="medicine-details-box medicine-details-vertical">
-
-              <span className="medicine-details-subtitle">
-                Start Date
-              </span>
-
+              <span className="medicine-details-subtitle">Start Date</span>
               <div className="medicine-details-value">
-
                 <svg
                   viewBox="0 0 24 24"
                   stroke="#5EA5C0"
@@ -172,30 +158,20 @@ export default function MedicineDetails() {
                   <line x1="8" y1="2" x2="8" y2="6"/>
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
-
                 <span className="medicine-details-text">
-                  25 July 2026
+                  {new Date(medicine.startDate).toLocaleDateString()}
                 </span>
-
               </div>
-
             </div>
 
-
-            {/* End Date */}
             <div className="medicine-details-box medicine-details-vertical">
-
-              <span className="medicine-details-subtitle">
-                End Date
-              </span>
-
+              <span className="medicine-details-subtitle">End Date</span>
               <div className="medicine-details-value">
-
                 <svg
                   viewBox="0 0 24 24"
                   stroke="#5EA5C0"
-                  fill="none"
                   strokeWidth="1.5"
+                  fill="none"
                   className="medicine-details-icon"
                 >
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -203,37 +179,21 @@ export default function MedicineDetails() {
                   <line x1="8" y1="2" x2="8" y2="6"/>
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
-
                 <span className="medicine-details-text">
-                  25 July 2026
+                  {new Date(medicine.endDate).toLocaleDateString()}
                 </span>
-
               </div>
-
             </div>
 
           </div>
-
         </div>
-
 
         {/* Reminder Time */}
         <div className="medicine-details-row">
-
-          <div className="medicine-details-label">
-            Reminder Time
-          </div>
-
+          <div className="medicine-details-label">Reminder Time</div>
           <div className="medicine-details-content">
-
-            <div className="medicine-details-box medicine-details-vertical medicine-details-full">
-
-              <span className="medicine-details-subtitle">
-                Time
-              </span>
-
+            <div className="medicine-details-box medicine-details-full">
               <div className="medicine-details-value">
-
                 <svg
                   viewBox="0 0 24 24"
                   stroke="#5EA5C0"
@@ -244,37 +204,23 @@ export default function MedicineDetails() {
                   <circle cx="12" cy="12" r="10"/>
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
-
                 <span className="medicine-details-text">
-                  10:00 AM
+                  {new Date(medicine.scheduledTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </span>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
 
         {/* Dosage Schedule */}
         <div className="medicine-details-row">
-
-          <div className="medicine-details-label">
-            Dosage Schedule
-          </div>
-
+          <div className="medicine-details-label">Dosage Schedule</div>
           <div className="medicine-details-content medicine-details-two">
 
-
-            {/* Frequency */}
-            <div className="medicine-details-box medicine-details-vertical">
-
-              <span className="medicine-details-subtitle">
-                Frequency
-              </span>
-
+            <div className="medicine-details-box">
               <div className="medicine-details-value">
 
                 <svg
@@ -289,22 +235,12 @@ export default function MedicineDetails() {
                 </svg>
 
                 <span className="medicine-details-text">
-                  Daily
+                  {medicine.frequency}
                 </span>
-
               </div>
-
             </div>
 
-
-            {/* Time Per Day */}
-            <div className="medicine-details-box medicine-details-vertical">
-
-
-              <span className="medicine-details-subtitle">
-                Time Per Day
-              </span>
-
+            <div className="medicine-details-box">
               <div className="medicine-details-value">
 
                 <svg
@@ -319,32 +255,39 @@ export default function MedicineDetails() {
                 </svg>
 
                 <span className="medicine-details-text">
-                  1
+                  {medicine.timesPerDay}
                 </span>
-
               </div>
-
             </div>
 
           </div>
-
         </div>
 
-
-        {/* Buttons */}
         <div className="medicine-details-actions">
-
-          <button className="medicine-details-btn medicine-details-edit " onClick= {medicineEdit}>
+          <button
+            className="medicine-details-btn medicine-details-edit"
+            onClick={medicineEdit}
+          >
             Edit
           </button>
 
-          <button className="medicine-details-btn medicine-details-delete">
+          <button
+            className="medicine-details-btn medicine-details-delete"
+            onClick={handleDeleteClick}
+          >
             Delete
           </button>
-
         </div>
 
       </div>
+
+      <DeleteReminderModal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        isDeleting={isDeleting}
+      />
+
     </div>
   );
 }
