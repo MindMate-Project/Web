@@ -1,12 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddMedicine.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createReminder } from "../../../redux/slices/reminderSlice";
 
 const AddMedicine = () => {
   const navigate = useNavigate();
-  const handleBack = () => {
-    navigate("/api/dashboard/reminders");
+  const dispatch = useDispatch();
+
+  const patientId = localStorage.getItem("selectedPatientId");
+  const userString = localStorage.getItem("user");
+  const user = JSON.parse(userString);
+  const caregiverId = user._id;
+
+  const [form, setForm] = useState({
+    medicineName: "",
+    dosage: "",
+    scheduledTime: "",
+    timesPerDay: 1,
+    form: "tablet",
+    frequency: "once",
+    startDay: "",
+    startMonth: "",
+    startYear: "",
+    endDay: "",
+    endMonth: "",
+    endYear: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
   };
+
+  const handleSave = async () => {
+    const requiredFields = ["medicineName", "dosage", "scheduledTime", "form", "frequency", "startDay","startMonth","startYear","endDay","endMonth","endYear"];
+    const emptyFields = requiredFields.filter(f => !form[f] || form[f].toString().trim() === "");
+
+    if (emptyFields.length > 0) {
+      alert(`Please fill all required fields: ${emptyFields.join(", ")}`);
+      return;
+    }
+
+    if (!patientId || !caregiverId) {
+      alert("Patient or Caregiver ID is missing");
+      return;
+    }
+
+    try {
+      // convert treatment period inputs to ISO string
+      const startDateStr = `${form.startYear}-${form.startMonth.padStart(2,'0')}-${form.startDay.padStart(2,'0')}T${form.scheduledTime}:00`;
+      const endDateStr = `${form.endYear}-${form.endMonth.padStart(2,'0')}-${form.endDay.padStart(2,'0')}T${form.scheduledTime}:00`;
+
+      const startDate = new Date(startDateStr).toISOString();
+      const endDate = new Date(endDateStr).toISOString();
+
+      const payload = {
+        type: "medication",
+        patient: patientId,
+        caregiver: caregiverId,
+        medicineName: form.medicineName,
+        dosage: form.dosage,
+        timesPerDay: Number(form.timesPerDay),
+        form: form.form,
+        frequency: form.frequency.toLowerCase(),
+        scheduledTime: startDate,
+        startDate: startDate,
+        endDate: endDate,
+      };
+
+      await dispatch(createReminder(payload));
+      navigate("/api/dashboard/reminders");
+    } catch (err) {
+      console.error(err);
+      alert("Error saving medicine");
+    }
+  };
+
+  const handleBack = () => navigate("/api/dashboard/reminders");
 
   return (
     <div className="add-medicine-container">
@@ -27,74 +98,78 @@ const AddMedicine = () => {
 
       <div className="medicine-card">
         <div className="form-section">
-          {/* Row 1 */}
           <div className="form-group">
             <label>Drug Name *</label>
-            <input type="text" placeholder="Amlodipine" />
+            <input type="text" name="medicineName" value={form.medicineName} onChange={handleChange} />
           </div>
+
           <div className="form-group">
             <label>Dosage *</label>
-            <input type="text" placeholder="1 tablet" />
+            <input type="text" name="dosage" value={form.dosage} onChange={handleChange} />
           </div>
 
-          {/* Row 2 */}
           <div className="form-group">
             <label>Time *</label>
-            <input type="time" defaultValue="10:00" />
-          </div>
-          <div className="form-group">
-            <label>Time Per Day <span className="time-optional">(optional)</span></label>
-            <input type="number" min="1" defaultValue="1" />
+            <input type="time" name="scheduledTime" value={form.scheduledTime} onChange={handleChange} />
           </div>
 
-          {/* Row 3: Treatment Period */}
+          <div className="form-group">
+            <label>Times Per Day</label>
+            <input type="number" min="1" name="timesPerDay" value={form.timesPerDay} onChange={handleChange} />
+          </div>
+
+          {/* Treatment Period */}
           <div className="form-group full-width">
             <label>Treatment Period *</label>
             <div className="treatment-period">
               <div className="date-inputs-group">
                 <span className="date-label">From</span>
                 <div className="date-inputs">
-                  <input type="text" placeholder="DD" maxLength="2" />
-                  <input type="text" placeholder="MM" maxLength="2" />
-                  <input type="text" placeholder="YY" maxLength="2" />
+                  <input type="text" name="startDay" placeholder="DD" maxLength="2" value={form.startDay} onChange={handleChange} />
+                  <input type="text" name="startMonth" placeholder="MM" maxLength="2" value={form.startMonth} onChange={handleChange} />
+                  <input type="text" name="startYear" placeholder="YY" maxLength="4" value={form.startYear} onChange={handleChange} />
                 </div>
               </div>
               <div className="date-inputs-group">
                 <span className="date-label">To</span>
                 <div className="date-inputs">
-                  <input type="text" placeholder="DD" maxLength="2" />
-                  <input type="text" placeholder="MM" maxLength="2" />
-                  <input type="text" placeholder="YY" maxLength="2" />
+                  <input type="text" name="endDay" placeholder="DD" maxLength="2" value={form.endDay} onChange={handleChange} />
+                  <input type="text" name="endMonth" placeholder="MM" maxLength="2" value={form.endMonth} onChange={handleChange} />
+                  <input type="text" name="endYear" placeholder="YY" maxLength="4" value={form.endYear} onChange={handleChange} />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Row 4: Type */}
+          {/* Type */}
           <div className="form-group full-width">
             <label>Type *</label>
             <div className="radio-group">
-              <label><input type="radio" name="type" /> Tablet</label>
-              <label><input type="radio" name="type" /> Capsule</label>
-              <label><input type="radio" name="type" /> Syrup</label>
-              <label><input type="radio" name="type" /> Injection</label>
+              {["tablet","capsule","syrup","injection"].map(f => (
+                <label key={f}>
+                  <input type="radio" name="form" value={f} checked={form.form===f} onChange={handleChange} /> {f.charAt(0).toUpperCase() + f.slice(1)}
+                </label>
+              ))}
             </div>
           </div>
 
-          {/* Row 5: Frequency */}
+          {/* Frequency */}
           <div className="form-group full-width">
             <label>Frequency *</label>
             <div className="radio-group">
-              <label><input type="radio" name="frequency" /> Once</label>
-              <label><input type="radio" name="frequency" /> Daily</label>
-              <label><input type="radio" name="frequency" /> Weekly</label>
+              {["once","daily","weekly"].map(f => (
+                <label key={f}>
+                  <input type="radio" name="frequency" value={f} checked={form.frequency===f} onChange={handleChange} /> {f.charAt(0).toUpperCase() + f.slice(1)}
+                </label>
+              ))}
             </div>
           </div>
+
         </div>
 
         <div className="form-actions">
-          <button className="save-btn">Add</button>
-          <button className="cancel-btn">Cancel</button>
+          <button className="save-btn" onClick={handleSave}>Add</button>
+          <button className="cancel-btn" onClick={handleBack}>Cancel</button>
         </div>
       </div>
     </div>
