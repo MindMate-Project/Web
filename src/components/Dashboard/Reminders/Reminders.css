@@ -10,13 +10,11 @@
 }
 
 /* SECTION */
-
 .reminders-page .reminder-section {
   margin-bottom: 35px;
 }
 
 /* HEADER ABOVE CARD */
-
 .reminders-page .section-header {
   display: flex;
   justify-content: space-between;
@@ -31,21 +29,17 @@
 }
 
 /* CARD */
-
 .reminders-page .reminder-card {
   background: #FFFFFF;
   border-radius: 10px;
-  /* padding:20px; */
   border: 1px solid #eef2f6;
 }
 
 /* BUTTON */
-
 .reminders-page .btn-add {
   border: 1px solid #C3D3E2;
   padding: 15px 16px;
   border-radius: 8px;
-  /* background:white; */
   color: #14274E;
   cursor: pointer;
   font-weight: 500;
@@ -56,22 +50,20 @@
 }
 
 /* TABLE CONTAINER */
-
 .reminders-page .table-container {
   width: 100%;
   overflow-x: auto;
 }
 
 /* TABLE */
-
 .reminders-page .reminder-table {
   width: 100%;
   border-collapse: collapse;
   min-width: 968px;
+  
 }
 
 /* HEADER */
-
 .reminders-page .reminder-table thead tr {
   border-bottom: 2px solid #a7d3e5;
 }
@@ -84,10 +76,42 @@
   line-height: 20px;
   letter-spacing: 0.1px;
   color: #5EA5C0;
+  background: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* BODY SCROLLING */
+.reminders-page .reminder-table tbody {
+  display: block; /* make tbody scrollable */
+  max-height: calc((23px + 20px) * 5); /* limit to 5 rows */
+  overflow-y: auto;
+}
+
+.reminders-page .reminder-table thead,
+.reminders-page .reminder-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* preserve column widths */
+}
+
+/* SCROLLBAR STYLE */
+.reminders-page .reminder-table tbody::-webkit-scrollbar {
+  width: 8px;
+}
+
+.reminders-page .reminder-table tbody::-webkit-scrollbar-thumb {
+  background-color: #a7d3e5; /* match divider line */
+  border-radius: 4px;
+}
+
+.reminders-page .reminder-table tbody {
+  scrollbar-color: #a7d3e5 transparent; /* Firefox */
+  scrollbar-width: thin;
 }
 
 /* ROWS */
-
 .reminders-page .reminder-table td {
   padding: 16px 12px;
   font-size: 14px;
@@ -95,20 +119,17 @@
 }
 
 /* ROW SEPARATORS */
-
 .reminders-page .reminder-table tbody tr {
   border-bottom: 1px solid #e3e5e6;
 }
 
 /* HOVER */
-
 .reminders-page .reminder-table tbody tr:hover {
   background: #fafbfd;
   cursor: pointer;
 }
 
 /* TIME BADGES */
-
 .reminders-page .time-badge {
   padding: 4px 10px;
   border-radius: 14px;
@@ -117,23 +138,19 @@
 }
 
 /* GREEN BADGE */
-
 .reminders-page .time-badge.appointment {
   background: #d9f7e8;
   color: #2e7d32;
 }
 
 /* ORANGE BADGE */
-
 .reminders-page .time-badge.medication {
   background: #ffe5d1;
   color: #d97706;
 }
 
 /* RESPONSIVE */
-
 @media (max-width: 768px) {
-
   .reminders-page {
     padding: 20px;
   }
@@ -145,5 +162,4 @@
   .reminders-page .reminder-card {
     padding: 16px;
   }
-
 }

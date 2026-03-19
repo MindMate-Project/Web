@@ -1,0 +1,95 @@
+/* OVERLAY */
+.delete-reminder-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* MODAL BOX */
+.delete-reminder-modal {
+  background: #fff;
+  padding: 35px 30px;
+  border-radius: 16px;
+  width: 420px;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* ICON */
+.modal-icon {
+  margin-bottom: 20px;
+}
+
+/* TITLE */
+.delete-reminder-modal h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1E1E1E;
+  margin-bottom: 10px;
+}
+
+/* TEXT */
+.delete-reminder-modal p {
+  font-size: 13px;
+  color: #8A8F98;
+  margin-bottom: 25px;
+}
+
+/* ACTIONS */
+.delete-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* DELETE BUTTON */
+.confirm-btn {
+  background: #E74C3C;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* CANCEL BUTTON */
+.cancel-btn {
+  background: #fff;
+  border: 1px solid #C7D3E3;
+  color: #14274E;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* SUCCESS CIRCLE */
+.success-circle {
+  width: 80px;
+  height: 80px;
+  background: #57B26A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+/* CONTINUE BUTTON */
+.continue-btn {
+  background: #fff;
+  border: 1px solid #C7D3E3;
+  color: #14274E;
+  padding: 12px 35px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}

@@ -1,0 +1,56 @@
+/* OVERLAY */
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* MODAL BOX */
+.success-modal {
+  background: #fff;
+  padding: 35px;
+  border-radius: 16px;
+  width: 350px;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* SUCCESS ICON */
+.success-circle {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+/* TEXT */
+.success-modal p {
+  font-size: 20px;
+  color: #1E1E1E;
+  font-weight: 700;
+
+  margin-bottom: 25px;
+}
+
+/* CONTINUE BUTTON */
+.continue-btn {
+  background: #fff;
+  border: 1px solid #C7D3E3;
+  color: #14274E;
+  padding: 12px 35px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.continue-btn:hover {
+  background: #eee;
+}
