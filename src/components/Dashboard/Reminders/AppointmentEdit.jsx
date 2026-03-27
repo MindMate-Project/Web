@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./AddAppointment.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getRemindersByPatient } from "../../../redux/slices/reminderSlice"; 
+import { useSelector } from "react-redux";
 import useUpdateReminder from "../../../hook/reminder/updateReminderHook";
 import SuccessModal from "./UpdatedSuccessfully"; 
 
 const AppointmentEdit = () => {
   const { id } = useParams(); 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [handleUpdateReminder, { loading, error }] = useUpdateReminder();
 
   const reminders = useSelector((state) => state.reminderReducer?.reminders || []);
   const initialData = reminders.find(r => r._id === id);
-
-  const patientId = localStorage.getItem("selectedPatientId");
 
   const [doctorName, setDoctorName] = useState("");
   const [specialty, setSpecialty] = useState("");
@@ -26,14 +22,7 @@ const AppointmentEdit = () => {
   const [purpose, setPurpose] = useState("consultation");
   const [notes, setNotes] = useState("");
 
-  // success modal state
   const [showSuccess, setShowSuccess] = useState(false);
-
-  useEffect(() => {
-    if (patientId) {
-      dispatch(getRemindersByPatient(patientId));
-    }
-  }, [dispatch, patientId]);
 
   useEffect(() => {
     if (initialData) {
@@ -76,10 +65,11 @@ const AppointmentEdit = () => {
     };
 
     try {
+      const patientId = localStorage.getItem("selectedPatientId");
       const result = await handleUpdateReminder(id, updatedData, patientId);
 
       if (result.success) {
-        setShowSuccess(true); // show success popup
+        setShowSuccess(true);
       }
 
     } catch (err) {
@@ -183,7 +173,6 @@ const AppointmentEdit = () => {
 
       </div>
 
-      {/* Success Modal */}
       <SuccessModal
         isOpen={showSuccess}
         onContinue={handleContinue}
