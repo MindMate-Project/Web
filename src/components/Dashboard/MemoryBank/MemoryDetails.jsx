@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
-import { memoryData } from "./MemoryBank";
+import useGetMemoryById from "../../../hook/memory/get-memory-by-id-hook";
+import useDeleteMemory from "../../../hook/memory/delete-memory-hook";
+import { useSelector } from "react-redux";
 import "./MemoryDetails.css";
 
 export default function MemoryDetails() {
@@ -11,9 +13,37 @@ export default function MemoryDetails() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
-    const mem = memoryData.find((m) => m.id.toString() === id);
+    const [memoryData] = useGetMemoryById(id);
+    const [handleDeleteMemory] = useDeleteMemory();
+    const loading = useSelector((state) => state.memoryReducer.loading);
 
-    if (!mem) {
+    const mem = memoryData;
+
+    const formatDate = (dateString) => {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        });
+    };
+
+    const isVideoUrl = (url) => {
+        if (!url) return false;
+        const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi'];
+        return videoExtensions.some((ext) => url.toLowerCase().includes(ext));
+    };
+
+    if (loading) {
+        return (
+            <div className="memorybank">
+                <p style={{ textAlign: "center", padding: "2rem" }}>Loading memory...</p>
+            </div>
+        );
+    }
+
+    if (!mem || !mem._id) {
         return (
             <div className="memory-details-container">
                 <p>Memory not found.</p>
@@ -22,7 +52,6 @@ export default function MemoryDetails() {
     }
 
     const isMedia = mem.type === "photo" || mem.type === "video";
-    // const dateText = mem.date || "No Date";
 
     const handleDeleteClick = () => {
         setIsDeleteModalOpen(true);
@@ -32,12 +61,9 @@ export default function MemoryDetails() {
         setIsDeleteModalOpen(false);
     };
 
-    const confirmDelete = () => {
-        // Remove the item from the mock data array for this session
-        const itemIndex = memoryData.findIndex((m) => m.id.toString() === id);
-        if (itemIndex > -1) {
-            memoryData.splice(itemIndex, 1);
-        }
+    const confirmDelete = async () => {
+        const patientId = localStorage.getItem("selectedPatientId");
+        await handleDeleteMemory(id, patientId);
 
         setIsDeleteModalOpen(false);
         setIsSuccessModalOpen(true);
@@ -81,12 +107,21 @@ export default function MemoryDetails() {
                         <div className="memory-details-media-row">
                             <div className="memory-details-label-space"></div>
                             <div className="memory-details-media-box">
-                                {mem.type === "photo" && mem.image ? (
-                                    <img
-                                        src={mem.image}
-                                        alt={mem.title}
-                                        className="memory-details-image"
-                                    />
+                                {mem.file_url ? (
+                                    isVideoUrl(mem.file_url) ? (
+                                        <video
+                                            src={mem.file_url}
+                                            controls
+                                            className="memory-details-image"
+                                            style={{ width: "100%", objectFit: "cover", borderRadius: "12px" }}
+                                        />
+                                    ) : (
+                                        <img
+                                            src={mem.file_url}
+                                            alt={mem.title}
+                                            className="memory-details-image"
+                                        />
+                                    )
                                 ) : (
                                     <div className="memory-details-video-placeholder">
                                         <svg
@@ -110,9 +145,9 @@ export default function MemoryDetails() {
                                         </svg>
                                     </div>
                                 )}
-                                {mem.date && (
+                                {mem.createdAt && (
                                     <div className="memory-details-date-badge">
-                                        {mem.date}
+                                        {formatDate(mem.createdAt)}
                                     </div>
                                 )}
                             </div>
@@ -123,9 +158,9 @@ export default function MemoryDetails() {
                     <div className="memory-details-row">
                         <div className="memory-details-label">Title</div>
                         <div className="memory-details-value-box">
-                            {!isMedia && mem.date && (
+                            {!isMedia && mem.createdAt && (
                                 <div className="memory-details-date-badge-inline">
-                                    {mem.date}
+                                    {formatDate(mem.createdAt)}
                                 </div>
                             )}
                             <p>{mem.title}</p>
@@ -137,6 +172,24 @@ export default function MemoryDetails() {
                             <div className="memory-details-label">Caption</div>
                             <div className="memory-details-value-box">
                                 <p>{mem.caption}</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {mem.type === "photo" && (
+                        <div className="memory-details-row">
+                            <div className="memory-details-label">Relation</div>
+                            <div className="memory-details-value-box">
+                                <p>{mem.relation ? mem.relation : "null"}</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {mem.type === "video" && (
+                        <div className="memory-details-row">
+                            <div className="memory-details-label">Date</div>
+                            <div className="memory-details-value-box">
+                                <p>{mem.date ? formatDate(mem.date) : "null"}</p>
                             </div>
                         </div>
                     )}
@@ -160,7 +213,7 @@ export default function MemoryDetails() {
                                 className="memory-details-btn-edit"
                                 onClick={() =>
                                     navigate(
-                                        `/api/dashboard/memory-bank/${mem.id}/edit`,
+                                        `/api/dashboard/memory-bank/${mem._id}/edit`,
                                     )
                                 }
                             >
@@ -246,31 +299,25 @@ export default function MemoryDetails() {
                 ariaHideApp={false}
             >
                 <div className="memorybank-success-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="#4CAF50"
-                            strokeWidth="2"
-                        />
+                    <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="35" cy="35" r="35" fill="#4CAF50" />
                         <path
-                            d="M8 12L11 15L16 9"
-                            stroke="#4CAF50"
-                            strokeWidth="2"
+                            d="M20 35L30 45L50 25"
+                            stroke="white"
+                            strokeWidth="4"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                         />
                     </svg>
                 </div>
-                <h2>Success</h2>
-                <p>Memory has been successfully deleted.</p>
+                <h2>Memory Deleted!</h2>
+                <p>The memory has been deleted successfully</p>
                 <div className="memorybank-delete-modal-actions success-actions">
                     <button
                         className="memorybank-success-btn"
                         onClick={handleCloseSuccessModal}
                     >
-                        Back to Memory Bank
+                        Continue
                     </button>
                 </div>
             </Modal>
