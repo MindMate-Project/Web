@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import "./AddAppointment.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getRemindersByPatient, createReminder } from "../../../redux/slices/reminderSlice";
+import useCreateReminder from "../../../hook/reminder/addReminderHook";
 
 const AddReminder = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const [handleCreateReminder, { loading, error }] = useCreateReminder();
 
   const patientId = localStorage.getItem("selectedPatientId");
-  
-  // Get the user string from localStorage
+
   const userString = localStorage.getItem("user");
-
-  // Parse it to a JS object
   const user = JSON.parse(userString);
-
-  // Access the ID
-  const caregiverId = user._id;
-
+  const caregiverId = user?._id;
 
   const [form, setForm] = useState({
     doctorName: "",
@@ -36,15 +30,25 @@ const AddReminder = () => {
   };
 
   const handlePurposeChange = (e) => {
-    setForm((prev) => ({ ...prev, appointmentType: e.target.value }));
+    setForm((prev) => ({
+      ...prev,
+      appointmentType: e.target.value,
+    }));
   };
 
   const handleSave = async () => {
-    // List of required fields
-    const requiredFields = ["doctorName", "specialty", "date", "time", "location", "appointmentType"];
+    const requiredFields = [
+      "doctorName",
+      "specialty",
+      "date",
+      "time",
+      "location",
+      "appointmentType",
+    ];
 
-    // Check if any required field is empty
-    const emptyFields = requiredFields.filter(field => !form[field] || form[field].trim() === "");
+    const emptyFields = requiredFields.filter(
+      (field) => !form[field] || form[field].trim() === ""
+    );
 
     if (emptyFields.length > 0) {
       alert(`Please fill all required fields: ${emptyFields.join(", ")}`);
@@ -56,7 +60,9 @@ const AddReminder = () => {
       return;
     }
 
-    const scheduledDateTime = new Date(`${form.date}T${form.time}:00Z`).toISOString();
+    const scheduledDateTime = new Date(
+      `${form.date}T${form.time}:00Z`
+    ).toISOString();
 
     const payload = {
       type: "appointment",
@@ -68,12 +74,11 @@ const AddReminder = () => {
       location: form.location,
       appointmentType: form.appointmentType,
       appointmentDate: scheduledDateTime,
-      notes: form.notes, // optional
+      notes: form.notes,
     };
 
     try {
-      await dispatch(createReminder(payload));
-      await dispatch(getRemindersByPatient(patientId)); // update table immediately
+      await handleCreateReminder(payload);
       navigate("/api/dashboard/reminders");
     } catch (err) {
       console.error(err);
@@ -88,15 +93,6 @@ const AddReminder = () => {
   return (
     <div className="add-reminder">
       <button className="back-button" onClick={handleBack}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M19 12H5M5 12L12 19M5 12L12 5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
         Back To Reminders
       </button>
 
@@ -104,6 +100,7 @@ const AddReminder = () => {
 
       <div className="form-card">
         <div className="form-grid">
+
           <div className="form-group">
             <label>Doctor Name *</label>
             <input
@@ -127,7 +124,7 @@ const AddReminder = () => {
           </div>
 
           <div className="form-group">
-            <label>Date*</label>
+            <label>Date *</label>
             <input
               type="date"
               className="input"
@@ -138,7 +135,7 @@ const AddReminder = () => {
           </div>
 
           <div className="form-group">
-            <label>Time*</label>
+            <label>Time *</label>
             <input
               type="time"
               className="input"
@@ -149,7 +146,7 @@ const AddReminder = () => {
           </div>
 
           <div className="form-group">
-            <label>Location*</label>
+            <label>Location *</label>
             <input
               type="text"
               className="input"
@@ -162,64 +159,45 @@ const AddReminder = () => {
           <div className="form-group purpose-group-wrapper">
             <label>Purpose *</label>
             <div className="purpose-group">
-              <label>
-                <input
-                  type="radio"
-                  name="purpose"
-                  value="consultation"
-                  checked={form.appointmentType === "consultation"}
-                  onChange={handlePurposeChange}
-                />
-                Consultation
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="purpose"
-                  value="follow-up"
-                  checked={form.appointmentType === "follow-up"}
-                  onChange={handlePurposeChange}
-                />
-                Follow-Up
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="purpose"
-                  value="lab"
-                  checked={form.appointmentType === "lab"}
-                  onChange={handlePurposeChange}
-                />
-                Lab
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="purpose"
-                  value="scan"
-                  checked={form.appointmentType === "scan"}
-                  onChange={handlePurposeChange}
-                />
-                Scan
-              </label>
+              {["consultation", "follow-up", "lab", "scan"].map((type) => (
+                <label key={type}>
+                  <input
+                    type="radio"
+                    name="purpose"
+                    value={type}
+                    checked={form.appointmentType === type}
+                    onChange={handlePurposeChange}
+                  />
+                  {type}
+                </label>
+              ))}
             </div>
           </div>
 
           <div className="form-group notes-group">
-            <label>Notes <span>(optional)</span></label>
+            <label>Notes (optional)</label>
             <textarea
               className="input textarea"
               name="notes"
               value={form.notes}
               onChange={handleChange}
-            ></textarea>
+            />
           </div>
+
         </div>
 
         <div className="form-actions">
-          <button className="btn-save" onClick={handleSave}>Save</button>
-          <button className="btn-cancel" onClick={handleBack}>Cancel</button>
+          <button className="btn-save" onClick={handleSave} disabled={loading}>
+            {loading ? "Saving..." : "Save"}
+          </button>
+
+          <button className="btn-cancel" onClick={handleBack}>
+            Cancel
+          </button>
         </div>
+
+        {/* ✅ Error handling */}
+        {error && <p className="error-text">Error: {error.message || "Something went wrong"}</p>}
       </div>
     </div>
   );
