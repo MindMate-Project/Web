@@ -1,58 +1,46 @@
 import React, { useEffect, useState } from "react";
 import "./MedicineDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  getRemindersByPatient,
-  deleteReminder,
-} from "../../../redux/slices/reminderSlice";
+import useGetReminders from "../../../hook/reminder/getRemindersHook";
+import useDeleteReminder from "../../../hook/reminder/deleteReminderHook";
 import DeleteReminderModal from "./deleteModal";
 
 export default function MedicineDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const dispatch = useDispatch();
   const patientId = localStorage.getItem("selectedPatientId");
 
-  const reminders = useSelector(
-    (state) => state.reminderReducer?.reminders || []
-  );
+  const { reminders, getReminders } = useGetReminders();
+  const { handleDelete, loading: isDeleting } = useDeleteReminder();
 
   const [medicine, setMedicine] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (patientId) dispatch(getRemindersByPatient(patientId));
-  }, [dispatch, patientId]);
+    if (patientId) getReminders(patientId);
+  }, [patientId, getReminders]);
 
   useEffect(() => {
-    const med = reminders.find(
-      (r) => r._id === id && r.type === "medication"
-    );
+    const med = reminders.find((r) => r._id === id && r.type === "medication");
     setMedicine(med);
   }, [reminders, id]);
 
   const handleBack = () => navigate("/api/dashboard/reminders");
-
-  const medicineEdit = () =>
+  const handleEdit = () =>
     navigate(`/api/dashboard/reminders/medicine/${id}/edit`);
 
   const handleDeleteClick = () => setIsDeleteModalOpen(true);
 
   const confirmDelete = async () => {
-    if (!medicine) return;
-
-    setIsDeleting(true);
-    try {
-      await dispatch(deleteReminder(medicine._id)).unwrap();
-      setIsDeleteModalOpen(false);
-      navigate("/api/dashboard/reminders");
-    } catch (err) {
-      console.error(err);
-    }
-    setIsDeleting(false);
-  };
+  if (!medicine) return;
+  try {
+    await handleDelete(medicine._id);
+    setIsDeleteModalOpen(false);
+    navigate("/api/dashboard/reminders");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
@@ -60,7 +48,6 @@ export default function MedicineDetails() {
 
   return (
     <div className="medicine-details-page">
-
       <button className="back-button" onClick={handleBack} type="button">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path
@@ -75,24 +62,18 @@ export default function MedicineDetails() {
       <h2 className="medicine-details-title">Medicine Information</h2>
 
       <div className="medicine-details-card">
-
-        {/* Drug Name */}
         <div className="medicine-details-row">
           <div className="medicine-details-label">Drug Name</div>
           <div className="medicine-details-content">
             <div className="medicine-details-box medicine-details-full">
-              <span className="medicine-details-text">
-                {medicine.medicineName}
-              </span>
+              <span className="medicine-details-text">{medicine.medicineName}</span>
             </div>
           </div>
         </div>
 
-        {/* Dosage */}
         <div className="medicine-details-row">
           <div className="medicine-details-label">Dosage</div>
           <div className="medicine-details-content medicine-details-two">
-
             <div className="medicine-details-box medicine-details-vertical">
               <span className="medicine-details-subtitle">Amount</span>
               <div className="medicine-details-value">
@@ -103,14 +84,9 @@ export default function MedicineDetails() {
                     stroke="#2ca9bc"
                     strokeWidth="1.5"
                   />
-                  <path
-                    d="M15.54,15.54l-4,4a5,5,0,0,1-7.08-7.08l4-4Z"
-                    fill="#2ca9bc"
-                  />
+                  <path d="M15.54,15.54l-4,4a5,5,0,0,1-7.08-7.08l4-4Z" fill="#2ca9bc" />
                 </svg>
-                <span className="medicine-details-text">
-                  {medicine.dosage}
-                </span>
+                <span className="medicine-details-text">{medicine.dosage}</span>
               </div>
             </div>
 
@@ -259,15 +235,11 @@ export default function MedicineDetails() {
                 </span>
               </div>
             </div>
-
           </div>
         </div>
 
         <div className="medicine-details-actions">
-          <button
-            className="medicine-details-btn medicine-details-edit"
-            onClick={medicineEdit}
-          >
+          <button className="medicine-details-btn medicine-details-edit" onClick={handleEdit}>
             Edit
           </button>
 
