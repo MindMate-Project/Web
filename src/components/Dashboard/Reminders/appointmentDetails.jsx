@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "./appointmentDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  getRemindersByPatient,
-  deleteReminder,
-} from "../../../redux/slices/reminderSlice";
+import useGetReminders from "../../../hook/reminder/getRemindersHook";
+import useDeleteReminder from "../../../hook/reminder/deleteReminderHook";
 import DeleteReminderModal from "./deleteModal";
 
 export default function AppointmentCard() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const dispatch = useDispatch();
-
   const patientId = localStorage.getItem("selectedPatientId");
 
-  const reminders = useSelector(
-    (state) => state.reminderReducer?.reminders || []
-  );
+  // ===== HOOKS =====
+  const { reminders, getReminders } = useGetReminders();
+  const { handleDelete, loading: isDeleting } = useDeleteReminder();
 
   const [appointment, setAppointment] = useState(null);
 
   // ===== MODAL STATE =====
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
 
   // ===== GET DATA =====
   useEffect(() => {
-    if (patientId) dispatch(getRemindersByPatient(patientId));
-  }, [dispatch, patientId]);
+    if (patientId) getReminders(patientId);
+  }, [patientId, getReminders]);
 
   useEffect(() => {
     const app = reminders.find((r) => r._id === id);
@@ -37,43 +31,30 @@ export default function AppointmentCard() {
 
   // ===== NAVIGATION =====
   const handleBack = () => navigate("/api/dashboard/reminders");
-
   const handleEdit = () =>
     navigate(`/api/dashboard/reminders/apointment/${id}/edit`);
 
   // ===== DELETE =====
-  const handleDeleteClick = () => {
-    setIsDeleteModalOpen(true);
-  };
+  const handleDeleteClick = () => setIsDeleteModalOpen(true);
 
   const confirmDelete = async () => {
     if (!appointment) return;
-
-    setIsDeleting(true);
-
     try {
-      await dispatch(deleteReminder(appointment._id)).unwrap();
-
+      await handleDelete(appointment._id);
       setIsDeleteModalOpen(false);
       navigate("/api/dashboard/reminders");
-
     } catch (err) {
       console.error(err);
     }
-
-    setIsDeleting(false);
   };
 
-  const closeDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
   // ===== LOADING =====
   if (!appointment) return <p>Loading...</p>;
 
   return (
     <div className="appointment-details-page">
-
       <button
         className="details-back-button"
         onClick={handleBack}
@@ -94,7 +75,6 @@ export default function AppointmentCard() {
       <h2 className="details-page-title">Appointment Information</h2>
 
       <div className="details-card">
-
         <div className="details-row">
           <div className="details-label">Doctor Name</div>
           <div className="details-content two">
@@ -133,16 +113,13 @@ export default function AppointmentCard() {
         <div className="details-row">
           <div className="details-label">Purpose</div>
           <div className="details-content">
-            <div className="details-box full">
-              {appointment.appointmentType}
-            </div>
+            <div className="details-box full">{appointment.appointmentType}</div>
           </div>
         </div>
 
         <div className="details-row">
           <div className="details-label">Schedule</div>
           <div className="details-content two">
-
             {/* Date */}
             <div className="details-box center">
               <span className="details-value">
@@ -184,9 +161,9 @@ export default function AppointmentCard() {
                   <path d="M12 6v6h4"/>
                 </svg>
                 {new Date(appointment.appointmentDate).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </span>
             </div>
           </div>
@@ -204,23 +181,13 @@ export default function AppointmentCard() {
         </div>
 
         <div className="details-actions">
-          <button
-            className="details-btn edit"
-            onClick={handleEdit}
-            type="button"
-          >
+          <button className="details-btn edit" onClick={handleEdit} type="button">
             Edit
           </button>
-
-          <button
-            className="details-btn delete"
-            onClick={handleDeleteClick}
-            type="button"
-          >
+          <button className="details-btn delete" onClick={handleDeleteClick} type="button">
             Delete
           </button>
         </div>
-
       </div>
 
       {/* DELETE MODAL */}
@@ -230,7 +197,6 @@ export default function AppointmentCard() {
         onConfirm={confirmDelete}
         isDeleting={isDeleting}
       />
-
     </div>
   );
 }
