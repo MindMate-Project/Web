@@ -334,8 +334,8 @@
 }
 
 .memorybank-success-icon svg {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
 }
 
 .memorybank-delete-modal-content.success-modal h2 {
@@ -343,12 +343,13 @@
 }
 
 .memorybank-success-btn {
-    background-color: #5EA5C0 !important;
-    color: white !important;
+    background-color: #ffffff !important;
+    color: #333 !important;
+    border: 1px solid #d4d8e1 !important;
 }
 
 .memorybank-success-btn:hover {
-    background-color: #4a8ca6 !important;
+    background-color: #f7f9fa !important;
 }
 
 /* Modal Media Queries */
