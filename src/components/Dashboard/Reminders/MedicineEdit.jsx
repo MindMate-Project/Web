@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./AddMedicine.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getRemindersByPatient } from "../../../redux/slices/reminderSlice";
+import { useSelector } from "react-redux";
 import useUpdateReminder from "../../../hook/reminder/updateReminderHook";
 import SuccessModal from "./UpdatedSuccessfully";
 
 const EditMedicine = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [handleUpdateReminder, { loading, error }] = useUpdateReminder();
 
@@ -20,10 +18,8 @@ const EditMedicine = () => {
   const patientId = localStorage.getItem("selectedPatientId");
   const initialData = reminders.find((r) => r._id === id);
 
-  // success modal state
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // form states
   const [medicineName, setMedicineName] = useState("");
   const [dosage, setDosage] = useState("");
   const [time, setTime] = useState("");
@@ -38,12 +34,6 @@ const EditMedicine = () => {
   const [endDay, setEndDay] = useState("");
   const [endMonth, setEndMonth] = useState("");
   const [endYear, setEndYear] = useState("");
-
-  useEffect(() => {
-    if (patientId) {
-      dispatch(getRemindersByPatient(patientId));
-    }
-  }, [dispatch, patientId]);
 
   useEffect(() => {
     if (initialData) {
@@ -259,7 +249,6 @@ const EditMedicine = () => {
 
       </div>
 
-      {/* Success Modal */}
       <SuccessModal
         isOpen={showSuccess}
         onContinue={handleContinue}
