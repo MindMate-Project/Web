@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./AddMedicine.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { createReminder } from "../../../redux/slices/reminderSlice";
+import useCreateReminder from "../../../hook/reminder/addReminderHook";
 
 const AddMedicine = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  //  use hook instead of dispatch
+  const [handleCreateReminder] = useCreateReminder();
 
   const patientId = localStorage.getItem("selectedPatientId");
   const userString = localStorage.getItem("user");
@@ -48,7 +49,6 @@ const AddMedicine = () => {
     }
 
     try {
-      // convert treatment period inputs to ISO string
       const startDateStr = `${form.startYear}-${form.startMonth.padStart(2,'0')}-${form.startDay.padStart(2,'0')}T${form.scheduledTime}:00`;
       const endDateStr = `${form.endYear}-${form.endMonth.padStart(2,'0')}-${form.endDay.padStart(2,'0')}T${form.scheduledTime}:00`;
 
@@ -69,7 +69,9 @@ const AddMedicine = () => {
         endDate: endDate,
       };
 
-      await dispatch(createReminder(payload));
+      //  replaced dispatch with hook
+      await handleCreateReminder(payload);
+
       navigate("/api/dashboard/reminders");
     } catch (err) {
       console.error(err);
@@ -118,7 +120,6 @@ const AddMedicine = () => {
             <input type="number" min="1" name="timesPerDay" value={form.timesPerDay} onChange={handleChange} />
           </div>
 
-          {/* Treatment Period */}
           <div className="form-group full-width">
             <label>Treatment Period *</label>
             <div className="treatment-period">
@@ -141,7 +142,6 @@ const AddMedicine = () => {
             </div>
           </div>
 
-          {/* Type */}
           <div className="form-group full-width">
             <label>Type *</label>
             <div className="radio-group">
@@ -153,7 +153,6 @@ const AddMedicine = () => {
             </div>
           </div>
 
-          {/* Frequency */}
           <div className="form-group full-width">
             <label>Frequency *</label>
             <div className="radio-group">
