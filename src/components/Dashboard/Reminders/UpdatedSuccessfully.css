@@ -23,7 +23,7 @@
 }
 
 /* SUCCESS ICON */
-.success-circle {
+.success-overlay .success-circle {
   width: 80px;
   height: 80px;
   display: flex;
@@ -42,7 +42,7 @@
 }
 
 /* CONTINUE BUTTON */
-.continue-btn {
+.success-overlay .continue-btn {
   background: #fff;
   border: 1px solid #C7D3E3;
   color: #14274E;
@@ -51,6 +51,6 @@
   font-weight: 500;
   cursor: pointer;
 }
-.continue-btn:hover {
+.success-overlay .continue-btn:hover {
   background: #eee;
 }
