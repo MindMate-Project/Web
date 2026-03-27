@@ -23,7 +23,7 @@
 }
 
 /* ICON */
-.modal-icon {
+.delete-reminder-overlay .modal-icon {
   margin-bottom: 20px;
 }
 
@@ -50,7 +50,7 @@
 }
 
 /* DELETE BUTTON */
-.confirm-btn {
+.delete-reminder-overlay .confirm-btn {
   background: #E74C3C;
   color: #fff;
   border: none;
@@ -61,7 +61,7 @@
 }
 
 /* CANCEL BUTTON */
-.cancel-btn {
+.delete-reminder-overlay .cancel-btn {
   background: #fff;
   border: 1px solid #C7D3E3;
   color: #14274E;
@@ -72,7 +72,7 @@
 }
 
 /* SUCCESS CIRCLE */
-.success-circle {
+.delete-reminder-overlay .success-circle {
   width: 80px;
   height: 80px;
   background: #57B26A;
@@ -84,7 +84,7 @@
 }
 
 /* CONTINUE BUTTON */
-.continue-btn {
+.delete-reminder-overlay .continue-btn {
   background: #fff;
   border: 1px solid #C7D3E3;
   color: #14274E;
