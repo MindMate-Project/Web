@@ -1,28 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"; 
+// import { useSelector } from "react-redux"; 
 import { useEffect } from "react";
-import { getRemindersByPatient } from "../../../redux/slices/reminderSlice"; 
+import useGetAllReminders from "../../../hook/reminder/get-all-reminders-hook"; 
 import "./Reminders.css";
 
 export default function Reminders() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { reminders, loading, fetchReminders } = useGetAllReminders();
 
   const patientId = localStorage.getItem("selectedPatientId");
 
-  const { reminders, loading } = useSelector((state) => state.reminderReducer);
-
   useEffect(() => {
     if (patientId) {
-      dispatch(getRemindersByPatient(patientId));
+      fetchReminders(patientId);
     }
-  }, [dispatch, patientId]);
+  }, [fetchReminders, patientId]);
 
-  // ================= APPOINTMENTS =================
   const appointments =
     reminders?.filter((r) => r.type === "appointment") || [];
 
-  // ================= MEDICATIONS (mapped) =================
   const medications =
     reminders
       ?.filter((r) => r.type === "medication")
@@ -37,7 +33,6 @@ export default function Reminders() {
     <div className="reminders-page">
       <h1 className="page-title">Reminders</h1>
 
-      {/* ================= APPOINTMENTS ================= */}
       <div className="reminder-section">
         <div className="section-header">
           <h3>Upcoming Appointments</h3>
@@ -52,9 +47,7 @@ export default function Reminders() {
         <div className="reminder-card">
           <div className="table-container">
             {loading && reminders.length === 0 ? (
-              <p style={{ padding: "20px", textAlign: "center" }}>
-                Loading...
-              </p>
+              <p style={{ padding: "20px", textAlign: "center" }}>Loading...</p>
             ) : (
               <table className="reminder-table">
                 <thead>
@@ -73,22 +66,16 @@ export default function Reminders() {
                       <tr
                         key={app._id}
                         onClick={() =>
-                          navigate(
-                            `/api/dashboard/reminders/appointment/${app._id}`
-                          )
+                          navigate(`/api/dashboard/reminders/appointment/${app._id}`)
                         }
                         style={{ cursor: "pointer" }}
                       >
                         <td>{app.doctorName}</td>
                         <td>{app.specialty}</td>
-                        <td>
-                          {new Date(app.appointmentDate).toLocaleDateString()}
-                        </td>
+                        <td>{new Date(app.appointmentDate).toLocaleDateString()}</td>
                         <td>
                           <span className="time-badge appointment">
-                            {new Date(
-                              app.appointmentDate
-                            ).toLocaleTimeString([], {
+                            {new Date(app.appointmentDate).toLocaleTimeString([], {
                               hour: "2-digit",
                               minute: "2-digit",
                             })}
@@ -102,10 +89,7 @@ export default function Reminders() {
                     ))
                   ) : (
                     <tr>
-                      <td
-                        colSpan="6"
-                        style={{ textAlign: "center", padding: "20px" }}
-                      >
+                      <td colSpan="6" style={{ textAlign: "center", padding: "20px" }}>
                         No appointments found.
                       </td>
                     </tr>
@@ -117,7 +101,6 @@ export default function Reminders() {
         </div>
       </div>
 
-      {/* ================= MEDICATIONS ================= */}
       <div className="reminder-section">
         <div className="section-header">
           <h3>Medication Schedule</h3>
@@ -148,9 +131,7 @@ export default function Reminders() {
                     <tr
                       key={med._id}
                       onClick={() =>
-                        navigate(
-                          `/api/dashboard/reminders/medicine/${med._id}`
-                        )
+                        navigate(`/api/dashboard/reminders/medicine/${med._id}`)
                       }
                       style={{ cursor: "pointer" }}
                     >
@@ -166,17 +147,12 @@ export default function Reminders() {
                         </span>
                       </td>
                       <td>{med.timesPerDay}</td>
-                      <td style={{ textTransform: "capitalize" }}>
-                        {med.type}
-                      </td>
+                      <td style={{ textTransform: "capitalize" }}>{med.type}</td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td
-                      colSpan="6"
-                      style={{ textAlign: "center", padding: "20px" }}
-                    >
+                    <td colSpan="6" style={{ textAlign: "center", padding: "20px" }}>
                       No medications found.
                     </td>
                   </tr>
