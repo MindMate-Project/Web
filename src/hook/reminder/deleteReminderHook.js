@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteReminder } from "../../redux/slices/reminderSlice";
 import { useState } from "react";
 
-export const useDeleteReminder = () => {
+const useDeleteReminder = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,12 +12,9 @@ export const useDeleteReminder = () => {
     setError(null);
 
     try {
-      
       await dispatch(deleteReminder(id)).unwrap();
-
       setLoading(false);
       return true; // success
-
     } catch (err) {
       setLoading(false);
       setError(err?.message || "Failed to delete reminder");
@@ -27,3 +24,5 @@ export const useDeleteReminder = () => {
 
   return { handleDelete, loading, error };
 };
+
+export default useDeleteReminder;
