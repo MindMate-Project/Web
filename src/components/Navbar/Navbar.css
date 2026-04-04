@@ -267,3 +267,16 @@ nav.main-navbar * {
         margin-left: auto;
     }
 }
+
+/* Make the 'Go Back' text and arrow bigger */
+.main-navbar .btn-get-started.btn-go-back {
+    font-size: 18px;
+    padding: 12px 32px;
+}
+
+@media (max-width: 768px) {
+    .main-navbar .btn-get-started.btn-go-back {
+        font-size: 16px;
+        padding: 10px 24px;
+    }
+}
