@@ -364,7 +364,8 @@
     }
 
     .dashboardLayout .dashboard__header p {
-        display: none; /* Hide subtitle to save vertical space on mobile */
+        display: none;
+        /* Hide subtitle to save vertical space on mobile */
     }
 
     .dashboardLayout .dashboard__action-btn {
@@ -385,7 +386,8 @@
 
 @media (max-width: 575px) {
     .dashboardLayout .dashboard__header {
-        flex-wrap: nowrap; /* Prevent actions and profile from dropping to the next line */
+        flex-wrap: nowrap;
+        /* Prevent actions and profile from dropping to the next line */
         padding: 10px 14px;
         gap: 10px;
     }
