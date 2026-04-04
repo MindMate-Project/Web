@@ -3,16 +3,14 @@ import "./Login.css";
 import LoginHook from "../../hook/auth/login-hook";
 import { ToastContainer } from "react-toastify";
 import ImageSlider from "../ImageSlider/ImageSlider";
-import logo from "../../images/logo.png";
+import Navbar from "../Navbar/Navbar";
+
 function Login() {
     const [email, password, , onChangeEmail, onChangePassword, onSubmit] =
         LoginHook();
     return (
         <div className="login">
-            <div className="logo-header">
-                <img src={logo} alt="Logo" />
-                <h1 className="brand-title">MindMate</h1>
-            </div>
+            <Navbar />
             <div className="container">
                 <div className="left">
                     <ImageSlider />
