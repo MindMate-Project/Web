@@ -2,7 +2,8 @@ import "./SignUp.css";
 import SignupHook from "./../../hook/auth/signup-hook";
 import { ToastContainer } from "react-toastify";
 import ImageSlider from "../ImageSlider/ImageSlider";
-import logo from "../../images/logo.png";
+import Navbar from "../Navbar/Navbar";
+
 function SignupPage() {
     const [
         firstName,
@@ -25,10 +26,7 @@ function SignupPage() {
     ] = SignupHook();
     return (
         <div className="signup">
-            <div className="logo-header">
-                <img src={logo} alt="Logo" />
-                <h1 className="brand-title">MindMate</h1>
-            </div>
+            <Navbar />
             <div className="container">
                 <div className="left">
                     <ImageSlider />

@@ -4,6 +4,5 @@ body{
     box-sizing: border-box;
     font-family: 'Poppins', 'Nunito', sans-serif;
     --primary-bg: #5EA5C0;
-    /* background-color: var(--primary-bg); */
-    /* background-color: gray; */
+    overflow-y: scroll; /* Force vertical scrollbar to prevent horizontal navbar jumps between long/short pages */
 }

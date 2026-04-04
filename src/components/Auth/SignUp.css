@@ -41,7 +41,7 @@
 /* container */
 .signup .container {
     width: 100%;
-    min-height: 100vh;
+    flex: 1;
     background: #ffffff;
     display: flex;
     justify-content: center;
@@ -223,7 +223,7 @@
 }
 
 /* BUTTON */
-.signup button {
+.signup .card button {
     margin-top: 10px;
     height: 42px;
     border: none;
@@ -237,7 +237,7 @@
     margin-bottom: 18px;
 }
 
-.signup button:hover {
+.signup .card button:hover {
     background: #5aa3bd;
 }
 
@@ -280,7 +280,7 @@
         flex-direction: column;
         width: 100%;
         min-height: auto;
-        padding-top: 80px;
+        padding-top: 20px;
     }
 
     .signup .logo-header {
@@ -346,7 +346,8 @@
     }
 
     .signup .container {
-        padding-top: 70px;
+        padding-top: 20px;
+        padding-bottom: 40px;
     }
 
     .signup .left {
@@ -373,7 +374,7 @@
         padding: 0 10px;
     }
 
-    .signup button {
+    .signup .card button {
         height: 40px;
         font-size: 17px;
     }
@@ -397,7 +398,8 @@
     }
 
     .signup .container {
-        padding-top: 60px;
+        padding-top: 10px;
+        padding-bottom: 20px;
     }
 
     .signup .left {
@@ -426,7 +428,7 @@
         padding: 0 10px;
     }
 
-    .signup button {
+    .signup .card button {
         height: 38px;
         font-size: 16px;
     }
@@ -469,3 +471,20 @@
         padding: 0 4px;
     }
 }
+
+/* Auth-specific Navbar styling fixes */
+.signup nav.main-navbar {
+    background-color: #ffffff;
+    border-bottom: none;
+}
+/* Hide Get Started & underline inside SignUp */
+
+.signup .main-navbar .navbar-links a.active {
+    border-bottom: none !important;
+    color: #5EA5C0 !important;
+}
+
+.signup .main-navbar .navbar-links a:hover {
+    color: #151D48 !important;
+}
+

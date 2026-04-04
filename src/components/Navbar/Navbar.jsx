@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../../images/logo.png";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const location = useLocation();
+
+    // Check if the current route is auth-related
+    const isAuthPage =
+        location.pathname.includes("/login") ||
+        location.pathname.includes("/signup");
 
     return (
         <nav className="main-navbar">
@@ -13,65 +19,65 @@ const Navbar = () => {
                 <span>MindMate</span>
             </div>
 
-            <button
-                className="navbar-toggle-btn"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
-            >
-                <span className={`bar ${isMenuOpen ? "open" : ""}`}></span>
-                <span className={`bar ${isMenuOpen ? "open" : ""}`}></span>
-                <span className={`bar ${isMenuOpen ? "open" : ""}`}></span>
-            </button>
+            {/* Hide hamburger menu on Auth pages since there are no links to toggle */}
+            {!isAuthPage && (
+                <button
+                    className="navbar-toggle-btn"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    <span className={`bar ${isMenuOpen ? "open" : ""}`}></span>
+                    <span className={`bar ${isMenuOpen ? "open" : ""}`}></span>
+                    <span className={`bar ${isMenuOpen ? "open" : ""}`}></span>
+                </button>
+            )}
 
-            <div className={`navbar-right ${isMenuOpen ? "open" : ""}`}>
-                <ul className="navbar-links">
-                    <li>
-                        <Link
-                            to="/"
-                            className="active"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                            About
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Features
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                            Team
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Contact
-                        </Link>
-                    </li>
-                </ul>
+            {/* Only show the right side (links and button) if not an Auth page */}
+            {!isAuthPage && (
+                <div className={`navbar-right ${isMenuOpen ? "open" : ""}`}>
+                    <ul className="navbar-links">
+                        <li>
+                            <Link
+                                to="/"
+                                className="active"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                                About
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                                Features
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                                Team
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                                Contact
+                            </Link>
+                        </li>
+                    </ul>
 
-                <div className="navbar-actions">
-                    <Link
-                        to="/api/auth/login"
-                        className="btn-get-started"
-                        onClick={() => setIsMenuOpen(false)}
-                    >
-                        Get Started
-                    </Link>
+                    <div className="navbar-actions">
+                        <Link
+                            to="/api/auth/login"
+                            className="btn-get-started"
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Get Started
+                        </Link>
+                    </div>
                 </div>
-            </div>
+            )}
         </nav>
     );
 };
