@@ -38,7 +38,7 @@
 
 .login .container {
     width: 100%;
-    min-height: 100vh;
+    flex: 1;
     background: #ffffff;
     display: flex;
     justify-content: center;
@@ -131,7 +131,7 @@
     margin-top: 2px;
 }
 
-.login button {
+.login .card button {
     margin-top: 10px;
     height: 45px;
     border: none;
@@ -144,7 +144,7 @@
     font-weight: 600;
 }
 
-.login button:hover {
+.login .card button:hover {
     background: #5aa3bd;
 }
 
@@ -213,7 +213,7 @@
         flex-direction: column;
         width: 100%;
         min-height: auto;
-        padding-top: 80px;
+        padding-top: 20px;
     }
 
     .login .logo-header {
@@ -274,7 +274,8 @@
     }
 
     .login .container {
-        padding-top: 70px;
+        padding-top: 20px;
+        padding-bottom: 40px;
     }
 
     .login .left {
@@ -310,7 +311,8 @@
     }
 
     .login .container {
-        padding-top: 60px;
+        padding-top: 10px;
+        padding-bottom: 20px;
     }
 
     .login .left {
@@ -338,7 +340,7 @@
         font-size: 13px;
     }
 
-    .login button {
+    .login .card button {
         height: 42px;
         font-size: 18px;
     }
@@ -371,3 +373,20 @@
         font-size: 28px;
     }
 }
+
+/* Auth-specific Navbar styling fixes */
+.login nav.main-navbar {
+    background-color: #ffffff;
+    border-bottom: none;
+}
+/* Hide Get Started & underline inside Login */
+
+.login .main-navbar .navbar-links a.active {
+    border-bottom: none !important;
+    color: #5EA5C0 !important;
+}
+
+.login .main-navbar .navbar-links a:hover {
+    color: #151D48 !important;
+}
+
