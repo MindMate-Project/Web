@@ -30,9 +30,9 @@ const Navbar = () => {
                 </button>
             )}
 
-            {/* If Auth page, remove the "open" class requirement and slide-out behavior */}
-            <div className={`navbar-right ${isMenuOpen && !isAuthPage ? "open" : ""} ${isAuthPage ? "navbar-right-auth" : ""}`}>
-                {!isAuthPage && (
+            {/* Only show the right side (links and button) if not an Auth page */}
+            {!isAuthPage && (
+                <div className={`navbar-right ${isMenuOpen ? "open" : ""}`}>
                     <ul className="navbar-links">
                         <li>
                             <Link
@@ -70,18 +70,8 @@ const Navbar = () => {
                             </Link>
                         </li>
                     </ul>
-                )}
 
-                <div className="navbar-actions">
-                    {isAuthPage ? (
-                        <Link
-                            to="/"
-                            className="btn-get-started btn-go-back"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Go Back
-                        </Link>
-                    ) : (
+                    <div className="navbar-actions">
                         <Link
                             to="/api/auth/login"
                             className="btn-get-started"
@@ -89,9 +79,9 @@ const Navbar = () => {
                         >
                             Get Started
                         </Link>
-                    )}
+                    </div>
                 </div>
-            </div>
+            )}
         </nav>
     );
 };
