@@ -8,7 +8,9 @@ const Navbar = () => {
     const location = useLocation();
 
     // Check if the current route is auth-related
-    const isAuthPage = location.pathname.includes("/login") || location.pathname.includes("/signup");
+    const isAuthPage =
+        location.pathname.includes("/login") ||
+        location.pathname.includes("/signup");
 
     return (
         <nav className="main-navbar">
@@ -49,10 +51,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                to="/"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
+                            <Link to="/" onClick={() => setIsMenuOpen(false)}>
                                 Features
                             </Link>
                         </li>
@@ -62,10 +61,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                to="/"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
+                            <Link to="/" onClick={() => setIsMenuOpen(false)}>
                                 Contact
                             </Link>
                         </li>
