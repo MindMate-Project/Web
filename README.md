@@ -1,70 +1,141 @@
-# Getting Started with Create React App
+<div align="center">
+  <img src="./assets/logo.svg" alt="MindMate Logo" width="250">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MindMate 🧠💙
 
-## Available Scripts
+<h3>Smart care. Safer lives. Stronger connections.</h3>
 
-In the project directory, you can run:
+[![React](https://img.shields.io/badge/React-18.x-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Redux](https://img.shields.io/badge/Redux-Toolkit-purple?style=for-the-badge&logo=redux)](https://redux-toolkit.js.org/)
+[![Socket.io](https://img.shields.io/badge/Socket.io-Connected-black?style=for-the-badge&logo=socket.io)](https://socket.io/)
+[![Leaflet](https://img.shields.io/badge/Leaflet-Maps-green?style=for-the-badge&logo=leaflet)](https://leafletjs.com/)
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📖 About The Project
 
-### `npm test`
+<h3>MindMate is an intelligent, compassionate web application</h3>
+<p>It is designed to support Alzheimer's patients and empower their caregivers. Managing the daily challenges of Alzheimer's requires constant attention, and MindMate bridges the gap by offering a cohesive dashboard for caregivers to monitor, assist, and care for their loved ones effectively.</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p>From real-time geographical tracking to therapeutic memory banks, the application acts as a digital companion that ensures patients' safety while significantly reducing caregiver burnout.</p>
 
-### `npm run build`
+<div align="center">
+  <img src="./assets/dashboard_section.png" alt="MindMate Dashboard Preview" width="100%" style="max-width: 800px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+  <p><em>Caregiver Dashboard & Real-Time Tracking</em></p>
+</div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ✨ Features & Interface
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h4>We have built specific modules to tackle the everyday challenges faced by caregivers:</h4>
 
-### `npm run eject`
+<table width="100%">
+  <tr>
+    <td align="center" width="50%">
+      <img src="./assets/location_section.png" alt="Location Tracking Preview" width="100%" style="border-radius: 8px;">
+      <br/><br/>
+      <h3>📍 Real-Time Location Tracking</h3>
+      <p>Integrated Leaflet maps & Socket.io for live geolocation updates.</p>
+    </td>
+    <td align="center" width="50%">
+      <img src="./assets/reminder_section.png" alt="Smart Reminders Preview" width="100%" style="border-radius: 8px;">
+      <br/><br/>
+      <h3>💊 Smart Reminders</h3>
+      <p>Granular scheduling for Medications and Appointments.</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="./assets/memory_section.png" alt="Memory Bank Preview" width="100%" style="border-radius: 8px;">
+      <br/><br/>
+      <h3>🖼️ Memory Bank</h3>
+      <p>A therapeutic vault for photos, notes, and cherished milestones.</p>
+    </td>
+    <td align="center" width="50%">
+      <img src="./assets/patient_section.png" alt="Patient Management Preview" width="100%" style="border-radius: 8px;">
+      <br/><br/>
+      <h3>👥 Patient Management</h3>
+      <p>Easily add, edit, and oversee multiple patient profiles.</p>
+    </td>
+  </tr>
+</table>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **🔐 Secure Authentication:** Complete onboarding flows including Sign Up, Login, and Password Recovery.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🛠 Tech Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Frontend Framework & Libraries:**
 
-## Learn More
+- **React 18** (Bootstrapped with Create React App)
+- **React Router v7** (Dynamic client-side routing & protected routes)
+- **Redux Toolkit** (Global state management)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Integration & Functionality:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Axios** (RESTful API communication)
+- **Socket.io-Client** (WebSockets for real-time tracking)
+- **Leaflet & React-Leaflet** (Interactive maps for patient location)
+- **React Toastify & React Modal** (Intuitive UI feedback and dialogs)
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🚀 Getting Started
 
-### Analyzing the Bundle Size
+Follow these instructions to get a local copy of the project up and running.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Prerequisites
 
-### Making a Progressive Web App
+Make sure you have Node.js and npm installed on your machine.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- npm
+    ```sh
+    npm install npm@latest -g
+    ```
 
-### Advanced Configuration
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. **Clone the repo**
+    ```sh
+    git clone https://github.com/MindMate-Project/Web.git
+    ```
+2. **Navigate to the project directory**
+    ```sh
+    cd alzheimer
+    ```
+3. **Install NPM packages**
+    ```sh
+    npm install
+    ```
+4. **Setup Environment Variables**
+    - Create a `.env` file in the root directory.
+    - Add your API Base URLs and other secrets (e.g., `REACT_APP_API_URL=http://localhost:5000/api`).
+5. **Start the development server**
+    ```sh
+    npm start
+    ```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📂 Project Structure
 
-### `npm run build` fails to minify
+```text
+src/
+├── API/             # Axios instances and API route configurations
+├── components/      # Reusable UI components (Auth, Dashboard, Maps, Navigation)
+├── hook/ & hooks/   # Custom React hooks containing abstracted logic & API calls
+├── images/          # Static graphical assets
+├── pages/           # High-level layouts and routed pages
+├── redux/           # Redux store, slices, and asynchronous thunks
+└── utils/           # Helper functions and Route Protection wrappers
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+<div align="center">
+  <b>Built with ❤️ for a better tomorrow.</b>
+</div>
