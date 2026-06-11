@@ -33,6 +33,7 @@ import MedicineDetails from "./components/Dashboard/Reminders/MedicineDetails";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import ResetCodeRoute from "./components/utils/ResetCodeRoute";
 import NewPasswordRoute from "./components/utils/NewPasswordRoute";
+import EditProfile from "./components/Dashboard/Profile/EditProfile";
 
 import NotFound from "./pages/NotFound/NotFound";
 import LandingPage from "./pages/Landing/LandingPage";
@@ -76,7 +77,10 @@ function App() {
               {/* Header Icon Routes */}
               <Route path="settings" element={<Settings />} />
               <Route path="notification" element={<Notification />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="profile">
+                <Route index element={<Profile />} />
+                <Route path="edit" element={<EditProfile />} />
+              </Route>
 
               <Route path="memory-bank">
                 <Route index element={<MemoryBank/>}/>
