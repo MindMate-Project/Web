@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { loginUser } from "../../redux/slices/authSlice";
-import { toast } from "react-toastify";
 
 const LoginHook = () => {
     const dispatch = useDispatch();
@@ -12,6 +11,7 @@ const LoginHook = () => {
     const [password, setPassword] = useState("");
 
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
     const lastProcessedRes = useRef(null);
     const hasSubmitted = useRef(false);
 
@@ -33,34 +33,24 @@ const LoginHook = () => {
 
     const validationValues = () => {
         let isValid = true;
-        let message = "";
+        let newErrors = {};
         if (!validateEmail(email)) {
             isValid = false;
-            message = "Email not valid";
+            newErrors.email = "Email not valid";
         } else if (password.length < 6) {
             isValid = false;
-            message = "Password must be more than 5 characters";
+            newErrors.password = "Password must be more than 5 characters";
         }
-
-        return [isValid, message];
+        setErrors(newErrors);
+        return isValid;
     };
 
     const res = useSelector((state) => state.authReducer.loginUser);
 
     const onSubmit = (e) => {
         e?.preventDefault();
-        const [isValid, message] = validationValues();
+        const isValid = validationValues();
         if (!isValid) {
-            toast(message, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-                style: { backgroundColor: "white", color: "#0b236c" },
-            });
             return;
         }
 
@@ -92,31 +82,11 @@ const LoginHook = () => {
                         res.data.token,
                     );
                     localStorage.setItem("user", JSON.stringify(res.data.data));
-                    toast("Login successful! Redirecting...", {
-                        position: "top-right",
-                        autoClose: 1500,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                        style: { backgroundColor: "white", color: "#0b236c" },
-                    });
                     setTimeout(() => {
                         navigate("/api/dashboard");
-                    }, 1600);
-                    //
+                    }, 500);
                 } else {
-                    toast("Login failed. Please check your credentials.", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                        style: { backgroundColor: "white", color: "#0b236c" },
-                    });
+                    setErrors({ form: "Login failed. Please check your credentials." });
                 }
             } catch (err) {
                 console.log(err);
@@ -131,6 +101,7 @@ const LoginHook = () => {
         onChangeEmail,
         onChangePassword,
         onSubmit,
+        errors,
     ];
 };
 export default LoginHook;
