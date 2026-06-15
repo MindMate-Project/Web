@@ -11,10 +11,17 @@
     min-height: 100vh;
     background-color: #FFFFFF;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     position: relative;
     overflow-x: hidden;
+}
+
+.verification-page .container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .verification-page .logo-header {
