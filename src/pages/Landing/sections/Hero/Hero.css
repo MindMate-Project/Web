@@ -93,7 +93,7 @@
 /* Mockups Layout (Normal Flow to Prevent Overlapping with Text) */
 .hero-mockups-container {
     width: 100%;
-    margin-bottom: -25px;
+    margin-bottom: -160px; /* Deep negative margin to cut off bottom quarter */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,12 +131,9 @@
     width: 100%;
 }
 
-.mobile-carousel-img {
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    display: block;
+.mobile-carousel-img.iphone-frame {
+    height: 600px;
+    width: 277px;
     margin: 0 auto;
     filter: drop-shadow(0 20px 30px rgba(20, 39, 78, 0.15));
     transition: opacity 0.3s ease;
@@ -164,11 +161,9 @@
     z-index: 10;
 }
 
-.mockup-center img {
-    height: 420px;
-    width: auto;
-    object-fit: contain;
-    display: block;
+.mockup-center .iphone-frame {
+    height: 600px;
+    width: 277px;
     margin: 0 auto;
     filter: drop-shadow(0 30px 50px rgba(20, 39, 78, 0.25));
 }
@@ -180,17 +175,62 @@
     cursor: pointer;
 }
 
-.mockup-side img {
-    height: 350px;
-    width: auto;
-    object-fit: contain;
-    display: block;
+.mockup-side.left:hover {
+    transform: translateY(-20px) translateX(-15px) scale(1.05) rotate(-2deg);
+    z-index: 10;
+}
+
+.mockup-side.right:hover {
+    transform: translateY(-20px) translateX(15px) scale(1.05) rotate(2deg);
+    z-index: 10;
+}
+
+.mockup-side:hover .iphone-frame {
+    animation-play-state: paused;
+}
+
+.mockup-side .iphone-frame {
+    height: 520px;
+    width: 240px;
     animation: floatPhone 4s ease-in-out infinite;
     filter: drop-shadow(0 20px 40px rgba(20, 39, 78, 0.15));
 }
 
-.mockup-side.right img {
+.mockup-side.right .iphone-frame {
     animation-delay: -2s;
+}
+
+/* Custom iPhone 13 Pro Max Frame CSS */
+.iphone-frame {
+    position: relative;
+    background-color: #000;
+    border: 8px solid #1c1c1e;
+    border-radius: 32px;
+    box-shadow: inset 0 0 0 2px #3a3a3c;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.iphone-notch {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45%;
+    height: 18px;
+    background-color: #1c1c1e;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 10;
+}
+
+.iphone-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
 }
 
 @keyframes floatPhone {
@@ -230,15 +270,17 @@
     }
 
     .hero-mockups-container {
-        margin-bottom: -20px;
+        margin-bottom: -140px;
     }
 
-    .mockup-center img {
-        height: 365px;
+    .mockup-center .iphone-frame {
+        height: 520px;
+        width: 240px;
     }
 
-    .mockup-side img {
-        height: 305px;
+    .mockup-side .iphone-frame {
+        height: 450px;
+        width: 208px;
     }
 
     .mockup-side.left {
@@ -271,15 +313,17 @@
     }
 
     .hero-mockups-container {
-        margin-bottom: -15px;
+        margin-bottom: -120px;
     }
 
-    .mockup-center img {
-        height: 320px;
+    .mockup-center .iphone-frame {
+        height: 456px;
+        width: 210px;
     }
 
-    .mockup-side img {
-        height: 270px;
+    .mockup-side .iphone-frame {
+        height: 395px;
+        width: 182px;
     }
 
     .mockup-side.left {
@@ -323,7 +367,7 @@
 
     .hero-mockups-container {
         margin-top: 20px;
-        margin-bottom: -15px;
+        margin-bottom: -130px;
     }
 
     .mobile-carousel-dots {
@@ -336,18 +380,16 @@
 
     .mobile-center {
         display: block !important;
+        height: auto;
     }
 
     .mockup-side {
         display: none !important;
     }
 
-    .mobile-center {
-        height: 350px;
-    }
-    
-    .mockup-center img {
-        height: 350px;
+    .mobile-carousel-img.iphone-frame {
+        height: 500px;
+        width: 231px;
     }
 
     .mockup-center:hover {
@@ -389,7 +431,7 @@
 
     .hero-mockups-container {
         margin-top: 25px;
-        margin-bottom: -15px;
+        margin-bottom: -115px;
     }
 
     .mobile-carousel-dots {
@@ -402,18 +444,16 @@
 
     .mobile-center {
         display: block !important;
+        height: auto;
     }
 
     .mockup-side {
         display: none !important;
     }
 
-    .mobile-center {
-        height: 310px;
-    }
-
-    .mockup-center img {
-        height: 310px;
+    .mobile-carousel-img.iphone-frame {
+        height: 440px;
+        width: 203px;
     }
 
     .mockup-center:hover {

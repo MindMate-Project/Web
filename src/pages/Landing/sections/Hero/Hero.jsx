@@ -3,9 +3,16 @@ import "./Hero.css";
 
 import appleBadge from "../../../../images/Apple.webp";
 import googleBadge from "../../../../images/Google.webp";
-import leftMobile from "../../../../images/landing/hero-left-phone.webp";
-import mainMobile from "../../../../images/landing/hero-middle-phone.webp";
-import rightMobile from "../../../../images/landing/hero-right-phone.webp";
+import leftMobile from "../../../../images/landing/f1pic1.webp";
+import mainMobile from "../../../../images/landing/f1pic2.webp";
+import rightMobile from "../../../../images/landing/f1pic3.webp";
+
+const IPhoneFrame = ({ src, alt, className = "" }) => (
+    <div className={`iphone-frame ${className}`}>
+        <div className="iphone-notch"></div>
+        <img src={src} alt={alt} />
+    </div>
+);
 
 const Hero = () => {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -64,22 +71,21 @@ const Hero = () => {
                 <div className="hero-mockups">
                     {/* Desktop View: Shows all three naturally */}
                     <div className="mockup-side left">
-                        <img src={leftMobile} alt="App Screenshot Left" />
+                        <IPhoneFrame src={leftMobile} alt="App Screenshot Left" />
                     </div>
                     <div className="mockup-center desktop-center">
-                        <img src={mainMobile} alt="App Screenshot Center" />
+                        <IPhoneFrame src={mainMobile} alt="App Screenshot Center" />
                     </div>
                     <div className="mockup-side right">
-                        <img src={rightMobile} alt="App Screenshot Right" />
+                        <IPhoneFrame src={rightMobile} alt="App Screenshot Right" />
                     </div>
 
                     {/* Mobile View: Shows only the active image */}
                     <div className="mockup-center mobile-center">
-                        <img 
+                        <IPhoneFrame 
                             src={mobileImages[activeIndex]} 
                             alt="App Screenshot Mobile" 
                             className="mobile-carousel-img"
-                            data-index={activeIndex}
                         />
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import logo from "../../images/logo.webp";
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
+    const [scrollProgress, setScrollProgress] = useState(0);
     const location = useLocation();
 
     // Check if the current route is auth-related
@@ -52,6 +53,12 @@ const Navbar = () => {
                 current = "download";
             }
 
+            // Calculate Scroll Progress
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            
+            setScrollProgress(scrollPercent);
             setActiveSection(current);
         };
 
@@ -64,6 +71,10 @@ const Navbar = () => {
 
     return (
         <nav className="main-navbar">
+            <div 
+                className="navbar-scroll-progress" 
+                style={{ width: `${scrollProgress}%` }}
+            ></div>
             <div className="navbar-logo">
                 <img src={logo} alt="MindMate" />
                 <span>MindMate</span>

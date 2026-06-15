@@ -11,7 +11,7 @@ const Support = () => {
     ];
 
     return (
-        <div className="support-section" id="support">
+        <div className="landing-support-section" id="support">
             <h2 className="support-title">
                 Supporting Those Who Need Care the Most
             </h2>

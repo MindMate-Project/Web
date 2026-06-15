@@ -56,8 +56,8 @@ const PeaceOfMind = () => {
         {
             id: 6,
             number: "6",
-            title: "Unnoticed Emergencies",
-            description: "Lack of immediate contact during an incident is dangerous. Smart notifications ensure caregivers are instantly alerted.",
+            title: "Smart Notifications",
+            description: "Receive instant, real-time updates directly to your phone. MindMate's smart alerts ensure you stay informed about your loved one's daily activities without needing to constantly check.",
             image: NotificationImg
         },
         {
