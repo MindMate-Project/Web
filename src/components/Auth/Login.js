@@ -1,16 +1,14 @@
-import google from "../../images/google.svg";
 import "./Login.css";
 import LoginHook from "../../hook/auth/login-hook";
-import { ToastContainer } from "react-toastify";
 import ImageSlider from "../ImageSlider/ImageSlider";
-import Navbar from "../Navbar/Navbar";
+import AuthNavbar from "../AuthNavbar/AuthNavbar";
 
 function Login() {
-    const [email, password, , onChangeEmail, onChangePassword, onSubmit] =
+    const [email, password, loading, onChangeEmail, onChangePassword, onSubmit, errors] =
         LoginHook();
     return (
         <div className="login">
-            <Navbar />
+            <AuthNavbar />
             <div className="container">
                 <div className="left">
                     <ImageSlider />
@@ -26,7 +24,9 @@ function Login() {
                                     placeholder="@gmail.com"
                                     value={email}
                                     onChange={onChangeEmail}
+                                    className={errors?.email ? "input-error" : ""}
                                 />
+                                {errors?.email && <span className="error-text">{errors.email}</span>}
                             </div>
 
                             <div className="field">
@@ -36,7 +36,9 @@ function Login() {
                                     placeholder="***********"
                                     value={password}
                                     onChange={onChangePassword}
+                                    className={errors?.password ? "input-error" : ""}
                                 />
+                                {errors?.password && <span className="error-text">{errors.password}</span>}
                                 <div className="option-forgot-password">
                                     <p className="forgot-password">
                                         {" "}
@@ -46,15 +48,16 @@ function Login() {
                                     </p>
                                 </div>
                             </div>
+                            
+                            {errors?.form && <div className="form-error">{errors.form}</div>}
 
-                            <button type="submit" onClick={onSubmit}>
-                                Log In
-                            </button>
-                            <button className="google-login" type="button">
-                                <span className="google-icon">
-                                    <img src={google} alt="Google Icon" />
-                                </span>{" "}
-                                Continue with Google
+                            <button 
+                                type="submit" 
+                                onClick={onSubmit} 
+                                disabled={loading}
+                                className={`submit-btn ${loading ? 'loading' : ''}`}
+                            >
+                                {loading ? <span className="auth-spinner"></span> : "Log In"}
                             </button>
                             <div className="signup-redirect">
                                 <p className="signup-link">
@@ -66,7 +69,6 @@ function Login() {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 }
