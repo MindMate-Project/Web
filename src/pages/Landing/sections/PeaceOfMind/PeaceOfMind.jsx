@@ -84,18 +84,18 @@ const PeaceOfMind = () => {
         }
     }, []);
 
-    // Auto-scroll every 4 seconds
-    const startAutoScroll = useCallback(() => {
-        stopAutoScroll();
-        autoScrollRef.current = setInterval(scrollNext, 4000);
-    }, [scrollNext]);
-
     const stopAutoScroll = useCallback(() => {
         if (autoScrollRef.current) {
             clearInterval(autoScrollRef.current);
             autoScrollRef.current = null;
         }
     }, []);
+
+    // Auto-scroll every 4 seconds
+    const startAutoScroll = useCallback(() => {
+        stopAutoScroll();
+        autoScrollRef.current = setInterval(scrollNext, 4000);
+    }, [scrollNext, stopAutoScroll]);
 
     useEffect(() => {
         startAutoScroll();
