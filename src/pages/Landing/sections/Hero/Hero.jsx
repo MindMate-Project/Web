@@ -19,13 +19,7 @@ const Hero = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const nextImage = () => {
-        setActiveIndex((prev) => (prev + 1) % 3);
-    };
 
-    const prevImage = () => {
-        setActiveIndex((prev) => (prev === 0 ? 2 : prev - 1));
-    };
 
     return (
         <div className="hero-section" id="home">
