@@ -1,8 +1,7 @@
 import "./SignUp.css";
 import SignupHook from "./../../hook/auth/signup-hook";
-import { ToastContainer } from "react-toastify";
 import ImageSlider from "../ImageSlider/ImageSlider";
-import Navbar from "../Navbar/Navbar";
+import AuthNavbar from "../AuthNavbar/AuthNavbar";
 
 function SignupPage() {
     const [
@@ -23,10 +22,12 @@ function SignupPage() {
         onChangePassword,
         onChangeConfirmPassword,
         onSubmit,
+        loading,
+        errors,
     ] = SignupHook();
     return (
         <div className="signup">
-            <Navbar />
+            <AuthNavbar />
             <div className="container">
                 <div className="left">
                     <ImageSlider />
@@ -44,7 +45,9 @@ function SignupPage() {
                                         placeholder="Mahmoud"
                                         value={firstName}
                                         onChange={onChangeFirstName}
+                                        className={errors?.firstName ? "input-error" : ""}
                                     />
+                                    {errors?.firstName && <span className="error-text">{errors.firstName}</span>}
                                 </div>
 
                                 <div className="field">
@@ -54,7 +57,9 @@ function SignupPage() {
                                         placeholder="Abdellah"
                                         value={lastName}
                                         onChange={onChangeLastName}
+                                        className={errors?.lastName ? "input-error" : ""}
                                     />
+                                    {errors?.lastName && <span className="error-text">{errors.lastName}</span>}
                                 </div>
                             </div>
 
@@ -65,7 +70,9 @@ function SignupPage() {
                                     placeholder="@gmail.com"
                                     value={email}
                                     onChange={onChangeEmail}
+                                    className={errors?.email ? "input-error" : ""}
                                 />
+                                {errors?.email && <span className="error-text">{errors.email}</span>}
                             </div>
 
                             <div className="field">
@@ -75,7 +82,9 @@ function SignupPage() {
                                     placeholder="***********"
                                     value={phone}
                                     onChange={onChangePhone}
+                                    className={errors?.phone ? "input-error" : ""}
                                 />
+                                {errors?.phone && <span className="error-text">{errors.phone}</span>}
                             </div>
 
                             <div className="row dob-gender-row">
@@ -85,8 +94,9 @@ function SignupPage() {
                                         type="date"
                                         value={birthDate}
                                         onChange={onChangeBirthDate}
-                                        required
+                                        className={errors?.birthDate ? "input-error" : ""}
                                     />
+                                    {errors?.birthDate && <span className="error-text">{errors.birthDate}</span>}
                                 </div>
 
                                 <div className="field">
@@ -113,6 +123,7 @@ function SignupPage() {
                                             Female
                                         </label>
                                     </div>
+                                    {errors?.gender && <span className="error-text">{errors.gender}</span>}
                                 </div>
                             </div>
 
@@ -123,7 +134,9 @@ function SignupPage() {
                                     placeholder="***********"
                                     value={password}
                                     onChange={onChangePassword}
+                                    className={errors?.password ? "input-error" : ""}
                                 />
+                                {errors?.password && <span className="error-text">{errors.password}</span>}
                             </div>
 
                             <div className="field">
@@ -133,11 +146,20 @@ function SignupPage() {
                                     placeholder="***********"
                                     value={confirmPassword}
                                     onChange={onChangeConfirmPassword}
+                                    className={errors?.confirmPassword ? "input-error" : ""}
                                 />
+                                {errors?.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
                             </div>
+                            
+                            {errors?.form && <div className="form-error">{errors.form}</div>}
 
-                            <button type="submit" onClick={onSubmit}>
-                                Sign Up
+                            <button 
+                                type="submit" 
+                                onClick={onSubmit} 
+                                disabled={loading}
+                                className={`submit-btn ${loading ? 'loading' : ''}`}
+                            >
+                                {loading ? <span className="auth-spinner"></span> : "Sign Up"}
                             </button>
                             <div className="login-redirect">
                                 <p className="login-link">
@@ -149,7 +171,6 @@ function SignupPage() {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 }

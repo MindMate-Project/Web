@@ -395,3 +395,25 @@
 .login .main-navbar .navbar-links a:hover {
     color: #151D48 !important;
 }
+
+/* Error States */
+.input-error {
+    border-color: #DE5753 !important;
+}
+
+.error-text {
+    color: #DE5753;
+    font-size: 12px;
+    margin: 0;
+}
+
+.form-error {
+    color: #DE5753;
+    background-color: #FDE8E8;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 16px;
+    border: 1px solid #F9C8C8;
+}

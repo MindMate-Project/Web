@@ -5,4 +5,5 @@ body{
     font-family: 'Poppins', 'Nunito', sans-serif;
     --primary-bg: #5EA5C0;
     overflow-y: scroll; /* Force vertical scrollbar to prevent horizontal navbar jumps between long/short pages */
+    overflow-x: hidden; /* Prevent horizontal scrollbar from 100vw elements */
 }

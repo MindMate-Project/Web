@@ -1,29 +1,23 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { forgetPassword } from "../../redux/slices/authSlice";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 const ResendCodeHook = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     const onResendCode = async () => {
         const email = localStorage.getItem("user-email");
 
         if (!email) {
-            toast("Email not found, try logging in again", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-                style: { backgroundColor: "white", color: "#0b236c" },
-            });
+            setError("Email not found, try logging in again");
             return;
         }
 
+        setError("");
+        setMessage("");
         setLoading(true);
 
         await dispatch(
@@ -33,21 +27,13 @@ const ResendCodeHook = () => {
         );
 
         setLoading(false);
-
-        toast("Verification code resent to your email", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-            style: { backgroundColor: "white", color: "#0b236c" },
-        });
-        navigate("/api/auth/verify-reset-code");
+        setMessage("Verification code resent to your email");
+        setTimeout(() => {
+            navigate("/api/auth/verify-reset-code");
+        }, 1000);
     };
 
-    return [onResendCode, loading];
+    return [onResendCode, loading, message, error];
 };
 
 export default ResendCodeHook;

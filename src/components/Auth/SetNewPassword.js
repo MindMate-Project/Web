@@ -1,7 +1,7 @@
 import "./SetNewPassword.css";
 import ResetPasswordHook from "../../hook/auth/reset-password-hook";
-import { ToastContainer } from "react-toastify";
-import logo from "../../images/logo.png";
+import AuthNavbar from "../AuthNavbar/AuthNavbar";
+
 function SetNewPassword() {
     const [
         password,
@@ -9,15 +9,14 @@ function SetNewPassword() {
         OnChangePassword,
         OnChangeConfirmPassword,
         onSubmit,
+        loading,
+        errors,
     ] = ResetPasswordHook();
 
     // const navigate = useNavigate();
     return (
         <div className="set-pass">
-            <div className="logo-header">
-                <img src={logo} alt="Logo" />
-                <h1 className="brand-title">MindMate</h1>
-            </div>
+            <AuthNavbar />
             <div className="container">
                 <div className="right">
                     <div className="card">
@@ -33,7 +32,9 @@ function SetNewPassword() {
                                     onChange={OnChangePassword}
                                     type="password"
                                     placeholder="************"
+                                    className={errors?.password ? "input-error" : ""}
                                 />
+                                {errors?.password && <span className="error-text">{errors.password}</span>}
                             </div>
                             <div className="field">
                                 <label>Confirm Password</label>
@@ -42,16 +43,25 @@ function SetNewPassword() {
                                     onChange={OnChangeConfirmPassword}
                                     type="password"
                                     placeholder="************"
+                                    className={errors?.confirmPassword ? "input-error" : ""}
                                 />
+                                {errors?.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
                             </div>
-                            <button type="button" onClick={onSubmit}>
-                                Save
+                            
+                            {errors?.form && <div className="form-error">{errors.form}</div>}
+                            
+                            <button 
+                                type="button" 
+                                onClick={onSubmit} 
+                                disabled={loading}
+                                className={`submit-btn ${loading ? 'loading' : ''}`}
+                            >
+                                {loading ? <span className="auth-spinner"></span> : "Save"}
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 }

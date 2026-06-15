@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./ImageSlider.css";
-import img1 from "../../images/img1.png";
-import img2 from "../../images/img2.png";
-import img3 from "../../images/img3.png";
-import img4 from "../../images/img4.png";
+import img1 from "../../images/img1.webp";
+import img2 from "../../images/img2.webp";
+import img3 from "../../images/img3.webp";
+import img4 from "../../images/img4.webp";
 
 const images = [img1, img2, img3, img4];
 

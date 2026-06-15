@@ -1,18 +1,15 @@
 import "./ForgetPassword.css";
 import { useNavigate } from "react-router";
 import ForgetPasswordHook from "../../hook/auth/forget-password-hook";
-import { ToastContainer } from "react-toastify";
-import logo from "../../images/logo.png";
+import AuthNavbar from "../AuthNavbar/AuthNavbar";
+
 function ForgetPassword() {
     const navigate = useNavigate();
-    const [OnChangeEmail, email, onSubmit] = ForgetPasswordHook();
+    const [OnChangeEmail, email, onSubmit, loading, errors, successMessage] = ForgetPasswordHook();
 
     return (
         <div className="fo-pass">
-            <div className="logo-header">
-                <img src={logo} alt="Logo" />
-                <h1 className="brand-title">MindMate</h1>
-            </div>
+            <AuthNavbar />
             <div className="container">
                 <div className="right">
                     <div className="card">
@@ -32,12 +29,21 @@ function ForgetPassword() {
                                     value={email}
                                     type="email"
                                     placeholder="@gmail.com"
+                                    className={errors?.email ? "input-error" : ""}
                                 />
+                                {errors?.email && <span className="error-text">{errors.email}</span>}
                             </div>
+                            
+                            {errors?.form && <div className="form-error">{errors.form}</div>}
+                            {successMessage && <div style={{color: "#4FCB93", background: "#E8FDF3", padding: "10px", borderRadius: "8px", fontSize: "14px", marginBottom: "16px", border: "1px solid #C4F3DD", textAlign: "center"}}>{successMessage}</div>}
 
-                            <button type="submit" onClick={onSubmit}>
-                                {" "}
-                                Send Code{" "}
+                            <button 
+                                type="submit" 
+                                onClick={onSubmit} 
+                                disabled={loading}
+                                className={`submit-btn ${loading ? 'loading' : ''}`}
+                            >
+                                {loading ? <span className="auth-spinner"></span> : "Send Code"}
                             </button>
 
                             <button
@@ -51,7 +57,6 @@ function ForgetPassword() {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 }

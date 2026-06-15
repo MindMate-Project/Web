@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyResetCode } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
-
 const VerifyResetCodeHook = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [code, setCode] = useState(["", "", "", "", "",""]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const isPress = useRef(false);
+    const [errors, setErrors] = useState({});
 
     const inputsRef = useRef([]);
     const OnChangeCode = (e, index) => {
@@ -60,19 +60,12 @@ const VerifyResetCodeHook = () => {
 
     const onSubmit = async () => {
         const joinedCode = code.join("");
-        if (joinedCode.trim() === "") {
-            toast("Please enter your reset code", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-                style: { backgroundColor: "white", color: "#0b236c" },
-            });
+        if (joinedCode.trim().length !== 6) {
+            setErrors({ form: "Please enter your 6-digit reset code" });
             return;
         }
+        setErrors({});
+        isPress.current = true;
         setLoading(true);
         await dispatch(
             verifyResetCode({
@@ -85,23 +78,15 @@ const VerifyResetCodeHook = () => {
     const res = useSelector((state) => state.authReducer.verifyResetCode);
 
     useEffect(() => {
-        if (loading === false) {
+        if (loading === false && isPress.current === true) {
+            isPress.current = false;
             if (res) {
                 if (res.status === 200) {
                     localStorage.setItem("reset-code-verified", "true");
-                    toast("Reset code verified successfully", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                        style: { backgroundColor: "white", color: "#0b236c" },
-                    });
+                    localStorage.setItem("reset-code", code.join(""));
                     setTimeout(() => {
                         navigate("/api/auth/verification-success");
-                    }, 1500);
+                    }, 500);
                 } else {
                     setTimeout(() => {
                         navigate("/api/auth/verification-error");
@@ -109,9 +94,9 @@ const VerifyResetCodeHook = () => {
                 }
             }
         }
-    }, [loading, res, navigate]);
+    }, [loading, res, navigate, code]);
 
-    return [code, OnChangeCode, onSubmit, onPasteCode, onKeyDown, inputsRef];
+    return [code, OnChangeCode, onSubmit, onPasteCode, onKeyDown, inputsRef, loading, errors];
 };
 
 export default VerifyResetCodeHook;

@@ -1,15 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { forgetPassword } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
-
 
 const ForgetPasswordHook = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const isPress = useRef(false);
+    const [errors, setErrors] = useState({});
+    const [successMessage, setSuccessMessage] = useState("");
+
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            );
+    };
 
     const OnChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -18,19 +27,16 @@ const ForgetPasswordHook = () => {
 const onSubmit = async (e) => {
     e.preventDefault();
         if (email === "") {
-             toast('Please enter your email address', {
-                 position: "top-right",
-                 autoClose: 3000,
-                 hideProgressBar: false,
-                 closeOnClick: true,
-                 pauseOnHover: true,
-                 draggable: true,
-                 theme: "light",
-                 style: { backgroundColor: "white", color: "#0b236c" },
-             });
+             setErrors({email: "Please enter your email address"});
             return;
+        } else if (!validateEmail(email)) {
+             setErrors({email: "Email is not valid"});
+             return;
         }
+        setErrors({});
+        setSuccessMessage("");
         localStorage.setItem("user-email", email);
+        isPress.current = true;
         setLoading(true);
         await dispatch(
             forgetPassword({
@@ -43,49 +49,26 @@ const onSubmit = async (e) => {
     const res = useSelector((state) => state.authReducer.forgetPassword);
 
     useEffect(() => {
-        if (loading === false) {
+        if (loading === false && isPress.current === true) {
+            isPress.current = false;
             if (res) {
                 if (res.status === 200) {
-                    toast("Verification code sent to your email", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                    });
+                    setSuccessMessage("If an account exists for that email, a password reset code has been sent.");
                     setTimeout(() => {
                         navigate("/api/auth/verify-reset-code");
-                    }, 2000);
+                    }, 5000);
                 }
                 else if (res.status === 404) {
-                    toast("This account does not exist", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                    });
+                    setErrors({ form: "This account does not exist" });
                 }
                 else{
-                    toast("An error occurred while processing your request", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                    });
+                    setErrors({ form: "An error occurred while processing your request" });
                 }
             }
         }
     }, [loading, res, navigate]);
 
-    return [OnChangeEmail, email, onSubmit];
+    return [OnChangeEmail, email, onSubmit, loading, errors, successMessage];
 };
 
 export default ForgetPasswordHook;

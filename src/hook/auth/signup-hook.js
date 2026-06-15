@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { createNewUser } from "../../redux/slices/authSlice";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const SignupHook = () => {
     const dispatch = useDispatch();
@@ -19,6 +17,7 @@ const SignupHook = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
     const lastProcessedRes = useRef(null);
     const hasSubmitted = useRef(false);
 
@@ -79,33 +78,41 @@ const SignupHook = () => {
 
     const validationValues = () => {
         let isValid = true;
-        let message = "";
+        let newErrors = {};
         if (firstName === "") {
             isValid = false;
-            message = "First name is required";
-        } else if (lastName === "") {
+            newErrors.firstName = "First name is required";
+        } 
+        if (lastName === "") {
             isValid = false;
-            message = "Last name is required";
-        } else if (!validateEmail(email)) {
+            newErrors.lastName = "Last name is required";
+        } 
+        if (!validateEmail(email)) {
             isValid = false;
-            message = "Email is not valid";
-        } else if (!validatePhoneNumber(phone)) {
+            newErrors.email = "Email is not valid";
+        } 
+        if (!validatePhoneNumber(phone)) {
             isValid = false;
-            message = "Phone number is not valid";
-        } else if (!validateBirthDate(birthDate)) {
+            newErrors.phone = "Phone number is not valid";
+        } 
+        if (!validateBirthDate(birthDate)) {
             isValid = false;
-            message = "Birth date is not valid";
-        } else if (!gender) {
+            newErrors.birthDate = "Birth date is required";
+        } 
+        if (!gender) {
             isValid = false;
-            message = "Gender is required";
-        } else if (password.length < 6) {
+            newErrors.gender = "Gender is required";
+        } 
+        if (password.length < 6) {
             isValid = false;
-            message = "Password must be more than 5 characters";
-        } else if (password !== confirmPassword) {
+            newErrors.password = "Password must be at least 6 characters";
+        } 
+        if (password !== confirmPassword) {
             isValid = false;
-            message = "Passwords do not match";
+            newErrors.confirmPassword = "Passwords do not match";
         }
-        return [isValid, message];
+        setErrors(newErrors);
+        return isValid;
     };
 
     const res = useSelector((state) => state.authReducer.createUser);
@@ -113,9 +120,8 @@ const SignupHook = () => {
     const onSubmit = (e) => {
         e?.preventDefault();
 
-        const [isValid, message] = validationValues();
+        const isValid = validationValues();
         if (!isValid) {
-            alert(message);
             return;
         }
         lastProcessedRes.current = res;
@@ -148,34 +154,11 @@ const SignupHook = () => {
             setLoading(false);
 
             if (res.status === 201) {
-                // alert("Account created successfully!");
-                toast(
-                    "Account created successfully! Please verify your email. check your inbox",
-                    {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        theme: "light",
-                        style: { backgroundColor: "white", color: "#0b236c" },
-                    },
-                );
                 setTimeout(() => {
                     navigate("/api/auth/login");
-                }, 3000);
+                }, 500);
             } else {
-                // console.log('this is res',res);
-                toast.error(`Error Creating Account ,${res.data.message}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    theme: "light",
-                });
+                setErrors({ form: `Error Creating Account, ${res.data.message}` });
             }
         }
     }, [loading, res, navigate]);
@@ -198,6 +181,8 @@ const SignupHook = () => {
         onChangePassword,
         onChangeConfirmPassword,
         onSubmit,
+        loading,
+        errors,
     ];
 };
 export default SignupHook;

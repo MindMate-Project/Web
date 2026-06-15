@@ -6,11 +6,15 @@ nav.main-navbar {
     width: 100%;
     box-sizing: border-box;
     padding: 14px 60px;
-    background: transparent;
-    max-width: 1400px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     margin: 0 auto;
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .main-navbar .navbar-logo {
@@ -44,21 +48,22 @@ nav.main-navbar {
 
 .main-navbar .navbar-links a {
     text-decoration: none;
-    color: #5EA5C0;
+    color: #64748B;
     font-weight: 500;
     font-size: 15px;
     transition: color 0.2s;
     position: relative;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
 }
 
 .main-navbar .navbar-links a.active {
-    color: #151D48;
-    border-bottom: 2px solid #151D48;
-    padding-bottom: 4px;
+    color: #5EA5C0;
+    border-bottom: 2px solid #5EA5C0;
 }
 
 .main-navbar .navbar-links a:hover {
-    color: #151D48;
+    color: #5EA5C0;
 }
 
 .main-navbar .navbar-actions {

@@ -5,7 +5,7 @@ import useGetProfile from "../../hook/profile/useGetProfile";
 
 import "./DashboardLayout.css";
 
-import logo from "./../../images/logo.png";
+import logo from "./../../images/logo.webp";
 import dashboard from "./../../images/dashboard.svg";
 import patients from "./../../images/patients.svg";
 import location from "./../../images/location.svg";
