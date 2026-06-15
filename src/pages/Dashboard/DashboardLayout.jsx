@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import "./DashboardLayout.css";
 
-import logo from "./../../images/logo.png";
+import logo from "./../../images/logo.webp";
 import dashboard from "./../../images/dashboard.svg";
 import patients from "./../../images/patients.svg";
 import location from "./../../images/location.svg";
