@@ -1,0 +1,96 @@
+.auth-navbar {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 60px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.auth-navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 28px;
+    font-weight: 450;
+    color: #151D48;
+    text-decoration: none;
+    z-index: 1001;
+    position: relative;
+}
+
+.auth-navbar-logo img {
+    height: 38px;
+}
+
+.auth-back-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #64748B;
+    text-decoration: none;
+    transition: color 0.2s;
+    background: #ffffff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(21, 29, 72, 0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.auth-back-link:hover {
+    color: #5EA5C0;
+    border-color: #5EA5C0;
+    box-shadow: 0 4px 10px rgba(94, 165, 192, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .auth-navbar {
+        padding: 14px 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-navbar {
+        padding: 14px 20px;
+    }
+    
+    .auth-navbar-logo {
+        font-size: 24px;
+    }
+
+    .auth-navbar-logo img {
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-navbar {
+        padding: 14px 15px;
+    }
+    
+    .auth-navbar-logo {
+        font-size: 22px;
+        gap: 8px;
+    }
+
+    .auth-navbar-logo img {
+        height: 30px;
+    }
+    
+    .auth-back-link {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+}
