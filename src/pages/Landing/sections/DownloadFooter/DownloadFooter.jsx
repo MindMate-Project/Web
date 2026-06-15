@@ -144,7 +144,9 @@ const DownloadFooter = () => {
                 <div className="footer-bottom-line"></div>
                 <div className="footer-copyright">
                     <p>&copy; {new Date().getFullYear()} MindMate. All rights reserved.</p>
-                    <p className="made-with-love">Made with ❤️ by the MindMate Team</p>
+                    <p className="made-with-love">
+                        Made with <span className="heart-pulse">❤️</span> by the <span className="team-font">MindMate Team</span>
+                    </p>
                 </div>
             </div>
 
