@@ -1,0 +1,147 @@
+.story-section {
+    padding: 80px 40px;
+    background-color: #FFFFFF;
+}
+
+.story-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.story-title {
+    font-size: 36px;
+    color: #14274E;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 50px;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.story-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    padding-top: 100px;
+}
+
+.story-title .highlight-text {
+    color: #5EA5C0;
+}
+
+.story-paragraph {
+    font-size: 19px;
+    line-height: 1.8;
+    color: #556987;
+    text-align: left;
+    font-weight: 400;
+}
+
+.story-bold-underline {
+    font-weight: 700;
+}
+
+.story-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-img {
+    width: 100%;
+    max-width: 500px;
+    object-fit: contain;
+    border-radius: 20px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.story-img:hover {
+    transform: scale(1.03);
+}
+
+/* ================= Responsive Queries ================= */
+
+@media (max-width: 1200px) {
+    .story-grid {
+        gap: 40px;
+    }
+    
+    .story-content {
+        padding-top: 60px; /* Scale down the offset gradually */
+    }
+}
+
+@media (max-width: 992px) {
+    .story-grid {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .story-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .story-content {
+        align-items: flex-start; /* Keep text left-aligned for readability */
+        padding-top: 0;
+        width: 100%;
+        max-width: 650px;
+    }
+
+    .story-paragraph {
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .story-img {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .story-section {
+        padding: 60px 20px;
+    }
+    
+    .story-title {
+        font-size: 28px;
+    }
+    
+    .story-img {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .story-section {
+        padding: 40px 15px;
+    }
+
+    .story-title {
+        font-size: 24px;
+    }
+
+    .story-paragraph {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+    
+    .story-img {
+        max-width: 100%;
+    }
+}
