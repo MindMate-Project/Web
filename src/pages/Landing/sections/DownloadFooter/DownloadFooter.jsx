@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./DownloadFooter.css";
 import { 
     IoCallOutline, 
@@ -109,17 +110,16 @@ const DownloadFooter = () => {
                             <li><a href="#home">Home</a></li>
                             <li><a href="#about">About Us</a></li>
                             <li><a href="#features">Features</a></li>
-                            <li><a href="#team">Our Team</a></li>
+                            <li><a href="https://github.com/orgs/MindMate-Project/people" target="_blank" rel="noopener noreferrer">Our Team</a></li>
                         </ul>
                     </div>
 
                     <div className="footer-col">
                         <h4 className="footer-col-title">Support</h4>
                         <ul className="footer-links">
-                            <li><a href="#help">Help Center</a></li>
-                            <li><a href="#privacy">Privacy Policy</a></li>
-                            <li><a href="#terms">Terms & Conditions</a></li>
-                            <li><a href="#faq">FAQs</a></li>
+                            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                            <li><Link to="/terms-and-conditions">Terms & Conditions</Link></li>
+                            <li><Link to="/faq">FAQs</Link></li>
                         </ul>
                     </div>
 

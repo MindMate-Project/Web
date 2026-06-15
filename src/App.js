@@ -37,6 +37,9 @@ import EditProfile from "./components/Dashboard/Profile/EditProfile";
 
 import NotFound from "./pages/NotFound/NotFound";
 import LandingPage from "./pages/Landing/LandingPage";
+import PrivacyPolicy from "./pages/Support/PrivacyPolicy";
+import TermsAndConditions from "./pages/Support/TermsAndConditions";
+import FAQPage from "./pages/Support/FAQPage";
 
 function App() {
   return (
@@ -44,6 +47,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/faq" element={<FAQPage />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/api/dashboard/" element={<DashboardLayout />}>
