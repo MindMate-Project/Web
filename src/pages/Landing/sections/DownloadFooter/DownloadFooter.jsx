@@ -93,13 +93,13 @@ const DownloadFooter = () => {
                             Empowering Alzheimer's patients and caregivers through intelligent monitoring, reminders, and compassionate support.
                         </p>
                         <div className="social-links">
-                            <a href="#" aria-label="Facebook"><IoLogoFacebook /></a>
+                            <a href="#!" aria-label="Facebook"><IoLogoFacebook /></a>
                             <span className="social-divider">|</span>
-                            <a href="#" aria-label="Instagram"><IoLogoInstagram /></a>
+                            <a href="#!" aria-label="Instagram"><IoLogoInstagram /></a>
                             <span className="social-divider">|</span>
-                            <a href="#" aria-label="Twitter"><IoLogoTwitter /></a>
+                            <a href="#!" aria-label="Twitter"><IoLogoTwitter /></a>
                             <span className="social-divider">|</span>
-                            <a href="#" aria-label="YouTube"><IoLogoYoutube /></a>
+                            <a href="#!" aria-label="YouTube"><IoLogoYoutube /></a>
                         </div>
                     </div>
 
