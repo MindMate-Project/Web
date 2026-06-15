@@ -58,18 +58,22 @@
   margin-bottom: 44px;
 }
 
+/* ── Avatar wrapper — CRITICAL: position:relative for pencil + dropdown anchoring ── */
 .edit-profile-page-avatar-wrapper {
   flex-shrink: 0;
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  overflow: hidden;
+  overflow: visible;           /* allow pencil btn & dropdown to escape the circle */
   background-color: #eaecef;
+  position: relative;          /* anchor for .ep-avatar-edit-btn & .ep-avatar-dropdown */
 }
 
+/* Inner clip so the image itself stays circular */
 .edit-profile-page-avatar {
-  width: 100%;
-  height: 100%;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
   object-fit: cover;
   display: block;
 }
@@ -113,7 +117,7 @@
 }
 
 .edit-profile-page-label {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   color: #14274E;
 }
@@ -124,8 +128,8 @@
   border: 1px solid #F4F4F4;
   border-radius: 9px;
   padding: 12px 16px;
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 400;
   color: #6C7278;
   height: 46px;
   width: 100%;
@@ -288,6 +292,11 @@
     height: 110px;
   }
 
+  .edit-profile-page-avatar {
+    width: 110px;
+    height: 110px;
+  }
+
   .edit-profile-page-field-group {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -325,6 +334,11 @@
     height: 80px;
   }
 
+  .edit-profile-page-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
   .edit-profile-page-input,
   .edit-profile-page-select {
     font-size: 12px;
@@ -335,4 +349,420 @@
   .edit-profile-page-select {
     padding-right: 32px;
   }
+}
+
+
+/* ── Default avatar placeholder (no photo state) ──
+   When the src is the SVG icon, contain + padding centres it.
+   A real photo overrides this via the .ep-has-photo modifier
+   added in JS — but since we can't easily detect that in pure CSS,
+   we use object-fit:cover always and rely on the SVG being
+   naturally square and filling the circle cleanly.
+   The grey background on the wrapper is the visual container. ── */
+.edit-profile-page-avatar-wrapper {
+  background-color: #EFEFEF;   /* grey circle when no photo */
+}
+
+
+/* =============================================
+   Avatar Editor System
+   All ep-* selectors are fully isolated.
+   Zero impact on any .edit-profile-page-* rule.
+   ============================================= */
+
+/* ── Pencil edit button ── */
+.ep-avatar-edit-btn {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #5EA5C0;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  /* Must NOT affect layout — it is taken out of flow via position:absolute */
+}
+
+.ep-avatar-edit-btn:hover {
+  background-color: #427A90;
+  transform: scale(1.1);
+}
+
+.ep-avatar-edit-btn:disabled {
+  background-color: #a0c8d8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Spinner (reused inside btn and delete modal) ── */
+.ep-avatar-edit-spinner {
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: ep-spin 0.7s linear infinite;
+  display: block;
+  flex-shrink: 0;
+}
+
+@keyframes ep-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Dropdown ──
+   position:absolute keeps it out of normal flow.
+   It will NOT push the form or any sibling element.
+   overflow:visible on the wrapper lets it escape the circle.
+──────────────────────────────────────────────────── */
+.ep-avatar-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 190px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(20, 30, 60, 0.14);
+  padding: 6px 0;
+  z-index: 200;                /* above page content, below modals */
+  animation: ep-dropdown-in 0.14s ease;
+}
+
+@keyframes ep-dropdown-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ep-avatar-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: #14274E;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  line-height: 1;
+  transition: background-color 0.14s ease;
+}
+
+.ep-avatar-dropdown-item:hover:not(:disabled) {
+  background-color: #F4F4F4;
+}
+
+.ep-avatar-dropdown-item:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ep-avatar-dropdown-item--danger {
+  color: #d94f4f;
+}
+
+.ep-avatar-dropdown-item--danger:hover:not(:disabled) {
+  background-color: #fff0f0;
+}
+
+.ep-avatar-dropdown-divider {
+  height: 1px;
+  background-color: #F0F0F0;
+  margin: 4px 0;
+}
+
+/* =============================================
+   Modals
+   position:fixed + z-index:9999 guarantees they
+   sit above everything and never affect layout.
+   ============================================= */
+
+.ep-modal-overlay {
+  position: fixed;
+  inset: 0;                    /* top/right/bottom/left: 0 */
+  background: rgba(20, 30, 60, 0.46);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;               /* highest layer — never blocked */
+  animation: ep-overlay-in 0.18s ease;
+  /* Prevent page scroll while modal is open */
+  overflow: hidden;
+}
+
+@keyframes ep-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.ep-modal {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(20, 30, 60, 0.2);
+  padding: 28px;
+  width: 100%;
+  box-sizing: border-box;
+  animation: ep-modal-in 0.2s cubic-bezier(0.34, 1.25, 0.64, 1);
+  /* Modals are removed from document flow via the fixed overlay */
+}
+
+@keyframes ep-modal-in {
+  from { opacity: 0; transform: scale(0.93) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* ── Crop modal ── */
+.ep-crop-modal {
+  max-width: 360px;
+}
+
+.ep-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ep-modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #151D48;
+}
+
+.ep-modal-close-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #F4F4F4;
+  color: #6C7278;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background-color 0.14s ease;
+}
+
+.ep-modal-close-btn:hover {
+  background-color: #e8e8e8;
+}
+
+.ep-crop-hint {
+  font-size: 12px;
+  color: #A9A9A9;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.ep-crop-canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.ep-crop-canvas {
+  border-radius: 50%;
+  display: block;
+  touch-action: none;
+  box-shadow: 0 0 0 4px rgba(94, 165, 192, 0.18);
+}
+
+/* ── Zoom slider ── */
+.ep-zoom-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.ep-zoom-label {
+  font-size: 12px;
+  color: #6C7278;
+  white-space: nowrap;
+  min-width: 32px;
+  flex-shrink: 0;
+}
+
+.ep-zoom-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: #E0E0E0;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.ep-zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #5EA5C0;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(94, 165, 192, 0.45);
+  cursor: pointer;
+  transition: transform 0.14s ease;
+}
+
+.ep-zoom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.ep-zoom-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #5EA5C0;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(94, 165, 192, 0.45);
+  cursor: pointer;
+}
+
+/* ── Delete confirm modal ── */
+.ep-confirm-modal {
+  max-width: 320px;
+  text-align: center;
+}
+
+.ep-confirm-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: #d94f4f;
+  flex-shrink: 0;
+}
+
+.ep-confirm-icon-wrap svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.ep-confirm-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #151D48;
+  margin: 0 0 8px 0;
+}
+
+.ep-confirm-body {
+  font-size: 13px;
+  color: #6C7278;
+  margin: 0 0 24px 0;
+  line-height: 1.55;
+}
+
+/* ── Modal action row ── */
+.ep-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.ep-modal-btn {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1;
+  transition: background-color 0.16s ease, transform 0.12s ease;
+  flex-shrink: 0;
+}
+
+.ep-modal-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.ep-modal-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.ep-modal-btn--primary {
+  background: #5EA5C0;
+  color: #ffffff;
+}
+
+.ep-modal-btn--primary:hover:not(:disabled) {
+  background: #427A90;
+}
+
+.ep-modal-btn--secondary {
+  background: #F4F4F4;
+  color: #151D48;
+}
+
+.ep-modal-btn--secondary:hover:not(:disabled) {
+  background: #e8e8e8;
+}
+
+.ep-modal-btn--danger {
+  background: #d94f4f;
+  color: #ffffff;
+  min-width: 96px;
+}
+
+.ep-modal-btn--danger:hover:not(:disabled) {
+  background: #b83a3a;
+}
+
+/* ── Modal responsive ── */
+@media (max-width: 480px) {
+  .ep-crop-modal,
+  .ep-confirm-modal {
+    max-width: calc(100vw - 32px);
+    padding: 20px 18px;
+  }
+
+  .ep-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .ep-modal-btn {
+    width: 100%;
+  }
+}
+
+/* ── No-photo placeholder div (rendered by AvatarEditor when previewImage is null) ── */
+.ep-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EFEFEF;
+  border-radius: 50%;
 }

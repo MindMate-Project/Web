@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useGetProfile from "../../hook/profile/useGetProfile";
+
 import "./DashboardLayout.css";
 
 import logo from "./../../images/logo.webp";
@@ -8,12 +11,19 @@ import patients from "./../../images/patients.svg";
 import location from "./../../images/location.svg";
 import reminder from "./../../images/reminder.svg";
 import memoryBank from "./../../images/memory bank.svg";
-import CarePerson from "../../images/DashbordPerson.jpg";
+
 function DashboardLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
     const navigate = useNavigate();
     const settingsRef = useRef(null);
+
+    useGetProfile();
+
+    const { profile } = useSelector(
+        (state) => state.profileReducer
+    );
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -24,9 +34,14 @@ function DashboardLayout() {
                 setIsSettingsOpen(false);
             }
         };
+
         document.addEventListener("mousedown", handleClickOutside);
+
         return () =>
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
     }, []);
 
     const handleLogout = () => {
@@ -37,20 +52,29 @@ function DashboardLayout() {
     };
 
     let user = localStorage.getItem("user");
+
     if (user) {
         user = JSON.parse(user);
     } else {
-        user = { name: "Guest", role: "Caregiver" };
+        user = {
+            name: "Guest",
+            role: "Caregiver",
+        };
     }
 
-    const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
-    const closeSidebar = () => setIsSidebarOpen(false);
+    const toggleSidebar = () =>
+        setIsSidebarOpen((prev) => !prev);
+
+    const closeSidebar = () =>
+        setIsSidebarOpen(false);
 
     return (
         <div className="dashboardLayout">
             {/* Sidebar */}
             <aside
-                className={`dashboard__sidebar ${isSidebarOpen ? "open" : ""}`}
+                className={`dashboard__sidebar ${
+                    isSidebarOpen ? "open" : ""
+                }`}
             >
                 <div className="dashboard__logo">
                     <img src={logo} alt="MindMate Logo" />
@@ -120,14 +144,15 @@ function DashboardLayout() {
 
             <button
                 type="button"
-                className={`dashboard__overlay ${isSidebarOpen ? "show" : ""}`}
+                className={`dashboard__overlay ${
+                    isSidebarOpen ? "show" : ""
+                }`}
                 onClick={closeSidebar}
                 aria-label="Close sidebar"
             />
 
-            {/* Right Side (Header + Page Content) */}
+            {/* Main */}
             <div className="dashboard__main">
-                {/* Constant Header */}
                 <header className="dashboard__header">
                     <div className="dashboard__header-left">
                         <button
@@ -142,8 +167,14 @@ function DashboardLayout() {
                         </button>
 
                         <div className="dashboard__header-text">
-                            <h2>Hello, {user.name}</h2>
-                            <p>Ready to take care of your patients today</p>
+                            <h2>
+                                Hello,{" "}
+                                {profile?.name || user.name}
+                            </h2>
+                            <p>
+                                Ready to take care of your
+                                patients today
+                            </p>
                         </div>
                     </div>
 
@@ -156,7 +187,9 @@ function DashboardLayout() {
                                 className="dashboard__action-btn"
                                 aria-label="Settings"
                                 onClick={() =>
-                                    setIsSettingsOpen(!isSettingsOpen)
+                                    setIsSettingsOpen(
+                                        !isSettingsOpen
+                                    )
                                 }
                             >
                                 <svg
@@ -169,8 +202,12 @@ function DashboardLayout() {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                 >
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="3"
+                                    />
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                                 </svg>
                             </button>
 
@@ -178,63 +215,35 @@ function DashboardLayout() {
                                 <div className="dashboard__settings-dropdown">
                                     <button
                                         onClick={() => {
-                                            setIsSettingsOpen(false);
-                                            navigate("/api/dashboard/settings");
+                                            setIsSettingsOpen(
+                                                false
+                                            );
+                                            navigate(
+                                                "/api/dashboard/settings"
+                                            );
                                         }}
                                         className="dashboard__dropdown-item"
                                     >
-                                        <svg
-                                            width="18"
-                                            height="18"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <circle
-                                                cx="12"
-                                                cy="12"
-                                                r="3"
-                                            ></circle>
-                                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                                        </svg>
                                         Settings
                                     </button>
+
                                     <button
                                         onClick={handleLogout}
                                         className="dashboard__dropdown-item logout-item"
                                     >
-                                        <svg
-                                            width="18"
-                                            height="18"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                            <polyline points="16 17 21 12 16 7"></polyline>
-                                            <line
-                                                x1="21"
-                                                y1="12"
-                                                x2="9"
-                                                y2="12"
-                                            ></line>
-                                        </svg>
                                         Logout
                                     </button>
                                 </div>
                             )}
                         </div>
+
                         <button
                             className="dashboard__action-btn dashboard__action-btn--notify"
                             aria-label="Notifications"
                             onClick={() =>
-                                navigate("/api/dashboard/notification")
+                                navigate(
+                                    "/api/dashboard/notification"
+                                )
                             }
                         >
                             <svg
@@ -247,21 +256,33 @@ function DashboardLayout() {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                             >
-                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
                             </svg>
+
                             <span className="dashboard__notify-badge"></span>
                         </button>
+
                         <div
                             className="dashboard__profile-avatar"
-                            onClick={() => navigate("/api/dashboard/profile")}
+                            onClick={() =>
+                                navigate(
+                                    "/api/dashboard/profile"
+                                )
+                            }
                         >
-                            <img src={CarePerson} alt="profile" />
+                            <img
+                                src={
+                                    profile?.profilePicture?.trim()
+                                        ? profile.profilePicture
+                                        : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                                }
+                                alt="profile"
+                            />
                         </div>
                     </div>
                 </header>
 
-                {/* Dynamic Content */}
                 <main className="dashboard__content">
                     <Outlet />
                 </main>
