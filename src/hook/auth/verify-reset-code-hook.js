@@ -94,7 +94,7 @@ const VerifyResetCodeHook = () => {
                 }
             }
         }
-    }, [loading, res, navigate]);
+    }, [loading, res, navigate, code]);
 
     return [code, OnChangeCode, onSubmit, onPasteCode, onKeyDown, inputsRef, loading, errors];
 };
