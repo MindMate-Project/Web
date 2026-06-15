@@ -36,8 +36,8 @@ const LandingPage = () => {
 
     return (
         <>
+            <Navbar />
             <div className="landing-page-container">
-                <Navbar />
                 <Hero />
                 <Features />
                 <Story />
