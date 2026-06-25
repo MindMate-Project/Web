@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useGetProfile from "../../hook/profile/useGetProfile";
@@ -14,42 +14,14 @@ import memoryBank from "./../../images/memory bank.svg";
 
 function DashboardLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     const navigate = useNavigate();
-    const settingsRef = useRef(null);
 
     useGetProfile();
 
     const { profile } = useSelector(
         (state) => state.profileReducer
     );
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                settingsRef.current &&
-                !settingsRef.current.contains(event.target)
-            ) {
-                setIsSettingsOpen(false);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () =>
-            document.removeEventListener(
-                "mousedown",
-                handleClickOutside
-            );
-    }, []);
-
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        localStorage.removeItem("selectedPatientId");
-        navigate("/api/auth/login");
-    };
 
     let user = localStorage.getItem("user");
 
@@ -179,63 +151,31 @@ function DashboardLayout() {
                     </div>
 
                     <div className="dashboard__profile-actions">
-                        <div
-                            className="dashboard__settings-wrapper"
-                            ref={settingsRef}
+                        <button
+                            className="dashboard__action-btn"
+                            aria-label="Settings"
+                            onClick={() =>
+                                navigate("/api/dashboard/settings")
+                            }
                         >
-                            <button
-                                className="dashboard__action-btn"
-                                aria-label="Settings"
-                                onClick={() =>
-                                    setIsSettingsOpen(
-                                        !isSettingsOpen
-                                    )
-                                }
+                            <svg
+                                width="22"
+                                height="22"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#5C6B8A"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             >
-                                <svg
-                                    width="22"
-                                    height="22"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="#5C6B8A"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <circle
-                                        cx="12"
-                                        cy="12"
-                                        r="3"
-                                    />
-                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                                </svg>
-                            </button>
-
-                            {isSettingsOpen && (
-                                <div className="dashboard__settings-dropdown">
-                                    <button
-                                        onClick={() => {
-                                            setIsSettingsOpen(
-                                                false
-                                            );
-                                            navigate(
-                                                "/api/dashboard/settings"
-                                            );
-                                        }}
-                                        className="dashboard__dropdown-item"
-                                    >
-                                        Settings
-                                    </button>
-
-                                    <button
-                                        onClick={handleLogout}
-                                        className="dashboard__dropdown-item logout-item"
-                                    >
-                                        Logout
-                                    </button>
-                                </div>
-                            )}
-                        </div>
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3"
+                                />
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                            </svg>
+                        </button>
 
                         <button
                             className="dashboard__action-btn dashboard__action-btn--notify"
