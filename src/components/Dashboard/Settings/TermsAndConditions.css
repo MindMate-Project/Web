@@ -1,0 +1,404 @@
+/* ============================================================
+   Terms & Conditions — Dashboard Settings styles
+   Extends SupportPages.css with terms-specific components
+   ============================================================ */
+
+/* ── Layout & Container ──────────────────────────────────── */
+.settings-terms-layout {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.settings-terms-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Back Button ─────────────────────────────────────────── */
+.settings-terms-back-wrapper {
+    margin-bottom: 32px;
+}
+
+.settings-terms-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px 16px;
+    border-radius: 30px;
+    background-color: #f1f5f9;
+}
+
+.settings-terms-back-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.settings-terms-back-btn:hover {
+    color: #4a90e2;
+    background-color: #e2e8f0;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+}
+
+.settings-terms-back-btn:hover svg {
+    transform: translateX(-4px);
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.settings-terms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 60px;
+    animation: stFadeUp 0.8s ease-out;
+}
+
+.settings-terms-header-text {
+    flex: 1;
+}
+
+.settings-terms-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.settings-terms-updated {
+    font-size: 15px;
+    color: #4a90e2;
+    font-weight: 600;
+    margin-bottom: 28px;
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: rgba(74, 144, 226, 0.1);
+    border-radius: 20px;
+}
+
+.settings-terms-intro p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #475569;
+    margin-bottom: 16px;
+}
+
+.settings-terms-image {
+    flex: 0 0 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: stFloatImage 6s ease-in-out infinite;
+}
+
+.settings-terms-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.08));
+}
+
+/* ── Main Content ────────────────────────────────────────── */
+.settings-terms-content {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    background-color: #ffffff;
+    padding: 48px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+    border: 1px solid #f8fafc;
+}
+
+.settings-terms-section {
+    position: relative;
+    padding-left: 24px;
+    border-left: 3px solid #e2e8f0;
+    transition: border-color 0.3s ease;
+}
+
+.settings-terms-section:hover {
+    border-left-color: #4a90e2;
+}
+
+.settings-terms-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 20px;
+}
+
+.settings-terms-section p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #475569;
+    margin-bottom: 16px;
+}
+
+.settings-terms-section ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 16px;
+}
+
+.settings-terms-section ul li {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #475569;
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 24px;
+}
+
+.settings-terms-section ul li::before {
+    content: '•';
+    color: #4a90e2;
+    font-size: 20px;
+    position: absolute;
+    left: 4px;
+    top: -2px;
+}
+
+.settings-terms-section ul li strong {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* ── Agreement / Checkbox ────────────────────────────────── */
+.settings-terms-agreement {
+    margin-top: 20px;
+    padding-top: 40px;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.settings-terms-confirmation {
+    font-size: 16px;
+    color: #0f172a;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.settings-terms-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.settings-terms-checkbox:hover {
+    border-color: #4a90e2;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(74, 144, 226, 0.1);
+}
+
+.settings-terms-checkbox.settings-terms-checkbox--agreed {
+    background-color: #f0f7ff;
+    border-color: #4a90e2;
+}
+
+.settings-terms-checkbox-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.settings-terms-icon--unchecked {
+    color: #cbd5e1;
+    transition: color 0.3s ease;
+}
+
+.settings-terms-checkbox:hover .settings-terms-icon--unchecked {
+    color: #94a3b8;
+}
+
+.settings-terms-icon--checked {
+    color: #4a90e2;
+    animation: stPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.settings-terms-checkbox-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #475569;
+    user-select: none;
+}
+
+.settings-terms-checkbox.settings-terms-checkbox--agreed .settings-terms-checkbox-label {
+    color: #4a90e2;
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes stFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes stFloatImage {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes stPopIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── Responsive Design ───────────────────────────────────── */
+
+/* Large Tablets / Small Laptops (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+    .settings-terms-container {
+        padding: 32px 24px 60px;
+    }
+    .settings-terms-header {
+        gap: 40px;
+    }
+    .settings-terms-image {
+        flex: 0 0 300px;
+    }
+    .settings-terms-title {
+        font-size: 38px;
+    }
+}
+
+/* Tablets (max-width: 992px) */
+@media screen and (max-width: 992px) {
+    .settings-terms-header {
+        flex-direction: column-reverse;
+        gap: 32px;
+        align-items: center;
+        text-align: center;
+    }
+    .settings-terms-image {
+        flex: auto;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .settings-terms-intro p {
+        text-align: left;
+    }
+    .settings-terms-agreement {
+        padding-top: 32px;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .settings-terms-container {
+        padding: 24px 20px 50px;
+    }
+    .settings-terms-title {
+        font-size: 32px;
+    }
+    .settings-terms-content {
+        padding: 32px 24px;
+        gap: 32px;
+        border-radius: 20px;
+    }
+    .settings-terms-section {
+        padding-left: 16px;
+    }
+    .settings-terms-section h2 {
+        font-size: 20px;
+    }
+    .settings-terms-checkbox {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+    .settings-terms-confirmation {
+        font-size: 15px;
+        padding: 0 10px;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .settings-terms-container {
+        padding: 20px 16px 40px;
+    }
+    .settings-terms-title {
+        font-size: 28px;
+    }
+    .settings-terms-image {
+        max-width: 260px;
+    }
+    .settings-terms-content {
+        padding: 24px 16px;
+        gap: 28px;
+    }
+    .settings-terms-section h2 {
+        font-size: 18px;
+    }
+    .settings-terms-section p,
+    .settings-terms-section ul li {
+        font-size: 14px;
+    }
+    .settings-terms-checkbox {
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px;
+        text-align: center;
+        border-radius: 16px;
+    }
+    .settings-terms-checkbox-label {
+        font-size: 14px;
+    }
+    .settings-terms-confirmation {
+        font-size: 14px;
+    }
+}
+
+/* Very Small Mobile (max-width: 375px) */
+@media screen and (max-width: 375px) {
+    .settings-terms-title {
+        font-size: 24px;
+    }
+    .settings-terms-updated {
+        font-size: 13px;
+        padding: 4px 12px;
+    }
+    .settings-terms-intro p {
+        font-size: 14px;
+    }
+    .settings-terms-checkbox-label {
+        font-size: 13px;
+    }
+    .settings-terms-confirmation {
+        font-size: 13px;
+    }
+}

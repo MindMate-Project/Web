@@ -40,6 +40,8 @@ import LandingPage from "./pages/Landing/LandingPage";
 import PrivacyPolicy from "./pages/Support/PrivacyPolicy";
 import TermsAndConditions from "./pages/Support/TermsAndConditions";
 import FAQPage from "./pages/Support/FAQPage";
+import Privacy from "./components/Dashboard/Settings/PrivacyPolicy";
+import Terms from "./components/Dashboard/Settings/TermsAndConditions";
 
 function App() {
   return (
@@ -81,7 +83,11 @@ function App() {
               </Route>
 
               {/* Header Icon Routes */}
-              <Route path="settings" element={<Settings />} />
+              <Route path="settings">
+                <Route index element={<Settings />} />
+                <Route path="privacy-policy" element={<Privacy />} />
+                <Route path="terms-and-conditions" element={<Terms />} />
+              </Route>
               <Route path="notification" element={<Notification />} />
               <Route path="profile">
                 <Route index element={<Profile />} />
