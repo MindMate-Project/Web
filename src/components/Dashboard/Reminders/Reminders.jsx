@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 // import { useSelector } from "react-redux"; 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import useGetAllReminders from "../../../hook/reminder/get-all-reminders-hook"; 
 import "./Reminders.css";
 
 export default function Reminders() {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("appointments");
   const { reminders, loading, fetchReminders } = useGetAllReminders();
 
   const patientId = localStorage.getItem("selectedPatientId");
@@ -33,13 +34,33 @@ export default function Reminders() {
     <div className="reminders-page">
       <h1 className="page-title">Reminders</h1>
 
-      <div className="reminder-section">
-        <div className="section-header">
+      <div className="tab-container">
+        <button 
+          className={`tab-btn ${activeTab === "appointments" ? "active" : ""}`}
+          onClick={() => setActiveTab("appointments")}
+        >
+          Appointments
+        </button>
+        <button 
+          className={`tab-btn ${activeTab === "medications" ? "active" : ""}`}
+          onClick={() => setActiveTab("medications")}
+        >
+          Medications
+        </button>
+      </div>
+
+      {activeTab === "appointments" && (
+        <div className="reminder-section">
+          <div className="section-header">
           <h3>Upcoming Appointments</h3>
           <button
             className="btn-add"
             onClick={() => navigate("/api/dashboard/reminders/add-appointment")}
           >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
             Add New
           </button>
         </div>
@@ -70,10 +91,10 @@ export default function Reminders() {
                         }
                         style={{ cursor: "pointer" }}
                       >
-                        <td>{app.doctorName}</td>
-                        <td>{app.specialty}</td>
-                        <td>{new Date(app.appointmentDate).toLocaleDateString()}</td>
-                        <td>
+                        <td data-label="Doctor Name">{app.doctorName}</td>
+                        <td data-label="Specialty">{app.specialty}</td>
+                        <td data-label="Date">{new Date(app.appointmentDate).toLocaleDateString()}</td>
+                        <td data-label="Time">
                           <span className="time-badge appointment">
                             {new Date(app.appointmentDate).toLocaleTimeString([], {
                               hour: "2-digit",
@@ -81,10 +102,10 @@ export default function Reminders() {
                             })}
                           </span>
                         </td>
-                        <td style={{ textTransform: "capitalize" }}>
+                        <td data-label="Purpose" style={{ textTransform: "capitalize" }}>
                           {app.appointmentType}
                         </td>
-                        <td>{app.location}</td>
+                        <td data-label="Location">{app.location}</td>
                       </tr>
                     ))
                   ) : (
@@ -98,16 +119,22 @@ export default function Reminders() {
               </table>
             )}
           </div>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="reminder-section">
-        <div className="section-header">
+      {activeTab === "medications" && (
+        <div className="reminder-section">
+          <div className="section-header">
           <h3>Medication Schedule</h3>
           <button
             className="btn-add"
             onClick={() => navigate("/api/dashboard/reminders/add-medicine")}
           >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
             Add New
           </button>
         </div>
@@ -135,10 +162,10 @@ export default function Reminders() {
                       }
                       style={{ cursor: "pointer" }}
                     >
-                      <td>{med.name}</td>
-                      <td>{med.dosage}</td>
-                      <td>{med.frequency}</td>
-                      <td>
+                      <td data-label="Drug Name">{med.name}</td>
+                      <td data-label="Dosage">{med.dosage}</td>
+                      <td data-label="Frequency">{med.frequency}</td>
+                      <td data-label="Time">
                         <span className="time-badge medication">
                           {new Date(med.time).toLocaleTimeString([], {
                             hour: "2-digit",
@@ -146,8 +173,8 @@ export default function Reminders() {
                           })}
                         </span>
                       </td>
-                      <td>{med.timesPerDay}</td>
-                      <td style={{ textTransform: "capitalize" }}>{med.type}</td>
+                      <td data-label="Times Per Day">{med.timesPerDay}</td>
+                      <td data-label="Type" style={{ textTransform: "capitalize" }}>{med.type}</td>
                     </tr>
                   ))
                 ) : (
@@ -160,8 +187,9 @@ export default function Reminders() {
               </tbody>
             </table>
           </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
