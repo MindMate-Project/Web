@@ -20,9 +20,6 @@ export default function AddPatient() {
         message: "",
     });
 
-    const handleBack = () => {
-        navigate("/api/dashboard/patients");
-    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -87,72 +84,76 @@ export default function AddPatient() {
     };
 
     return (
-        <div className="add-patient-container">
-            <button className="back-button" onClick={handleBack}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M19 12H5M5 12L12 19M5 12L12 5"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-                Back To Patients
-            </button>
+        <div className="ap-container">
+            <div className="ap-card">
+                <div className="ap-icon-wrapper">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="ap-email-icon">
+                        <rect width="100" height="100" rx="20" fill="#F4F4F5"/>
+                        <path d="M22 35C22 31.6863 24.6863 29 28 29H72C75.3137 29 78 31.6863 78 35V65C78 68.3137 75.3137 71 72 71H28C24.6863 71 22 68.3137 22 65V35Z" fill="#F04438"/>
+                        <path d="M22 35L50 52L78 35" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                        <circle cx="65" cy="65" r="22" fill="white"/>
+                        <path d="M65 55C59.4772 55 55 59.4772 55 65C55 70.5228 59.4772 75 65 75C70.5228 75 75 70.5228 75 65V63C75 60.7909 73.2091 59 71 59C68.7909 59 67 60.7909 67 63V66" stroke="#F04438" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M67 65C67 66.1046 66.1046 67 65 67C63.8954 67 63 66.1046 63 65C63 63.8954 63.8954 63 65 63C66.1046 63 67 63.8954 67 65Z" stroke="#F04438" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                </div>
+                
+                <h2 className="ap-subtitle">
+                    Please enter the patient's email address to send<br/>a connection request!
+                </h2>
 
-            <h1 className="page-title">Add New Patient</h1>
-
-            <div className="form-card">
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">patient Email</label>
+                <form onSubmit={handleSubmit} className="ap-form">
+                    <div className="ap-form-group ap-form-group--row">
+                        <label htmlFor="email" className="ap-label">Email</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="ahmed.k.ali@gmail.com"
+                            placeholder="example@gmail.com"
+                            className="ap-input"
                             required
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="relation">
-                            Patient Relationship
-                        </label>
+                    <div className="ap-form-group ap-form-group--row">
+                        <label htmlFor="relation" className="ap-label">Relation</label>
                         <input
                             type="text"
                             id="relation"
                             name="relation"
-                            value={formData.relation}
+                            value={formData.relation || ""}
                             onChange={handleChange}
-                            placeholder="Father"
+                            placeholder="e.g. Son, Daughter, Sibling..."
+                            className="ap-input"
                             required
                         />
                     </div>
 
-                    <p className="info-text">
-                        The patient must approve this request before access is
-                        allowed
-                    </p>
+                    <div className="ap-info-row">
+                        <svg className="ap-info-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                        <span className="ap-info-text">
+                            Access will be granted only after the patient approves your request.
+                        </span>
+                    </div>
 
-                    <div className="form-actions">
+                    <div className="ap-actions">
+                        <button 
+                            type="submit" 
+                            className="ap-btn ap-btn--primary"
+                            disabled={loading || !formData.email || !formData.relation}
+                        >
+                            {loading ? "Sending..." : "Send"}
+                        </button>
                         <button 
                             type="button"
-                            className="cancel-btn"
+                            className="ap-btn ap-btn--secondary"
                             onClick={handleCancel}
                             disabled={loading}
                         >
                             Cancel
-                        </button>
-                        <button 
-                            type="submit" 
-                            className="add-btn"
-                            disabled={loading || !formData.email || !formData.relation}
-                        >
-                            {loading ? "Sending Request..." : "Add"}
                         </button>
                     </div>
                 </form>
@@ -162,7 +163,7 @@ export default function AddPatient() {
             <Modal
                 isOpen={modalConfig.isOpen}
                 onRequestClose={closeModal}
-                className="delete-modal-content" // Reusing styling from DeleteModal for consistency
+                className="delete-modal-content"
                 overlayClassName="delete-modal-overlay"
                 portalClassName="patients-container"
                 ariaHideApp={false}
