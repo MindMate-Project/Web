@@ -113,7 +113,7 @@ export default function Patients() {
                         <div key={patient.patientId} className="patient-card">
                             <div className="patient-info">
                                 <img
-                                    src={patient.imageCover || father}
+                                    src={patient.profilePicture || father}
                                     alt={patient.name}
                                     className="patient-avatar"
                                 />
