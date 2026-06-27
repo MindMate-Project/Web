@@ -143,7 +143,6 @@ export default function SettingsPage() {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 60);
@@ -167,8 +166,24 @@ export default function SettingsPage() {
           <p className="sp-subtitle">Manage your account, preferences, and application settings.</p>
         </header>
 
-        {/* Support & Legal */}
+        {/* Account */}
         <section className="sp-section" style={{ animationDelay: "60ms" }}>
+          <div className="sp-section__meta">
+            <span className="sp-section__eyebrow">Account</span>
+          </div>
+          <div className="sp-card">
+            <SettingsRow
+              icon="LogOut"
+              title="Log Out"
+              description="Sign out from your account securely on this device."
+              onClick={() => setLogoutModal(true)}
+              variant="logout"
+            />
+          </div>
+        </section>
+
+        {/* Support & Legal */}
+        <section className="sp-section" style={{ animationDelay: "120ms" }}>
           <div className="sp-section__meta">
             <span className="sp-section__eyebrow">Support &amp; Legal</span>
           </div>
@@ -184,40 +199,6 @@ export default function SettingsPage() {
                 {i < supportItems.length - 1 && <div className="sp-divider" />}
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Account */}
-        <section className="sp-section" style={{ animationDelay: "120ms" }}>
-          <div className="sp-section__meta">
-            <span className="sp-section__eyebrow">Account</span>
-          </div>
-          <div className="sp-card">
-            <SettingsRow
-              icon="LogOut"
-              title="Log Out"
-              description="Sign out from your account securely on this device."
-              onClick={() => setLogoutModal(true)}
-              variant="logout"
-            />
-          </div>
-        </section>
-
-        {/* Danger Zone */}
-        <section className="sp-section" style={{ animationDelay: "180ms" }}>
-          <div className="sp-section__meta">
-            <span className="sp-section__eyebrow sp-section__eyebrow--danger">Danger Zone</span>
-            <p className="sp-section__danger-note">These actions are permanent and cannot be undone.</p>
-          </div>
-          <div className="sp-card sp-card--danger">
-            <SettingsRow
-              icon="Trash"
-              title="Delete Account"
-              description="Permanently remove your account and all associated health data."
-              variant="danger"
-              badge="Coming Soon"
-              disabled
-            />
           </div>
         </section>
 
@@ -239,17 +220,6 @@ export default function SettingsPage() {
         confirmLabel="Log Out"
         confirmVariant="warning"
         icon="LogOut"
-      />
-
-      <Modal
-        open={deleteModal}
-        onClose={() => setDeleteModal(false)}
-        onConfirm={() => setDeleteModal(false)}
-        title="Delete your account?"
-        message="This will permanently delete your account, all caregiver connections, and health records. This cannot be undone."
-        confirmLabel="Delete Account"
-        confirmVariant="danger"
-        icon="AlertTriangle"
       />
     </div>
   );
