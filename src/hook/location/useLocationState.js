@@ -98,7 +98,7 @@ export default function useLocationState() {
             return {
                 id: id,
                 name: patient.name,
-                imageCover: patient.imageCover,
+                profilePicture: patient.profilePicture,
                 position: currentPos,
                 status: finalStatus,
                 lastUpdated: currentTime,
