@@ -876,9 +876,13 @@
         min-height: 380px !important;
     }
 
-    /* Patient Dropdown */
     .dashboard .patient-dropdown-group {
         width: 100%;
+    }
+
+    .dashboard .patient-dropdown-wrapper {
+        flex: 1;
+        min-width: 0;
     }
 
     .dashboard .patient-dropdown-trigger {
