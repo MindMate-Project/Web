@@ -45,17 +45,50 @@ export default function useLocationState() {
             }
             if (patient.device?.timestamp) {
                 initialTime = new Date(patient.device.timestamp);
+            } else if (patient.device?.updatedAt) {
+                initialTime = new Date(patient.device.updatedAt);
             }
 
             // 2. Either use live socket data OR fallback to initial setup from API 
-            const currentPos = liveData?.position || initialPos;
+            let currentPos = liveData?.position || initialPos;
+            if (currentPos && currentPos.length === 2) {
+                currentPos = [
+                    Number(Number(currentPos[0]).toFixed(6)),
+                    Number(Number(currentPos[1]).toFixed(6))
+                ];
+            }
+
             const currentBattery = liveData?.battery ?? initialBattery;
-            const currentTime = liveData?.lastUpdated ? new Date(liveData.lastUpdated) : (initialTime || new Date());
+            
+            // If we have no timestamp at all, we assume it's offline. 
+            // We use 0 (epoch) if there's no initialTime so it immediately reads as offline.
+            const currentTime = liveData?.lastUpdated 
+                ? new Date(liveData.lastUpdated) 
+                : (initialTime ? new Date(initialTime) : new Date(0));
 
-            // 3. Mark offline if no ping in 10 seconds (~10,000ms)
-            const isOffline = (Date.now() - currentTime.getTime()) > 10000;
+            // 3. Mark offline if no ping in 5 minutes (300,000ms)
+            const isOffline = (Date.now() - currentTime.getTime()) > 300000;
 
-            let finalStatus = "Safe";
+            // Extract safe zone data from the device or live socket
+            let safeZone = null;
+            if (liveData?.safeZone) {
+                safeZone = {
+                    ...liveData.safeZone,
+                    lat: Number(Number(liveData.safeZone.lat).toFixed(6)),
+                    lng: Number(Number(liveData.safeZone.lng).toFixed(6))
+                };
+            } else if (patient.device?.safeZone) {
+                const sz = patient.device.safeZone;
+                if (sz.lat !== undefined && sz.lng !== undefined && sz.radiusMeters !== undefined) {
+                    safeZone = {
+                        lat: Number(Number(sz.lat).toFixed(6)),
+                        lng: Number(Number(sz.lng).toFixed(6)),
+                        radiusMeters: sz.radiusMeters,
+                    };
+                }
+            }
+
+            let finalStatus = "Online";
             if (isOffline) {
                 finalStatus = "Offline";
             } else if (currentBattery !== null && currentBattery < 20) {
@@ -70,7 +103,8 @@ export default function useLocationState() {
                 status: finalStatus,
                 lastUpdated: currentTime,
                 battery: currentBattery,
-                isOffline: isOffline
+                isOffline: isOffline,
+                safeZone: safeZone,
             };
         }).filter(patient => patient.position !== null);
         // eslint-disable-next-line react-hooks/exhaustive-deps

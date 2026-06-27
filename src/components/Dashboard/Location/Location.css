@@ -1,3 +1,7 @@
+/* ═══════════════════════════════════════════
+   Location Page
+   ═══════════════════════════════════════════ */
+
 .location-container {
     width: 100%;
     height: 100%;
@@ -6,13 +10,195 @@
     background-color: transparent;
     padding: 0;
     overflow: hidden;
-    /* No scroll */
     box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    position: relative; /* Added for pseudo-element positioning */
+    z-index: 1; /* Establishes stacking context so the ::before red background is visible */
+}
+
+/* ── Emergency Mode ── */
+.location-container.emergency-mode {
+    background-color: transparent !important;
+    overflow: visible !important; /* Allow the pseudo-element to bleed out over the parent padding */
+}
+
+.location-container.emergency-mode::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    background-color: #d32f2f;
+    z-index: -1;
+    animation: emergencyBgPulse 0.8s infinite alternate ease-in-out;
+}
+
+@media (max-width: 1199px) {
+    .location-container.emergency-mode::before {
+        top: -22px; left: -22px; right: -22px; bottom: -22px;
+    }
+}
+
+@media (max-width: 991px) {
+    .location-container.emergency-mode::before {
+        top: -18px; left: -18px; right: -18px; bottom: -18px;
+    }
+}
+
+@media (max-width: 767px) {
+    .location-container.emergency-mode::before {
+        top: -16px; left: -16px; right: -16px; bottom: -16px;
+    }
+}
+.location-container.emergency-mode .location-header h1,
+.location-container.emergency-mode .location-header p {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.location-container.emergency-mode .map-wrapper {
+    background-color: #4a0404;
+    padding: 8px;
+    animation: mapAlarmGlow 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes mapAlarmGlow {
+    from {
+        border: 3px solid #ff1744;
+        box-shadow: 0 0 15px rgba(255, 23, 68, 0.4);
+    }
+    to {
+        border: 3px solid #8b0000;
+        box-shadow: 0 0 35px rgba(255, 23, 68, 0.85);
+    }
+}
+
+@keyframes emergencyBgPulse {
+    from { background-color: #ff1744; }
+    to { background-color: #8b0000; }
 }
 
 .location-container .location-header {
     margin-bottom: 1rem;
     flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-top: 8px; /* Added to prevent overflow:hidden from clipping button hover shadows */
+}
+
+.emergency-alert-banner {
+    background: white;
+    color: #b71c1c;
+    padding: 8px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(183, 28, 28, 0.15);
+    border: 1px solid rgba(183, 28, 28, 0.12);
+    animation: bannerPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.emergency-warning-icon {
+    font-size: 1.1rem;
+    animation: alarmIconPulse 0.6s infinite alternate ease-in-out;
+}
+
+.emergency-mute-btn {
+    margin-left: 10px;
+    background: #b71c1c;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.emergency-mute-btn:hover {
+    background: #990000;
+    color: white;
+    transform: scale(1.03);
+}
+
+/* ── Snoozed Alert Banner ── */
+.snoozed-alert-banner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    background: linear-gradient(135deg, #64748b, #475569);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(100, 116, 139, 0.2);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    animation: alertSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 4px solid #94a3b8;
+}
+
+.snoozed-icon {
+    color: #e2e8f0;
+    flex-shrink: 0;
+}
+
+.snoozed-alert-banner strong {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    color: #f8fafc;
+}
+
+.cancel-snooze-btn {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.cancel-snooze-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: white;
+    transform: translateY(-1px);
+}
+
+@keyframes alertSlideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes alarmIconPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+}
+
+.emergency-alert-banner strong {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.emergency-alert-banner div {
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+@keyframes bannerPop {
+    from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .location-container .location-header h1 {
@@ -20,6 +206,7 @@
     font-weight: 600;
     color: #1a1b41;
     margin: 0 0 0.5rem 0;
+    transition: color 0.3s ease;
 }
 
 .location-container .location-header p {
@@ -33,9 +220,10 @@
     flex-direction: column;
     flex: 1;
     min-height: 0;
+    position: relative;
 }
 
-/* Map Section Wrapper */
+/* Map wrappers */
 .location-container .map-wrapper {
     background: white;
     padding: 1rem;
@@ -45,6 +233,7 @@
     display: flex;
     flex-direction: column;
     min-height: 0;
+    transition: all 0.3s ease;
 }
 
 .location-container .map-inner-container {
@@ -65,38 +254,47 @@
     z-index: 1;
 }
 
-/* Patient Card Overlay inside the white padding, hovering bottom-right of map */
+/* ═══ Patient Card — bottom-right ═══ */
 .new-patient-card-overlay {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 2rem;
     right: 1.5rem;
+    left: auto;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
-    /* slightly stronger shadow like image */
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    width: 250px;
+    width: 240px;
     padding: 12px 14px;
-    border: 1px solid #f3f4f6;
+    border: 1px solid #f0f1f3;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Top Right Badge "Safe Zone" */
+.new-patient-card-overlay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
 .npc-safe-zone {
     position: absolute;
     top: 0;
     right: 0;
     background-color: #1a1b41;
     color: white;
-    font-size: 0.65rem;
-    font-weight: 500;
-    padding: 3px 12px;
-    border-bottom-left-radius: 12px;
-    border-top-right-radius: 12px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-bottom-left-radius: 14px;
+    border-top-right-radius: 14px;
+    letter-spacing: 0.3px;
 }
 
 .npc-safe-zone.active-safe-zone {
-    background-color: #10b981;
-    /* Green color when live */
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.npc-safe-zone.outside {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
 .npc-main {
@@ -109,14 +307,14 @@
 .npc-avatar {
     width: 36px;
     height: 36px;
-    background-color: #1a1b41;
+    background: linear-gradient(135deg, #1a1b41, #2d2f6b);
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     flex-shrink: 0;
 }
 
@@ -148,7 +346,6 @@
     margin-bottom: 0;
 }
 
-/* SVG icon wrappers */
 .npc-icon {
     font-size: 0.85rem;
     display: inline-flex;
@@ -157,13 +354,1465 @@
     width: 14px;
 }
 
-@media (max-width: 768px) {
-    .new-patient-card-overlay {
-        width: auto;
-        max-width: none;
-        left: 1rem;
-        bottom: 1rem;
-        right: 1rem;
-        border-radius: 12px;
+/* ═══════════════════════════════════════════
+   Safe Zone Aside — Collapsible Card
+   ═══════════════════════════════════════════ */
+
+.sz-aside {
+    position: absolute;
+    bottom: 2rem;
+    right: 1.5rem;
+    width: 320px;
+    z-index: 1000;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: calc(100% - 4rem);
+    display: flex;
+    flex-direction: column;
+}
+
+.sz-aside:not(.expanded) {
+    display: none !important;
+}
+
+@media (min-width: 769px) {
+    .sz-aside.expanded {
+        display: flex !important;
+        position: absolute !important;
+        top: 72px !important;
+        right: 20px !important;
+        bottom: auto !important;
+        left: auto !important;
+        width: 320px !important;
+        max-height: calc(100% - 92px) !important;
+        z-index: 1001 !important;
+        margin: 0 !important;
     }
+}
+
+.sz-aside.expanded {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Compact Row (always visible) ── */
+.sz-aside-compact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #f1f5f9;
+    gap: 12px;
+}
+
+.sz-aside:not(.expanded) .sz-aside-compact:hover {
+    background: #f8fafc;
+}
+
+.sz-aside-compact-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.sz-aside-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sz-aside-dot.safe {
+    background: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25);
+    animation: szPulse 2s infinite ease-in-out;
+}
+
+.sz-aside-dot.alert {
+    background: #e11d48;
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.25);
+    animation: szPulse 2s infinite ease-in-out;
+}
+
+.sz-aside-dot.inactive {
+    background: #94a3b8;
+    box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.2);
+}
+
+@keyframes szPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: 0.6; }
+}
+
+.sz-aside-compact-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.sz-aside-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    letter-spacing: -0.1px;
+}
+
+.sz-aside-subtitle {
+    font-size: 0.72rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Edit / Close Icon Button */
+.sz-aside-edit-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.sz-aside-edit-btn:hover {
+    border-color: #cbd5e1;
+    color: #1e293b;
+    background: #f8fafc;
+}
+
+.sz-aside-edit-btn.active {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: #e2e8f0;
+}
+
+.sz-aside-edit-btn.active:hover {
+    background: #e2e8f0;
+}
+
+/* ── Expandable Body ── */
+.sz-aside-body {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.25s ease,
+                padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0 20px;
+}
+
+.sz-aside.expanded .sz-aside-body {
+    max-height: 500px;
+    flex: 1;
+    overflow-y: auto;
+    opacity: 1;
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* ── Status Pill ── */
+.sz-status-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.sz-status-pill.safe {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.sz-status-pill.alert {
+    background: #fff5f5;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.sz-status-pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sz-status-pill.safe .sz-status-pill-dot {
+    background: #059669;
+}
+
+.sz-status-pill.alert .sz-status-pill-dot {
+    background: #e11d48;
+}
+
+/* ── Fields ── */
+.sz-field {
+    margin-bottom: 20px;
+}
+
+.sz-field-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+
+/* Coordinates box */
+.sz-coords-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 16px;
+    margin-bottom: 10px;
+}
+
+.sz-coord {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sz-coord-k {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sz-coord-v {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1e293b;
+    font-family: "SF Mono", "Cascadia Code", "Consolas", monospace;
+    letter-spacing: -0.2px;
+}
+
+.sz-coord-divider {
+    width: 1px;
+    height: 30px;
+    background: #e2e8f0;
+    flex-shrink: 0;
+}
+
+.sz-coords-empty {
+    background: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Center buttons */
+.sz-center-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.sz-small-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: white;
+    color: #475569;
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.sz-small-btn:hover {
+    border-color: #cbd5e1;
+    color: #0f172a;
+    background: #f8fafc;
+}
+
+.sz-small-btn.active {
+    border-color: #7c3aed;
+    color: #7c3aed;
+    background: #f5f3ff;
+    animation: szPulseBtn 1.5s ease infinite;
+}
+
+@keyframes szPulseBtn {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.25); }
+    50% { box-shadow: 0 0 0 4px rgba(124, 58, 237, 0); }
+}
+
+/* ── Radius Slider ── */
+.sz-radius-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 2px 8px;
+    color: #1e293b;
+}
+
+.sz-radius-input {
+    background: transparent;
+    border: none;
+    color: #1e293b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 42px;
+    text-align: right;
+    outline: none;
+    padding: 0;
+    margin-right: 2px;
+    -moz-appearance: textfield;
+}
+
+.sz-radius-input::-webkit-outer-spin-button,
+.sz-radius-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.sz-radius-input-wrapper span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.sz-slider {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e2e8f0;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 6px;
+    margin-top: 10px;
+}
+
+.sz-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    border: 3.5px solid #059669;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: grab;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.sz-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.sz-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+}
+
+.sz-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    border: 3.5px solid #059669;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: grab;
+}
+
+.sz-slider-ends {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #94a3b8;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+/* Presets */
+.sz-presets {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.sz-chip {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #475569;
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sz-chip:hover {
+    border-color: #cbd5e1;
+    color: #0f172a;
+    background: #f8fafc;
+}
+
+.sz-chip.active {
+    background: #f0fdf4;
+    color: #059669;
+    border-color: #059669;
+    box-shadow: 0 1px 3px rgba(5, 150, 105, 0.05);
+}
+
+/* ── Messages ── */
+.sz-msg {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    animation: szSlideIn 0.25s ease;
+}
+
+@keyframes szSlideIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sz-msg-ok {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.sz-msg-err {
+    background: #fff5f5;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+/* ── Action Buttons ── */
+.sz-btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.sz-btn-save {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
+}
+
+.sz-btn-save:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+    transform: translateY(-1px);
+}
+
+.sz-btn-save:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.sz-btn-save:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.sz-btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 11px 16px;
+    border: 1px solid #fee2e2;
+    border-radius: 12px;
+    background: #fff5f5;
+    color: #e11d48;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sz-btn-delete:hover:not(:disabled) {
+    background: #ffe4e6;
+    border-color: #fecaca;
+    color: #be123c;
+}
+
+.sz-btn-delete:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ── Spinner ── */
+.sz-spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: szSpin 0.6s linear infinite;
+}
+
+@keyframes szSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Map Picking Overlay ── */
+.sz-picking-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    padding-top: 1rem;
+}
+
+.sz-picking-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(26, 27, 65, 0.92);
+    backdrop-filter: blur(8px);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+    animation: szSlideIn 0.25s ease;
+}
+
+.sz-picking-cancel {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 4px;
+    transition: background 0.15s ease;
+}
+
+.sz-picking-cancel:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Map Style Switcher & Dividers */
+.map-style-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    left: auto;
+    display: flex;
+    gap: 6px;
+    background: white;
+    padding: 4px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    z-index: 1000;
+}
+
+.map-style-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.map-style-btn:hover {
+    background: #f1f5f9;
+    transform: scale(1.05);
+}
+
+.map-style-btn.active {
+    background: #1a1b41;
+    color: white;
+    box-shadow: 0 2px 6px rgba(26, 27, 65, 0.3);
+}
+
+.map-style-divider {
+    width: 1px;
+    height: 20px;
+    background: #e2e8f0;
+    align-self: center;
+    margin: 0 4px;
+}
+
+/* Keyboard Shortcuts Guide */
+.map-shortcuts-guide {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #4b5563;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Recenter button on Map */
+.map-recenter-btn {
+    position: absolute;
+    bottom: 146px;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.map-recenter-btn:hover {
+    background: #f8fafc;
+    color: #1a1b41;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.map-recenter-btn:active {
+    transform: scale(0.95);
+    background: #f1f5f9;
+}
+
+/* Patient Avatar Realtime Status Dot */
+.npc-avatar {
+    position: relative;
+}
+
+.npc-status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    z-index: 5;
+}
+
+.npc-status-dot.online {
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    animation: statusPulseGreen 1.5s infinite alternate ease-in-out;
+}
+
+.npc-status-dot.offline {
+    background: #cbd5e1;
+    border-color: #f1f5f9;
+    box-shadow: 0 0 6px rgba(203, 213, 225, 0.4);
+}
+
+.npc-status-dot.alert {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+    animation: statusPulseRed 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes statusPulseGreen {
+    from { opacity: 0.7; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes statusPulseRed {
+    from { opacity: 0.6; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1.25); }
+}
+
+/* Pull Handle for mobile expanded bottom sheets */
+.mobile-drawer-handle {
+    display: none;
+}
+
+/* ═══════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════ */
+
+/* Push leaflet attribution out of the way */
+.leaflet-bottom.leaflet-right {
+    bottom: 0 !important;
+    right: 5px !important;
+}
+
+
+
+/* Close button inside the patient card */
+.npc-close-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* Style the Location Header to stack title and banner compactly */
+    .location-container .location-header {
+        margin-bottom: 0.8rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        position: static !important;
+        z-index: auto !important;
+        pointer-events: auto !important;
+    }
+
+    .location-container .location-header h1 {
+        font-size: 1.3rem !important;
+        margin: 0 !important;
+    }
+
+    .location-container .location-header p {
+        font-size: 0.8rem !important;
+        margin: 2px 0 0 0 !important;
+        display: block !important; /* ensure subtitle remains visible */
+    }
+
+    /* Extremely compact emergency banner for mobile viewports */
+    .emergency-alert-banner {
+        padding: 6px 10px !important;
+        gap: 8px !important;
+        border-radius: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        justify-content: space-between !important;
+        margin-top: 4px !important;
+    }
+
+    .emergency-alert-banner strong {
+        display: none !important; /* Hide "EMERGENCY ALERT:" on mobile to save space */
+    }
+
+    .emergency-alert-banner div {
+        font-size: 0.72rem !important;
+        flex: 1;
+        min-width: 0;
+        white-space: normal !important; /* Allow wrapping instead of breaking layout */
+        line-height: 1.2;
+    }
+
+    .emergency-mute-btn {
+        margin-left: 5px !important;
+        padding: 4px 8px !important;
+        font-size: 0.62rem !important;
+        border-radius: 4px !important;
+    }
+
+    /* Set the container to fill the full height of the parent dashboard padding */
+    .location-container {
+        height: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        border-radius: 0 !important;
+    }
+
+    .location-container .location-content {
+        height: 100% !important;
+        min-height: 0 !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Retain the white card layout but maximize it vertically */
+    .location-container .map-wrapper {
+        height: 100% !important;
+        min-height: 0 !important;
+        flex: 1 !important;
+        padding: 10px !important;
+        margin: 0 !important;
+        border: 1px solid #f0f1f3 !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02) !important;
+        background: white !important;
+        border-radius: 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .location-container .map-inner-container {
+        height: 100% !important;
+        min-height: 0 !important;
+        flex: 1 !important;
+        overflow: hidden !important;
+        border-radius: 8px !important;
+    }
+
+    .location-container .map-inner-container .leaflet-container {
+        height: 100% !important;
+        width: 100% !important;
+        border-radius: 8px !important;
+    }
+
+    /* ─── Collapsed Patient FAB ─── */
+    .new-patient-card-overlay.collapsed {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 50% !important;
+        padding: 0 !important;
+        bottom: 2rem !important;
+        right: 1.5rem !important;
+        left: auto !important;
+        top: auto !important;
+        overflow: hidden !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: #1a1b41 !important;
+        border: 2px solid white !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        z-index: 1000 !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .new-patient-card-overlay.collapsed:hover {
+        transform: translateY(-2px) scale(1.05) !important;
+    }
+
+    .new-patient-card-overlay.collapsed .npc-close-btn {
+        display: none !important;
+    }
+
+    .new-patient-card-overlay.collapsed .npc-safe-zone {
+        display: none !important;
+    }
+
+    .new-patient-card-overlay.collapsed .npc-main {
+        margin: 0 !important;
+        gap: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .new-patient-card-overlay.collapsed .npc-avatar {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 50% !important;
+        background: transparent !important;
+        margin: 0 !important;
+        font-size: 1.1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .new-patient-card-overlay.collapsed .npc-info {
+        display: none !important;
+    }
+
+    /* ─── Expanded Patient Card (Bottom Sheet style) ─── */
+    .new-patient-card-overlay.expanded {
+        position: absolute !important;
+        bottom: 1.5rem !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        right: auto !important;
+        top: auto !important;
+        width: calc(100% - 3rem) !important;
+        max-width: 310px !important;
+        z-index: 1005 !important;
+        background: white !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+        padding: 12px !important;
+        border: 1px solid #f0f1f3 !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        animation: slideUpMobile 0.25s ease-out !important;
+    }
+
+    .new-patient-card-overlay.expanded .npc-close-btn {
+        display: flex !important;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background: #f3f4f6;
+        color: #4b5563;
+        font-size: 0.65rem;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .new-patient-card-overlay.expanded .npc-safe-zone {
+        right: auto !important;
+        left: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 14px !important;
+        border-top-left-radius: 14px !important;
+    }
+
+    /* ─── Collapsed Safe Zone FAB ─── */
+    .sz-aside:not(.expanded) {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 50% !important;
+        overflow: hidden !important;
+        bottom: 2rem !important;
+        right: 1.5rem !important;
+        left: auto !important;
+        top: auto !important;
+        background: #1a1b41 !important;
+        border: 2px solid white !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        z-index: 1000 !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .sz-aside:not(.expanded):hover {
+        transform: translateY(-2px) scale(1.05) !important;
+    }
+
+    .sz-aside:not(.expanded) .sz-aside-compact {
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .sz-aside:not(.expanded) .sz-aside-compact-left {
+        display: none !important;
+    }
+
+    .sz-aside:not(.expanded) .sz-aside-edit-btn {
+        display: none !important;
+    }
+
+    /* Target/Shield icon inside the collapsed Safe Zone FAB */
+    .sz-aside:not(.expanded) .sz-aside-compact::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3C/svg%3E") no-repeat center;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3C/svg%3E") no-repeat center;
+        mask-size: contain;
+        -webkit-mask-size: contain;
+    }
+
+    /* ─── Expanded Safe Zone Card (Bottom Sheet style) ─── */
+    .sz-aside.expanded {
+        position: absolute !important;
+        bottom: 1.5rem !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        right: auto !important;
+        top: auto !important;
+        width: calc(100% - 3rem) !important;
+        max-width: 320px !important;
+        z-index: 1005 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(12px) !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(226, 232, 240, 0.8) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        max-height: calc(100% - 3rem) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        animation: slideUpMobile 0.25s ease-out !important;
+    }
+
+    .sz-aside.expanded .sz-aside-body {
+        max-height: 250px !important;
+        flex: 1 !important;
+        overflow-y: auto !important;
+        padding: 0 16px 16px 16px !important;
+    }
+
+    .sz-center-btns {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* ─── Emergency Pulsing Alarms for FABs ─── */
+    .location-container.emergency-mode .new-patient-card-overlay.collapsed {
+        background: #d32f2f !important;
+        animation: mobileAlarmFABPulse 0.8s infinite alternate ease-in-out !important;
+        border-color: #ff1744 !important;
+    }
+
+    .location-container.emergency-mode .sz-aside:not(.expanded) {
+        background: #d32f2f !important;
+        animation: mobileAlarmFABPulse 0.8s infinite alternate ease-in-out !important;
+        border-color: #ff1744 !important;
+    }
+
+    /* ─── Hover & Active States for Mobile FABs ─── */
+    .sz-aside:not(.expanded) .sz-aside-compact:hover {
+        background: transparent !important;
+    }
+
+    .new-patient-card-overlay.collapsed:hover,
+    .sz-aside:not(.expanded):hover {
+        background: #2d2f6b !important;
+    }
+
+    .new-patient-card-overlay.collapsed:active,
+    .sz-aside:not(.expanded):active {
+        background: #121330 !important;
+        transform: translateY(0) scale(0.95) !important;
+    }
+
+    /* Emergency Hover & Active States */
+    .location-container.emergency-mode .new-patient-card-overlay.collapsed:hover,
+    .location-container.emergency-mode .sz-aside:not(.expanded):hover {
+        background: #ef4444 !important;
+    }
+
+    .location-container.emergency-mode .new-patient-card-overlay.collapsed:active,
+    .location-container.emergency-mode .sz-aside:not(.expanded):active {
+        background: #b71c1c !important;
+        transform: translateY(0) scale(0.95) !important;
+    }
+
+    @keyframes mobileAlarmFABPulse {
+        from { transform: scale(1); box-shadow: 0 0 10px rgba(255, 23, 68, 0.4); }
+        to { transform: scale(1.1); box-shadow: 0 0 25px rgba(255, 23, 68, 0.95); }
+    }
+
+    @keyframes slideUpMobile {
+        from { transform: translate(-50%, 20px) !important; opacity: 0; }
+        to { transform: translate(-50%, 0) !important; opacity: 1; }
+    }
+
+    /* Mobile adjustments for Recenter and Drawer Handle */
+    .map-recenter-btn {
+        bottom: 5.5rem !important;
+        right: 1.5rem !important;
+        width: 48px !important;
+        height: 48px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .mobile-drawer-handle {
+        display: block !important;
+        width: 36px !important;
+        height: 4px !important;
+        background-color: #cbd5e1 !important;
+        border-radius: 2px !important;
+        margin: -4px auto 10px auto !important;
+    }
+
+    /* Mobile style switcher tweaks & shortcuts hiding */
+    .map-style-switcher {
+        top: 10px !important;
+        right: 10px !important;
+        left: auto !important;
+        padding: 3px !important;
+        gap: 4px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .map-style-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 0.8rem !important;
+    }
+
+    .map-style-divider {
+        height: 16px !important;
+    }
+
+    .map-shortcuts-guide {
+        display: none !important;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   Safe Zone Header Trigger Button & Badges
+   ═══════════════════════════════════════════ */
+
+.location-header-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.sz-header-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.sz-trigger-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1e293b;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.sz-trigger-btn:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+}
+
+.sz-trigger-btn.active {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    color: #0f172a;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.sz-trigger-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.sz-trigger-text {
+    font-weight: 600;
+    letter-spacing: -0.1px;
+}
+
+.sz-trigger-badge {
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    line-height: 1.3;
+}
+
+.sz-trigger-badge.safe {
+    background: #e2f9ec;
+    color: #0f7642;
+}
+
+.sz-trigger-badge.alert {
+    background: #fce8e6;
+    color: #c5221f;
+    animation: triggerBadgePulse 1s infinite alternate;
+}
+
+.sz-trigger-badge.inactive {
+    background: #f1f3f4;
+    color: #5f6368;
+}
+
+@keyframes triggerBadgePulse {
+    from { opacity: 0.85; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1.03); }
+}
+
+@media (max-width: 768px) {
+    .location-header-left {
+        gap: 12px;
+        width: 100%;
+    }
+
+    .sz-header-container {
+        width: 100%;
+        margin-top: 4px;
+        flex-direction: column; /* Stack the Caregiver and SafeZone buttons */
+        gap: 10px !important;
+    }
+
+    .location-snooze-wrapper {
+        width: 100%;
+    }
+
+    .sz-trigger-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 0.95rem; /* Larger touch target */
+    }
+
+    /* Caregiver dropdown needs to span the full width */
+    .emergency-snooze-menu {
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Hide keyboard shortcuts on touch devices */
+    .map-shortcuts-guide {
+        display: none !important;
+    }
+
+    /* Make Safe Zone picking banner easier to read */
+    .sz-picking-banner {
+        font-size: 0.8rem;
+        padding: 10px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .sz-picking-cancel {
+        width: 100%;
+        padding: 8px;
+    }
+
+    /* Shift the map layer switcher slightly to not crowd the edges */
+    .map-style-switcher {
+        top: 15px;
+        right: 15px;
+        padding: 4px;
+    }
+
+    /* Stack Safe Zone action buttons so they have equal, large touch targets */
+    .sz-btn-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .sz-btn-save, .sz-btn-delete {
+        width: 100%;
+        padding: 14px 16px;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   Custom Leaflet HTML Markers (UI/UX Upgrades)
+   ═══════════════════════════════════════════ */
+
+/* --- Simple Dot Markers --- */
+.custom-patient-marker-wrapper {
+    background: transparent !important;
+    border: none !important;
+}
+
+.simple-dot-marker {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2563eb; /* Online Cobalt Blue */
+    border: 2.5px solid white;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.4), 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.simple-dot-marker.alert {
+    background: #e11d48 !important; /* Crimson Red */
+    box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.5), 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.simple-dot-marker.offline {
+    background: #64748b !important; /* Slate Gray */
+    box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.3), 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Pulsating alert ring */
+.simple-dot-marker .marker-pulse-ring {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #e11d48;
+    animation: markerPulseRing 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    opacity: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+@keyframes markerPulseRing {
+    0% {
+        transform: scale(0.65);
+        opacity: 0.95;
+    }
+    100% {
+        transform: scale(1.9);
+        opacity: 0;
+    }
+}
+
+/* --- Custom Safe Zone Pin Marker --- */
+.custom-safezone-marker-wrapper {
+    background: transparent !important;
+    border: none !important;
+}
+
+.simple-safezone-marker {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #059669; /* Emerald Green */
+    border: 2.5px solid white;
+    box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.4), 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.simple-safezone-marker.editing {
+    background: #7c3aed !important; /* Violet Editing */
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.5), 0 4px 10px rgba(0, 0, 0, 0.25) !important;
+    cursor: grab;
+    transform: scale(1.15);
+}
+
+.simple-safezone-marker.editing:active {
+    cursor: grabbing;
+}
+
+/* Draggable handle bobbing animation */
+.simple-safezone-marker .safezone-drag-handle {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #7c3aed;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 12px;
+    border: 1px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+    animation: dragBob 1s infinite alternate ease-in-out;
+}
+
+@keyframes dragBob {
+    from { transform: translateX(-50%) translateY(0); }
+    to { transform: translateX(-50%) translateY(-3px); }
+}
+
+/* --- Patient Card Safe Zone Status Colors --- */
+.npc-safe-zone.inside {
+    background: linear-gradient(135deg, #10b981, #059669) !important; /* Rich Green */
+}
+
+.npc-safe-zone.outside {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important; /* Alert Red */
+}
+
+.npc-safe-zone.online {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; /* Info Blue */
+}
+
+.npc-safe-zone.offline {
+    background: linear-gradient(135deg, #94a3b8, #64748b) !important; /* Quiet Gray */
+}
+
+/* --- Keyboard shortcuts guide SVG alignment --- */
+.map-shortcuts-guide {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(8px);
+    padding: 6px 14px !important;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    font-size: 0.75rem;
+    color: #64748b;
+    z-index: 1000;
+}
+
+.map-shortcuts-guide svg {
+    color: #94a3b8;
+    flex-shrink: 0;
 }

@@ -1,6 +1,366 @@
 .dashboard {
     min-height: 100vh;
+    transition: background-color 0.4s ease;
 }
+
+/* ═══════════════════════════════════════
+   EMERGENCY MODE — Full Dashboard Alarm
+   ═══════════════════════════════════════ */
+.dashboard.dashboard-emergency {
+    background: linear-gradient(180deg, #fff5f5 0%, #fff 100%) !important;
+}
+
+/* ── Emergency Banner ── */
+.emergency-banner {
+    margin-bottom: 20px;
+    animation: bannerSlideDown 0.4s ease;
+}
+
+@keyframes bannerSlideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.emergency-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    border-radius: 14px;
+    padding: 14px 20px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3), 0 0 0 1px rgba(220, 38, 38, 0.1);
+    animation: bannerPulseGlow 2s infinite alternate ease-in-out;
+}
+
+@keyframes bannerPulseGlow {
+    from { box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3), 0 0 0 1px rgba(220, 38, 38, 0.1); }
+    to { box-shadow: 0 4px 30px rgba(220, 38, 38, 0.55), 0 0 0 2px rgba(220, 38, 38, 0.2); }
+}
+
+.emergency-banner-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+}
+
+.emergency-icon-pulse {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    animation: iconPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.emergency-banner-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.emergency-banner-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.emergency-banner-desc {
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0.92;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emergency-banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.emergency-btn-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+}
+
+.emergency-btn-track:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
+    transform: translateY(-1px);
+}
+
+.emergency-btn-dismiss {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.emergency-btn-dismiss:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+/* ── Emergency Snooze Menu ── */
+.emergency-snooze-wrapper {
+    position: relative;
+}
+
+.emergency-btn-snooze {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1.5px solid white;
+    border-radius: 10px;
+    background: white;
+    color: #dc2626;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.emergency-btn-snooze:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.emergency-snooze-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    padding: 8px 0;
+    min-width: 180px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(220, 38, 38, 0.1);
+    z-index: 2000;
+    animation: dropdownFadeIn 0.2s ease;
+}
+
+.snooze-menu-header {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 4px;
+}
+
+.snooze-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: #334155;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.snooze-option:hover {
+    background: #f8fafc;
+    color: #dc2626;
+}
+
+.snooze-option svg {
+    color: #94a3b8;
+}
+
+.snooze-option:hover svg {
+    color: #dc2626;
+}
+
+.snooze-custom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-top: 4px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.snooze-custom-inputs {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.snooze-custom-inputs input {
+    width: 100%;
+    min-width: 0;
+    padding: 6px 6px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s;
+    text-align: center;
+}
+
+.snooze-custom-inputs input:focus {
+    border-color: #ef4444;
+}
+
+.snooze-custom button {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.snooze-custom button:hover {
+    background: #dc2626;
+}
+
+/* ── Emergency Patient Dropdown Glow ── */
+.patient-dropdown-trigger.emergency-trigger {
+    border-color: #fca5a5;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15), 0 2px 8px rgba(0, 0, 0, 0.06);
+    animation: triggerPulse 2s infinite alternate;
+}
+
+@keyframes triggerPulse {
+    from { border-color: #fca5a5; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06); }
+    to { border-color: #ef4444; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2), 0 4px 14px rgba(239, 68, 68, 0.12); }
+}
+
+.patient-dropdown-avatar.emergency-avatar {
+    border: 2px solid #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.25);
+}
+
+.dropdown-emergency-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    flex-shrink: 0;
+    animation: dotBlink 1s infinite;
+}
+
+@keyframes dotBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ── Emergency Map Card ── */
+.map-card-container.map-emergency {
+    border: 2px solid #fca5a5;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08), 0 4px 16px rgba(239, 68, 68, 0.12);
+    animation: mapCardPulse 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes mapCardPulse {
+    from { border-color: #fca5a5; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08), 0 4px 16px rgba(239, 68, 68, 0.12); }
+    to { border-color: #ef4444; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15), 0 6px 24px rgba(239, 68, 68, 0.2); }
+}
+
+/* Emergency "Track Now" button */
+.btn-view.btn-view-emergency {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    animation: btnEmergencyPulse 1.5s infinite alternate;
+}
+
+@keyframes btnEmergencyPulse {
+    from { box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3); }
+    to { box-shadow: 0 4px 16px rgba(239, 68, 68, 0.5); }
+}
+
+/* Emergency location info popup */
+.location-info-popup.location-info-emergency {
+    border: 1.5px solid #fecaca;
+    box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15);
+}
+
+.patient-avatar-large.avatar-emergency {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Safe Zone Tag Variants */
+.dashboard .safe-zone-tag.safe {
+    background-color: #059669;
+    color: white;
+}
+
+.dashboard .safe-zone-tag.danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    animation: tagDangerPulse 1.5s infinite alternate;
+}
+
+@keyframes tagDangerPulse {
+    from { opacity: 0.9; }
+    to { opacity: 1; }
+}
+
+.dashboard .safe-zone-tag.no-zone {
+    background-color: #64748b;
+    color: white;
+}
+
+.dashboard .safe-zone-tag.offline {
+    background-color: #9ea0a5;
+}
+
+
+/* ═══════════════════════════════════════
+   ORIGINAL DASHBOARD STYLES
+   ═══════════════════════════════════════ */
 
 /* Header */
 .dashboard .dashboard-header {
@@ -334,6 +694,7 @@
     padding: 12px;
     box-sizing: border-box;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dashboard .dashboard-map {
@@ -367,6 +728,7 @@
     gap: 12px;
     position: relative;
     overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dashboard .patient-avatar-large {
@@ -381,6 +743,7 @@
     font-size: 16px;
     font-weight: 600;
     flex-shrink: 0;
+    transition: background-color 0.3s ease;
 }
 
 .dashboard .patient-location-details {
@@ -427,14 +790,207 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #5dbb70;
-    color: white;
     font-size: 10px;
     font-weight: 500;
     padding: 3px 12px;
     border-bottom-left-radius: 12px;
 }
 
-.dashboard .safe-zone-tag.offline {
+.dashboard .safe-zone-tag.safe {
+    background-color: #10b981;
+    color: white;
+}
+
+.dashboard .safe-zone-tag.danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.dashboard .safe-zone-tag.offline,
+.dashboard .safe-zone-tag.no-zone {
     background-color: #9ea0a5;
+    color: white;
+}
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+    /* Emergency Banner */
+    .emergency-banner-inner {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .emergency-banner-left {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .emergency-banner-desc {
+        white-space: normal;
+    }
+
+    .emergency-banner-actions {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .emergency-snooze-wrapper,
+    .emergency-btn-snooze,
+    .emergency-btn-track,
+    .emergency-btn-dismiss {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Make snooze menu span the width */
+    .emergency-snooze-menu {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        min-width: unset !important;
+    }
+
+    /* Dashboard Layout Stacking */
+    .dashboard .dashboard-layout {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .dashboard .dashboard-left,
+    .dashboard .dashboard-right {
+        min-width: 100% !important;
+        width: 100% !important;
+        flex: none !important;
+    }
+
+    /* Adjust Map Size for Mobile */
+    .dashboard .map-card-container {
+        min-height: 380px !important;
+        padding: 8px !important;
+    }
+    
+    .dashboard .dashboard-map {
+        min-height: 380px !important;
+    }
+
+    /* Patient Dropdown */
+    .dashboard .patient-dropdown-group {
+        width: 100%;
+    }
+
+    .dashboard .patient-dropdown-trigger {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .dashboard .patient-dropdown-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    /* Mobile Card View for Tables */
+    .dashboard .card.scrollable-table-container {
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .dashboard .dashboard-table {
+        display: block;
+        width: 100%;
+        min-width: 0 !important; /* Override the 600px min-width */
+        background: transparent;
+    }
+
+    .dashboard .dashboard-table thead {
+        display: none; /* Hide table headers on mobile */
+    }
+
+    .dashboard .dashboard-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .dashboard .dashboard-table tr {
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 12px 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        margin-bottom: 0;
+    }
+
+    .dashboard .dashboard-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #f1f5f9;
+        text-align: right;
+    }
+
+    .dashboard .dashboard-table td:last-child {
+        border-bottom: none;
+    }
+
+    /* Create the label using the data-label attribute */
+    .dashboard .dashboard-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        margin-right: 16px;
+        text-align: left;
+    }
+}
+
+/* Map Style Switcher for Dashboard */
+.dashboard-map-style-switcher {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row; /* Usually row looks better than column */
+    gap: 6px;
+    background: white;
+    padding: 4px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    z-index: 1000;
+}
+
+.dashboard-map-style-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #475569;
+}
+
+.dashboard-map-style-btn:hover {
+    background: #f1f5f9;
+    transform: scale(1.05);
+}
+
+.dashboard-map-style-btn.active {
+    background: #1a1b41;
+    color: white;
+    box-shadow: 0 2px 6px rgba(26, 27, 65, 0.3);
 }
