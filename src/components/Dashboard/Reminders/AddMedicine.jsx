@@ -102,12 +102,12 @@ const AddMedicine = () => {
         <div className="form-section">
           <div className="form-group">
             <label>Drug Name *</label>
-            <input type="text" name="medicineName" value={form.medicineName} onChange={handleChange} />
+            <input type="text" name="medicineName" placeholder="e.g. Aspirin" value={form.medicineName} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>Dosage *</label>
-            <input type="text" name="dosage" value={form.dosage} onChange={handleChange} />
+            <input type="text" name="dosage" placeholder="e.g. 500mg" value={form.dosage} onChange={handleChange} />
           </div>
 
           <div className="form-group">

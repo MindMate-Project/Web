@@ -9,6 +9,38 @@
   margin-bottom: 25px;
 }
 
+/* TABS */
+.reminders-page .tab-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eef2f6;
+  padding-bottom: 10px;
+}
+
+.reminders-page .tab-btn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #7e858e;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.reminders-page .tab-btn:hover {
+  background: #f8fafc;
+  color: #14274E;
+}
+
+.reminders-page .tab-btn.active {
+  background: #5EA5C0;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(94, 165, 192, 0.3);
+}
+
 /* SECTION */
 .reminders-page .reminder-section {
   margin-bottom: 35px;
@@ -37,16 +69,25 @@
 
 /* BUTTON */
 .reminders-page .btn-add {
-  border: 1px solid #C3D3E2;
-  padding: 15px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #5BA8C9;
+  border: 1px solid #5BA8C9;
+  padding: 10px 20px;
   border-radius: 8px;
-  color: #14274E;
+  color: #FFFFFF;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(91, 168, 201, 0.2);
 }
 
 .reminders-page .btn-add:hover {
-  background: #f2f7fb;
+  background: #4a8ca6;
+  border-color: #4a8ca6;
+  transform: translateY(-1px);
 }
 
 /* TABLE CONTAINER */
@@ -150,16 +191,130 @@
 }
 
 /* RESPONSIVE */
+@media (max-width: 968px) {
+  .reminders-page .table-container {
+    overflow-x: hidden;
+  }
+
+  .reminders-page .reminder-table,
+  .reminders-page .reminder-table thead,
+  .reminders-page .reminder-table tbody,
+  .reminders-page .reminder-table th,
+  .reminders-page .reminder-table td,
+  .reminders-page .reminder-table tr {
+    display: block;
+    width: 100%;
+    min-width: auto;
+  }
+
+  .reminders-page .reminder-table thead {
+    display: none;
+  }
+
+  .reminders-page .reminder-table tbody {
+    max-height: none;
+    overflow-y: visible;
+    background: transparent;
+  }
+
+  .reminders-page .reminder-table tbody tr {
+    position: relative;
+    margin-bottom: 1.25rem;
+    background: #FFFFFF;
+    border: 1px solid #eef2f6;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Card Header (Doctor Name / Drug Name) */
+  .reminders-page .reminder-table td:nth-child(1) {
+    background: #F8FAFC;
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1E293B;
+    border-bottom: 1px solid #eef2f6;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-align: left;
+  }
+  
+  .reminders-page .reminder-table td:nth-child(1)::before {
+    display: none; /* Hide label */
+  }
+
+  /* Absolute Position the Time Badge to Top Right */
+  .reminders-page .reminder-table td:nth-child(4) {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    padding: 0;
+    border: none;
+    width: auto;
+  }
+  
+  .reminders-page .reminder-table td:nth-child(4)::before {
+    display: none; /* Hide "Time" label */
+  }
+
+  /* Normal Row Items */
+  .reminders-page .reminder-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1.25rem;
+    border-bottom: 1px dashed #f1f5f9;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #475569;
+  }
+
+  .reminders-page .reminder-table td:last-child {
+    border-bottom: none;
+  }
+
+  .reminders-page .reminder-table td::before {
+    content: attr(data-label);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #94A3B8;
+    text-align: left;
+    margin-right: 15px;
+  }
+}
+
 @media (max-width: 768px) {
   .reminders-page {
-    padding: 20px;
+    padding: 1rem;
   }
 
   .reminders-page .page-title {
     font-size: 22px;
+    margin-bottom: 1rem;
+  }
+  
+  .reminders-page .section-header {
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .reminders-page .section-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .reminders-page .btn-add {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 
   .reminders-page .reminder-card {
-    padding: 16px;
+    padding: 0;
+    background: transparent;
+    border: none;
   }
 }

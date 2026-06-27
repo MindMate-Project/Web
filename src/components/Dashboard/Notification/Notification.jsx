@@ -11,9 +11,9 @@ const WELCOME_NOTIFICATION = {
   type: "welcome",
   title: "Welcome to MindMate",
   message: "We're glad to have you here. Thank you for using MindMate.",
-  timestamp: "Just now",
-  date: "Today",
-  read: false,
+  timestamp: "10 days ago",
+  date: "Jun 17, 2026",
+  read: true,
 };
 // =============================================================================
 // END TEMPORARY MOCK DATA

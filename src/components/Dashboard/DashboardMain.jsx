@@ -826,9 +826,9 @@ function DashboardPage() {
                                 >
                                     <div className={`patient-avatar-large ${isEmergency ? "avatar-emergency" : ""}`}>
                                         {trackedPatient &&
-                                        trackedPatient.imageCover ? (
+                                        trackedPatient.profilePicture ? (
                                             <img
-                                                src={trackedPatient.imageCover}
+                                                src={trackedPatient.profilePicture}
                                                 alt={trackedPatient.name}
                                                 style={{
                                                     width: "100%",

@@ -402,14 +402,13 @@ const EditProfile = () => {
     result?.type ===
     "profile/updateProfile/fulfilled"
   ) {
-    alert("Profile updated successfully");
-    navigate("/api/dashboard/profile");
+    navigate("/api/dashboard/profile", { state: { successMessage: "Profile updated successfully!" } });
   }
 };
 
   return (
     <div className="edit-profile-page">
-      <button className="back-button" onClick={() => navigate("/api/dashboard/profile")}>
+      <button className="back-button" onClick={() => navigate("/api/dashboard/profile")} style={{ color: "#5EA5C0" }}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path
             d="M19 12H5M5 12L12 19M5 12L12 5"
@@ -455,8 +454,14 @@ const EditProfile = () => {
 
           <div className="edit-profile-page-field-group">
             <div className="edit-profile-page-field">
-              <label className="edit-profile-page-label">Email</label>
-              <input className="edit-profile-page-input" name="email" value={form.email} disabled />
+              <label className="edit-profile-page-label" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                Email
+                <span style={{ fontSize: '0.75rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: '500', backgroundColor: '#f1f5f9', padding: '2px 8px', borderRadius: '12px' }}>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  Read Only
+                </span>
+              </label>
+              <input className="edit-profile-page-input" name="email" value={form.email} disabled style={{ backgroundColor: '#f8fafc', color: '#64748b', cursor: 'not-allowed' }} />
             </div>
             <div className="edit-profile-page-field">
               <label className="edit-profile-page-label">Phone Number</label>
@@ -466,12 +471,20 @@ const EditProfile = () => {
 
           <div className="edit-profile-page-field-group">
             <div className="edit-profile-page-field">
-              <label className="edit-profile-page-label">Gender</label>
-              <select className="edit-profile-page-select" name="gender" value={form.gender} onChange={handleChange}>
-                <option value="">Select</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-              </select>
+              <label className="edit-profile-page-label" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                Gender
+                <span style={{ fontSize: '0.75rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: '500', backgroundColor: '#f1f5f9', padding: '2px 8px', borderRadius: '12px' }}>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  Read Only
+                </span>
+              </label>
+              <input 
+                className="edit-profile-page-input" 
+                name="gender" 
+                value={form.gender ? form.gender.charAt(0).toUpperCase() + form.gender.slice(1) : ""} 
+                disabled 
+                style={{ backgroundColor: '#f8fafc', color: '#64748b', cursor: 'not-allowed' }} 
+              />
             </div>
             <div className="edit-profile-page-field">
               <label className="edit-profile-page-label">Address</label>

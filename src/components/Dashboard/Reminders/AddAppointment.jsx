@@ -93,6 +93,9 @@ const AddReminder = () => {
   return (
     <div className="add-reminder">
       <button className="back-button" onClick={handleBack}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
         Back To Reminders
       </button>
 
@@ -107,6 +110,7 @@ const AddReminder = () => {
               type="text"
               className="input"
               name="doctorName"
+              placeholder="e.g. Dr. John Doe"
               value={form.doctorName}
               onChange={handleChange}
             />
@@ -118,6 +122,7 @@ const AddReminder = () => {
               type="text"
               className="input"
               name="specialty"
+              placeholder="e.g. Cardiologist"
               value={form.specialty}
               onChange={handleChange}
             />
@@ -151,6 +156,7 @@ const AddReminder = () => {
               type="text"
               className="input"
               name="location"
+              placeholder="e.g. City Hospital, Building B"
               value={form.location}
               onChange={handleChange}
             />
@@ -179,6 +185,7 @@ const AddReminder = () => {
             <textarea
               className="input textarea"
               name="notes"
+              placeholder="e.g. Bring previous test results..."
               value={form.notes}
               onChange={handleChange}
             />

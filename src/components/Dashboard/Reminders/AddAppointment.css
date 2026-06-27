@@ -9,7 +9,7 @@
     padding: 0.5rem 0;
     background: transparent;
     border: none;
-    color: #7e858e;
+    color: #5EA5C0;
     font-size: 0.9rem;
     cursor: pointer;
     margin-bottom: 1.5rem;
@@ -17,7 +17,7 @@
 }
 
 .add-reminder .back-button:hover {
-    color: #5EA5C0;
+    color: #4a8ca6;
 }
 
 .add-reminder .back-button svg {
@@ -158,27 +158,43 @@
 }
 
 @media (max-width: 768px) {
+  .add-reminder {
+    padding: 1rem;
+  }
+  
   .add-reminder .form-card {
-    padding: 25px;
+    padding: 2rem 1.25rem;
     width: 100%; 
     max-width: 100%; 
-    box-sizing: border-box; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .add-reminder .form-grid {
+    grid-template-columns: 1fr; /* Force stacking */
+    gap: 25px;
   }
 
   .add-reminder .form-actions {
-    flex-direction: column; 
+    flex-direction: column-reverse; 
+    gap: 12px;
+    margin-top: 30px;
   }
 
-  .add-reminder .btn-save, .add-reminder .btn-cancel {
+  .add-reminder .btn-save, 
+  .add-reminder .btn-cancel {
     width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    text-align: center;
   }
 
   .add-reminder .purpose-group-wrapper,
-    .add-reminder .notes-group {
-        grid-column: 1 / -1; 
-    }
+  .add-reminder .notes-group {
+    grid-column: 1 / -1; 
+  }
 
-    .add-reminder .purpose-group {
-        gap: 15px; 
-    }
+  .add-reminder .purpose-group {
+    gap: 12px; 
+    flex-direction: column; /* Stack radio buttons on mobile */
+  }
 }

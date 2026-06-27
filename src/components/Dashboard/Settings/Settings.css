@@ -266,11 +266,13 @@ button { font-family: var(--sp-font); cursor: pointer; border: none; background:
 .sp-footer {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-top: 40px;
   font-size: 12px;
   color: var(--sp-text-light);
   flex-wrap: wrap;
+  text-align: center;
 }
 .sp-footer__dot {
   width: 3px; height: 3px;
