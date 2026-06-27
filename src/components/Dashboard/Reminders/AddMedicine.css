@@ -9,7 +9,7 @@
   padding: 0.5rem 0;
   background: transparent;
   border: none;
-  color: #7e858e;
+  color: #5EA5C0;
   font-size: 0.9rem;
   cursor: pointer;
   margin-bottom: 1.5rem;
@@ -172,11 +172,12 @@
 /* Updated Responsive Queries */
 @media (max-width: 768px) {
     .add-medicine-container {
-        padding: 15px;
+        padding: 1rem;
     }
 
     .add-medicine-container .medicine-card {
-        padding: 25px;
+        padding: 2rem 1.25rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .add-medicine-container .form-section {
@@ -186,7 +187,7 @@
 
     .add-medicine-container .treatment-period {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 20px;
     }
 
@@ -196,17 +197,21 @@
     }
 
     .add-medicine-container .radio-group {
+        flex-direction: column;
         gap: 15px;
     }
 
     .add-medicine-container .form-actions {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: column-reverse;
+        gap: 12px;
+        margin-top: 30px;
     }
 
     .add-medicine-container .save-btn, 
     .add-medicine-container .cancel-btn {
         width: 100%;
+        padding: 12px;
+        font-size: 1rem;
         text-align: center;
     }
 }
