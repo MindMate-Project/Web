@@ -50,13 +50,21 @@
     background: transparent;
 }
 
+.patient-details-container .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.75rem;
+    /* Optional: keep border on title or move it here */
+    border-bottom: 1px solid #f0f0f0;
+}
+
 .patient-details-container .section-title {
     font-size: 1rem;
     font-weight: 500;
     color: var(--section-title-color);
-    margin: 0 0 1.5rem 0;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid #f0f0f0;
+    margin: 0;
 }
 
 /* Basic Information Section */
@@ -208,14 +216,6 @@
     font-weight: 500;
 }
 
-.patient-details-container .medical-actions {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: flex-end;
-    padding-top: 1rem;
-    border-top: 1px solid #f0f0f0;
-}
-
 .patient-details-container .edit-btn,
 .patient-details-container .delete-btn {
     padding: 0.5rem 1.5rem;
@@ -238,15 +238,21 @@
 }
 
 .patient-details-container .delete-btn {
-    background-color: transparent;
-    color: #666;
-    border: 1px solid #e0e0e0;
+    background-color: #ef4444; /* Solid red background */
+    color: #ffffff;
+    border: 1px solid #ef4444;
 }
 
 .patient-details-container .delete-btn:hover {
-    background-color: #fee;
-    color: #dc2626;
-    border-color: #fca5a5;
+    background-color: #dc2626; /* Darker red on hover */
+    border-color: #dc2626;
+    transform: translateY(-1px);
+}
+
+/* Mobile Specific Delete Logic */
+.patient-details-container .mobile-only-delete-container {
+    display: none;
+    margin-top: 1rem;
 }
 
 /* Media Queries for Responsiveness */
@@ -320,14 +326,23 @@
         font-size: 0.875rem;
     }
 
-    .patient-details-container .medical-actions {
-        flex-wrap: wrap;
+    .patient-details-container .section-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .patient-details-container .desktop-only-delete {
+        display: none;
+    }
+
+    .patient-details-container .mobile-only-delete-container {
+        display: block;
     }
 
     .patient-details-container .edit-btn,
     .patient-details-container .delete-btn {
-        flex: 1;
-        min-width: 120px;
+        padding: 0.4rem 1.25rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -337,9 +352,12 @@
         padding: 0.75rem;
     }
 
+    .patient-details-container .section-header {
+        margin-bottom: 1rem;
+    }
+    
     .patient-details-container .section-title {
         font-size: 0.9rem;
-        margin-bottom: 1.25rem;
     }
 
     .patient-details-container .basic-info-layout {
@@ -391,9 +409,6 @@
         line-height: 1.7;
     }
 
-    .patient-details-container .medical-actions {
-        gap: 0.5rem;
-    }
 
     .patient-details-container .edit-btn,
     .patient-details-container .delete-btn {
@@ -430,8 +445,9 @@
         padding: 0.875rem;
     }
 
-    .patient-details-container .medical-actions {
-        flex-direction: column;
+    .patient-details-container .section-header {
+        flex-direction: row;
+        align-items: center;
     }
 
     .patient-details-container .edit-btn,
