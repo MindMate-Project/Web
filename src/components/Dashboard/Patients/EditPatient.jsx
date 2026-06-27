@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import useGetPatientData from "../../../hook/patient/get-patient-data-hook";
 import useEditPatient from "../../../hook/patient/edit-patient-data-hook";
@@ -13,8 +13,6 @@ export default function EditPatient() {
     const [patientData] = useGetPatientData(params.id);
     const [handleEditPatient, isSaving] = useEditPatient();
     const patient = patientData?.data;
-    const fileInputRef = useRef(null);
-    const [previewImage, setPreviewImage] = useState(null);
 
     // Form State
     const [formData, setFormData] = useState({
@@ -88,18 +86,6 @@ export default function EditPatient() {
 
     const handleBack = () => {
         navigate(`/api/dashboard/patients/${params.id}`);
-    };
-
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setPreviewImage(imageUrl);
-        }
-    };
-
-    const triggerFileInput = () => {
-        fileInputRef.current?.click();
     };
 
     const handleSave = async (e) => {
@@ -199,32 +185,13 @@ export default function EditPatient() {
             <h1 className="page-title">Edit Patient Profile</h1>
 
             <form onSubmit={handleSave} className="edit-form-layout">
-                {/* Left Column: Image Upload */}
                 <aside className="image-upload-section">
                     <div className="current-image-wrapper">
                         <img
-                            src={previewImage || patient.imageCover || father}
+                            src={patient.profilePicture || father}
                             alt={patient.name}
                             className="current-image"
                         />
-                    </div>
-                    <div className="upload-actions">
-                        <input 
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            ref={fileInputRef}
-                            style={{ display: "none" }}
-                            id="photo-upload"
-                        />
-                        <button 
-                            type="button" 
-                            className="upload-btn"
-                            onClick={triggerFileInput}
-                        >
-                            Change Photo
-                        </button>
-                        <p className="upload-hint">JPG, PNG or GIF (Max 2MB)</p>
                     </div>
                 </aside>
 
