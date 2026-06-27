@@ -72,12 +72,20 @@ export default function PatientDetails() {
             <div className="details-grid">
                 {/* Basic Information Section */}
                 <section className="basic-info">
-                    <h2 className="section-title">Basic Information</h2>
+                    <div className="section-header">
+                        <h2 className="section-title">Basic Information</h2>
+                        <button
+                            className="delete-btn desktop-only-delete"
+                            onClick={handleDeleteClick}
+                        >
+                            Delete
+                        </button>
+                    </div>
 
                     <div className="basic-info-layout">
                         <div className="profile-section">
                             <img
-                                src={patient.imageCover || father}
+                                src={patient.profilePicture || father}
                                 alt={patient.name}
                                 className="profile-image"
                             />
@@ -248,7 +256,12 @@ export default function PatientDetails() {
 
                 {/* Medical Notes Section */}
                 <section className="medical-notes">
-                    <h2 className="section-title">Medical Notes</h2>
+                    <div className="section-header">
+                        <h2 className="section-title">Medical Notes</h2>
+                        <button className="edit-btn" onClick={handleEdit}>
+                            Edit
+                        </button>
+                    </div>
 
                     <div className="medical-card">
                         <div className="medical-content">
@@ -284,20 +297,18 @@ export default function PatientDetails() {
                                 </li>
                             </ul>
                         </div>
-
-                        <div className="medical-actions">
-                            <button className="edit-btn" onClick={handleEdit}>
-                                Edit
-                            </button>
-                            <button
-                                className="delete-btn"
-                                onClick={handleDeleteClick}
-                            >
-                                Delete
-                            </button>
-                        </div>
                     </div>
                 </section>
+                
+                {/* Mobile Only Delete Button */}
+                <div className="mobile-only-delete-container">
+                    <button
+                        className="delete-btn mobile-only-delete"
+                        onClick={handleDeleteClick}
+                    >
+                        Delete Patient
+                    </button>
+                </div>
             </div>
 
             {/* Reusing the Delete Modal from Patients.jsx */}
