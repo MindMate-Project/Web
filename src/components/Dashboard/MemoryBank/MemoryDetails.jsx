@@ -106,12 +106,19 @@ export default function MemoryDetails() {
                     {isMedia && (
                         <div className="memory-details-media-row">
                             <div className="memory-details-label-space"></div>
-                            <div className="memory-details-media-box">
+                            <div style={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
+                                {mem.createdAt && (
+                                    <div style={{ alignSelf: "flex-end", color: "#5BA8C9", fontWeight: "600", fontSize: "14px" }}>
+                                        {formatDate(mem.createdAt)}
+                                    </div>
+                                )}
+                                <div className="memory-details-media-box">
                                 {mem.file_url ? (
                                     isVideoUrl(mem.file_url) ? (
                                         <video
                                             src={mem.file_url}
                                             controls
+                                            preload="metadata"
                                             className="memory-details-image"
                                             style={{ width: "100%", objectFit: "cover", borderRadius: "12px" }}
                                         />
@@ -119,6 +126,7 @@ export default function MemoryDetails() {
                                         <img
                                             src={mem.file_url}
                                             alt={mem.title}
+                                            loading="lazy"
                                             className="memory-details-image"
                                         />
                                     )
@@ -145,11 +153,7 @@ export default function MemoryDetails() {
                                         </svg>
                                     </div>
                                 )}
-                                {mem.createdAt && (
-                                    <div className="memory-details-date-badge">
-                                        {formatDate(mem.createdAt)}
-                                    </div>
-                                )}
+                            </div>
                             </div>
                         </div>
                     )}
