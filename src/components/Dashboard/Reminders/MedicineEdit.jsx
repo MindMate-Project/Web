@@ -45,7 +45,11 @@ const EditMedicine = () => {
 
       if (initialData.scheduledTime) {
         const d = new Date(initialData.scheduledTime);
-        setTime(d.toISOString().substring(11, 16));
+
+        // ✅ TIMEZONE FIX (read):
+        const hours   = String(d.getHours()).padStart(2, "0");
+        const minutes = String(d.getMinutes()).padStart(2, "0");
+        setTime(`${hours}:${minutes}`);
       }
 
       if (initialData.startDate) {
@@ -86,7 +90,11 @@ const EditMedicine = () => {
 
     const startDate = `20${startYear}-${startMonth}-${startDay}`;
     const endDate = `20${endYear}-${endMonth}-${endDay}`;
-    const scheduledDateTime = new Date(`${startDate}T${time}:00Z`).toISOString();
+
+    // ✅ TIMEZONE FIX (save):
+    const scheduledDateTime = new Date(
+      `${startDate}T${time}:00`
+    ).toISOString();
 
     const updatedData = {
       medicineName,

@@ -60,8 +60,9 @@ const AddReminder = () => {
       return;
     }
 
+    // ✅ TIMEZONE FIX: removed trailing "Z" → parsed as local time → correct UTC offset
     const scheduledDateTime = new Date(
-      `${form.date}T${form.time}:00Z`
+      `${form.date}T${form.time}:00`
     ).toISOString();
 
     const payload = {
