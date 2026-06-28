@@ -34,8 +34,13 @@ const AppointmentEdit = () => {
 
       if (initialData.appointmentDate) {
         const dateObj = new Date(initialData.appointmentDate);
-        setAppointmentDate(dateObj.toISOString().split("T")[0]);
-        setAppointmentTime(dateObj.toISOString().split("T")[1].substring(0, 5));
+        const year    = dateObj.getFullYear();
+        const month   = String(dateObj.getMonth() + 1).padStart(2, "0");
+        const day     = String(dateObj.getDate()).padStart(2, "0");
+        const hours   = String(dateObj.getHours()).padStart(2, "0");
+        const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+        setAppointmentDate(`${year}-${month}-${day}`);
+        setAppointmentTime(`${hours}:${minutes}`);
       }
     }
   }, [initialData]);
@@ -52,7 +57,10 @@ const AppointmentEdit = () => {
       return;
     }
 
-    const scheduledDateTime = new Date(`${appointmentDate}T${appointmentTime}:00Z`).toISOString();
+    // ✅ TIMEZONE FIX (save):
+    const scheduledDateTime = new Date(
+      `${appointmentDate}T${appointmentTime}:00`
+    ).toISOString();
 
     const updatedData = {
       doctorName,

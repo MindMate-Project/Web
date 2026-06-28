@@ -96,6 +96,7 @@ export default function Reminders() {
                         <td data-label="Date">{new Date(app.appointmentDate).toLocaleDateString()}</td>
                         <td data-label="Time">
                           <span className="time-badge appointment">
+                            {/* ✅ toLocaleTimeString converts UTC→local automatically ✓ */}
                             {new Date(app.appointmentDate).toLocaleTimeString([], {
                               hour: "2-digit",
                               minute: "2-digit",
@@ -167,6 +168,7 @@ export default function Reminders() {
                       <td data-label="Frequency">{med.frequency}</td>
                       <td data-label="Time">
                         <span className="time-badge medication">
+                          {/* ✅ toLocaleTimeString converts UTC→local automatically ✓ */}
                           {new Date(med.time).toLocaleTimeString([], {
                             hour: "2-digit",
                             minute: "2-digit",
